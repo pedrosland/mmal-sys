@@ -1,0 +1,12 @@
+[package]
+name = "mmal-sys"
+version = "0.1.0"
+authors = ["Pedro Sland <pedrosland@gmail.com>"]
+build = "build.rs"
+
+[dependencies]
+libc = "0.2.0"
+
+[build-dependencies]
+bindgen = "0.26.1"
+
