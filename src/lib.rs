@@ -2,6 +2,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![feature(const_fn)]
+use std::fmt;
 
 // #define VCOS_ALIGN_DOWN(p,n) (((ptrdiff_t)(p)) & ~((n)-1))
 // #define VCOS_ALIGN_UP(p,n) VCOS_ALIGN_DOWN((ptrdiff_t)(p)+(n)-1,(n))
@@ -90,6 +91,36 @@ pub const MMAL_EVENT_FORMAT_CHANGED: u32 = mmal_fourcc!('E','F','C','H');
  * \ref MMAL_EVENT_PARAMETER_CHANGED_T
  */
 pub const MMAL_EVENT_PARAMETER_CHANGED: u32 = mmal_fourcc!('E','P','C','H');
+
+
+impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_CAMERA_T {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "{} {}x{}",
+            ::std::str::from_utf8(&self.camera_name).unwrap(),
+            self.max_width,
+            self.max_height
+        )
+    }
+}
+
+impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_T {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Found {} camera(s)", self.num_cameras).unwrap();
+
+        // We can't iterate over all cameras because we will always have 4.
+        // Alternatively, we could iterate and break early. Not sure if that is more rust-y
+        for index in 0..self.num_cameras {
+            let camera = self.cameras[index as usize];
+            write!(f, "\n  {}", camera).unwrap();
+        }
+
+        // TODO: flashes?
+
+        Ok(())
+    }
+}
 
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
