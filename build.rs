@@ -4,8 +4,7 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    // Tell cargo to tell rustc to link the system bzip2
-    // shared library.
+    // Tell cargo to tell rustc to link the system shared libraries.
     println!("cargo:rustc-link-lib=mmal_core");
     println!("cargo:rustc-link-lib=mmal_util");
     println!("cargo:rustc-link-lib=mmal_vc_client");
@@ -19,10 +18,13 @@ fn main() {
     // to bindgen, and lets you build up options for
     // the resulting bindings.
     let bindings = bindgen::Builder::default()
-        // Do not generate unstable Rust code that
-        // requires a nightly rustc and enabling
-        // unstable features.
-//        .unstable_rust(false)
+       .constified_enum_module(r"MMAL_STATUS_T|MMAL_PARAMETER_CAMERA_CONFIG_TIMESTAMP_MODE_T")
+
+       .derive_debug(true)
+       .impl_debug(true)
+        // Without this, we get `__BindgenUnionField` in
+        // places and it isn't very pretty.
+       .rust_target(bindgen::RustTarget::Nightly)
 //      // Fix library path to include mmal headers
         .clang_arg("-I/opt/vc/include")
         // The input header we would like to generate
