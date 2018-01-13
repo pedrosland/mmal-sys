@@ -1,7 +1,13 @@
 [package]
 name = "mmal-sys"
-version = "0.1.0"
-authors = ["Pedro Sland <pedrosland@gmail.com>"]
+version = "0.0.0"
+authors = ["Peter Sutherland <pedrosland+mmalsys@gmail.com>"]
+description = "Rust definitions for mmal"
+repository = "https://github.com/pedrosland/mmal-sys"
+readme = "README.md"
+license = "MIT"
+categories = [ "external-ffi-bindings" ]
+links = "mmal"
 build = "build.rs"
 
 [dependencies]
