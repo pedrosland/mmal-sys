@@ -39,7 +39,6 @@ fn test_vcos_align_up() {
     assert_eq!(result, 10016, concat!("(10000, 32): ", stringify!(result)));
 }
 
-
 // #[macro_export]
 // macro_rules! mmal_fourcc {
 //     ($s:expr) => {
@@ -59,14 +58,14 @@ macro_rules! mmal_fourcc {
     }
 }
 
-pub const MMAL_ENCODING_JPEG: u32 = mmal_fourcc!('J','P','E','G');
-pub const MMAL_ENCODING_GIF: u32 = mmal_fourcc!('G','I','F',' ');
-pub const MMAL_ENCODING_PNG: u32 = mmal_fourcc!('P','N','G',' ');
-pub const MMAL_ENCODING_PPM: u32 = mmal_fourcc!('P','P','M',' ');
-pub const MMAL_ENCODING_TGA: u32 = mmal_fourcc!('T','G','A',' ');
-pub const MMAL_ENCODING_BMP: u32 = mmal_fourcc!('B','M','P',' ');
+pub const MMAL_ENCODING_JPEG: u32 = mmal_fourcc!('J', 'P', 'E', 'G');
+pub const MMAL_ENCODING_GIF: u32 = mmal_fourcc!('G', 'I', 'F', ' ');
+pub const MMAL_ENCODING_PNG: u32 = mmal_fourcc!('P', 'N', 'G', ' ');
+pub const MMAL_ENCODING_PPM: u32 = mmal_fourcc!('P', 'P', 'M', ' ');
+pub const MMAL_ENCODING_TGA: u32 = mmal_fourcc!('T', 'G', 'A', ' ');
+pub const MMAL_ENCODING_BMP: u32 = mmal_fourcc!('B', 'M', 'P', ' ');
 
-pub const MMAL_ENCODING_I420: u32 = mmal_fourcc!('I','4','2','0');
+pub const MMAL_ENCODING_I420: u32 = mmal_fourcc!('I', '4', '2', '0');
 pub const MMAL_ENCODING_RGB24: u32 = mmal_fourcc!('R', 'G', 'B', '3');
 pub const MMAL_ENCODING_BGR24: u32 = mmal_fourcc!('B', 'G', 'R', '3');
 
@@ -74,24 +73,22 @@ pub const MMAL_ENCODING_BGR24: u32 = mmal_fourcc!('B', 'G', 'R', '3');
  * VideoCore opaque image format, image handles are returned to
  * the host but not the actual image data.
  */
-pub const MMAL_ENCODING_OPAQUE: u32 = mmal_fourcc!('O','P','Q','V');
-
+pub const MMAL_ENCODING_OPAQUE: u32 = mmal_fourcc!('O', 'P', 'Q', 'V');
 
 // mmal_events.h
 /** Error event. Data contains a \ref MMAL_STATUS_T */
-pub const MMAL_EVENT_ERROR: u32 = mmal_fourcc!('E','R','R','O');
+pub const MMAL_EVENT_ERROR: u32 = mmal_fourcc!('E', 'R', 'R', 'O');
 
 /** End-of-stream event. Data contains a \ref MMAL_EVENT_END_OF_STREAM_T */
-pub const MMAL_EVENT_EOS: u32 = mmal_fourcc!('E','E','O','S');
+pub const MMAL_EVENT_EOS: u32 = mmal_fourcc!('E', 'E', 'O', 'S');
 
 /** Format changed event. Data contains a \ref MMAL_EVENT_FORMAT_CHANGED_T */
-pub const MMAL_EVENT_FORMAT_CHANGED: u32 = mmal_fourcc!('E','F','C','H');
+pub const MMAL_EVENT_FORMAT_CHANGED: u32 = mmal_fourcc!('E', 'F', 'C', 'H');
 
 /** Parameter changed event. Data contains the new parameter value, see
  * \ref MMAL_EVENT_PARAMETER_CHANGED_T
  */
-pub const MMAL_EVENT_PARAMETER_CHANGED: u32 = mmal_fourcc!('E','P','C','H');
-
+pub const MMAL_EVENT_PARAMETER_CHANGED: u32 = mmal_fourcc!('E', 'P', 'C', 'H');
 
 impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_CAMERA_T {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -121,6 +118,5 @@ impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_T {
         Ok(())
     }
 }
-
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
