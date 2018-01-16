@@ -1,0 +1,15 @@
+---
+language: rust
+dist: trusty
+services: docker
+cache: cargo
+
+before_cache:
+  # Travis can't cache files that are not readable by "others"
+  - chmod -R a+r $HOME/.cargo
+
+install:
+  - bash ci/install.sh
+
+script:
+  - cross test --target armv7-unknown-linux-gnueabihf
