@@ -12,10 +12,13 @@ fn main() {
     println!("cargo:rustc-link-lib=bcm_host");
     println!("cargo:rustc-link-search=native=/opt/vc/lib");
 
+    let host = env::var("HOST").unwrap();
+    let target = env::var("TARGET").unwrap();
+
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
     // the resulting bindings.
-    let bindings = bindgen::Builder::default()
+    let mut bindings = bindgen::Builder::default()
         // Pretty bindings make easier reading
         .rustfmt_bindings(true)
 
@@ -30,11 +33,23 @@ fn main() {
         // Without this, we get `__BindgenUnionField` in
         // places and it isn't very pretty.
         .rust_target(bindgen::RustTarget::Nightly)
-        // Fix library path to include mmal headers
-        .clang_arg("-I/opt/vc/include")
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h")
+        // Fix library path to include mmal headers
+        .clang_arg("-I/opt/vc/include");
+
+    if target == "armv7-unknown-linux-gnueabihf" && host != target {
+        // We're cross-compiling
+        bindings = bindings
+            .clang_arg("-I/usr/lib/gcc/arm-linux-gnueabihf/4.6/include-fixed/")
+            .clang_arg("-I/usr/lib/gcc/arm-linux-gnueabihf/4.6/include/")
+            .clang_arg("-I/usr/arm-linux-gnueabihf/include/")
+            .clang_arg("-nobuiltininc")
+            .clang_arg("-nostdinc++");
+    }
+
+    let bindings = bindings
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.
