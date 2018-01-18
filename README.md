@@ -15,6 +15,8 @@ PRs welcome. Breaking changes that make the library better to use eg changing
 
 Steps for improvement:
 
+* Evaluate if rust nightly is useful or switch on/off bindgen's nightly flag
+if running in nightly or not
 * Make API as natural as possible
 * Manually add `MMAL_ENCODING` constants and similar that aren't supported by
 bindgen

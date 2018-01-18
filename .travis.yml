@@ -1,8 +1,10 @@
 ---
-language: rust
 dist: trusty
 services: docker
 cache: cargo
+language: rust
+rust:
+  - nightly
 
 before_cache:
   # Travis can't cache files that are not readable by "others"
