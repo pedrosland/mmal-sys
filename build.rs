@@ -27,6 +27,7 @@ fn main() {
         // Prevent generating bindings including libc!
         .whitelist_type(r"MMAL_.*")
         .whitelist_function(r"(?:mmal_|vcos_|bcm_).*")
+        .whitelist_var(r"MMAL_.*")
 
         .derive_debug(true)
         .impl_debug(true)
