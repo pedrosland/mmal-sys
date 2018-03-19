@@ -14,4 +14,11 @@ build = "build.rs"
 libc = "0.2"
 
 [build-dependencies]
-bindgen = "0.32.1"
+bindgen = { version = "0.32.1", optional = true }
+
+[features]
+default = []
+
+# Enable this feature to automatically generate bindings for the mmal headers.
+# The default is to use the bindings already included in the src directory.
+generate_bindings = ["bindgen"]

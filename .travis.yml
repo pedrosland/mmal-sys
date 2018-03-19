@@ -14,4 +14,7 @@ install:
   - bash ci/install.sh
 
 script:
+  # Use included bindings
   - cross test --target armv7-unknown-linux-gnueabihf
+  # Generate bindings from headers
+  - cross test --target armv7-unknown-linux-gnueabihf --features generate_bindings

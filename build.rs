@@ -1,7 +1,11 @@
+#[cfg(feature = "generate_bindings")]
 extern crate bindgen;
 
 use std::env;
-use std::path::{Path, PathBuf};
+use std::path::Path;
+
+#[cfg(feature = "generate_bindings")]
+use std::path::PathBuf;
 
 fn main() {
     // Tell cargo to tell rustc to link the system shared libraries.
@@ -14,11 +18,16 @@ fn main() {
     println!("cargo:rerun-if-env-changed=TARGET");
     println!("cargo:rerun-if-env-changed=MMAL_INCLUDE_DIR");
     println!("cargo:rerun-if-env-changed=MMAL_LIB_DIR");
+    println!("cargo:rustc-link-search=native={}", locate_mmal_lib_dir());
 
+    #[cfg(feature = "generate_bindings")]
+    generate_bindings();
+}
+
+#[cfg(feature = "generate_bindings")]
+fn generate_bindings() {
     let host = env::var("HOST").unwrap();
     let target = env::var("TARGET").unwrap();
-
-    println!("cargo:rustc-link-search=native={}", locate_mmal_lib_dir());
 
     let mut mmal_lib_arg = "-I".to_owned();
     mmal_lib_arg.push_str(&locate_mmal_headers());
@@ -72,6 +81,8 @@ fn main() {
         .expect("Couldn't write bindings!");
 }
 
+
+#[cfg(feature = "generate_bindings")]
 fn locate_mmal_headers() -> String {
     let default_path = "/opt/vc/include";
     let path = if let Ok(env_path) = env::var("MMAL_INCLUDE_DIR") {

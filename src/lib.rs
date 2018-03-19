@@ -321,4 +321,8 @@ impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_T {
     }
 }
 
+#[cfg(feature = "generate_bindings")]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+#[cfg(not(feature = "generate_bindings"))]
+include!("bindings.rs");
