@@ -4,6 +4,7 @@ version = "0.0.1-2"
 authors = ["Peter Sutherland <pedrosland+mmalsys@gmail.com>"]
 description = "Rust definitions for mmal"
 repository = "https://github.com/pedrosland/mmal-sys"
+documentation = "https://pedrosland.github.io/mmal-sys/"
 readme = "README.md"
 license = "MIT"
 categories = [ "external-ffi-bindings" ]
