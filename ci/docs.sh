@@ -21,7 +21,7 @@ git remote add deploy "$SSH_REPO"
 
 # Clone the existing gh-pages for this repo into out/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deploy)
-if git show-branch -r $TARGET_BRANCH &> /dev/null; then
+if git fetch origin $TARGET_BRANCH:$TARGET_BRANCH; then
   git worktree add gh-pages $TARGET_BRANCH
 else
   git worktree add gh-pages HEAD
@@ -41,6 +41,8 @@ cp -r ../target/armv7-unknown-linux-gnueabihf/doc/* .
 touch .nojekyll
 echo "<html><head><meta http-equiv='refresh' content='0;url=$LIB_NAME/index.html'></head></html>" > index.html
 
+git add .
+
 # If there are no changes to the docs then just bail.
 if [[ -z $(git status -s) ]]; then
     echo "No changes to the docs. Exiting."
@@ -51,7 +53,6 @@ git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # Commit the "changes", i.e. the new version.
-git add .
 git commit --quiet -m "Deploy to GitHub Pages: ${SHA}"
 
 cd ..
