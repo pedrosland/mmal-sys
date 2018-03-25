@@ -13,8 +13,21 @@ before_cache:
 install:
   - bash ci/install.sh
 
+# load travis-cargo
+before_script:
+  - |
+      pip install 'travis-cargo<0.2' --user &&
+      export PATH=$HOME/.local/bin:$PATH
+
 script:
   # Use included bindings
   - cross test --target armv7-unknown-linux-gnueabihf
   # Generate bindings from headers
   - cross test --target armv7-unknown-linux-gnueabihf --features generate_bindings
+  # Fudge sanity checks and build docs
+  - MMAL_INCLUDE_DIR=/tmp MMAL_LIB_DIR=/tmp cross doc --target armv7-unknown-linux-gnueabihf
+
+after_success:
+  # Upload the documentation from the build with nightly
+  # Runs on the master branch, not individual PRs
+  - bash ci/docs.sh
