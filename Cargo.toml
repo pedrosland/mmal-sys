@@ -1,6 +1,6 @@
 [package]
 name = "mmal-sys"
-version = "0.0.1-2"
+version = "0.1.0-1"
 authors = ["Peter Sutherland <pedrosland+mmalsys@gmail.com>"]
 description = "Rust definitions for mmal"
 repository = "https://github.com/pedrosland/mmal-sys"
