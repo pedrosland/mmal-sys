@@ -14,7 +14,7 @@ RUN apt-get update \
   && apt-get purge wget -y --auto-remove \
   && rm -rf /var/lib/apt/lists/*
 
-ENV firmware="1.20171029"
+ENV firmware="1.20180817"
 
 RUN apt-get update \
   && apt-get install -y wget \
