@@ -26,7 +26,12 @@ where
         let byte_index = index / 8;
         let byte = self.storage.as_ref()[byte_index];
 
-        let bit_index = index % 8;
+        let bit_index = if cfg!(target_endian = "big") {
+            7 - (index % 8)
+        } else {
+            index % 8
+        };
+
         let mask = 1 << bit_index;
 
         byte & mask == mask
@@ -39,9 +44,13 @@ where
         let byte_index = index / 8;
         let byte = &mut self.storage.as_mut()[byte_index];
 
-        let bit_index = index % 8;
-        let mask = 1 << bit_index;
+        let bit_index = if cfg!(target_endian = "big") {
+            7 - (index % 8)
+        } else {
+            index % 8
+        };
 
+        let mask = 1 << bit_index;
         if val {
             *byte |= mask;
         } else {
@@ -59,7 +68,12 @@ where
 
         for i in 0..(bit_width as usize) {
             if self.get_bit(i + bit_offset) {
-                val |= 1 << i;
+                let index = if cfg!(target_endian = "big") {
+                    bit_width as usize - 1 - i
+                } else {
+                    i
+                };
+                val |= 1 << index;
             }
         }
 
@@ -75,74 +89,80 @@ where
         for i in 0..(bit_width as usize) {
             let mask = 1 << i;
             let val_bit_is_set = val & mask == mask;
-            self.set_bit(i + bit_offset, val_bit_is_set);
+            let index = if cfg!(target_endian = "big") {
+                bit_width as usize - 1 - i
+            } else {
+                i
+            };
+            self.set_bit(index + bit_offset, val_bit_is_set);
         }
     }
 }
-pub const MMAL_FALSE: ::std::os::raw::c_uint = 0;
-pub const MMAL_TRUE: ::std::os::raw::c_uint = 1;
-pub const MMAL_ENCODING_VARIANT_H264_DEFAULT: ::std::os::raw::c_uint = 0;
-pub const MMAL_ENCODING_VARIANT_MP4A_DEFAULT: ::std::os::raw::c_uint = 0;
-pub const MMAL_COLOR_SPACE_UNKNOWN: ::std::os::raw::c_uint = 0;
-pub const MMAL_ES_FORMAT_FLAG_FRAMED: ::std::os::raw::c_uint = 1;
-pub const MMAL_ENCODING_UNKNOWN: ::std::os::raw::c_uint = 0;
-pub const MMAL_ENCODING_VARIANT_DEFAULT: ::std::os::raw::c_uint = 0;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_TYPE: ::std::os::raw::c_uint = 1;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_ENCODING: ::std::os::raw::c_uint = 2;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_BITRATE: ::std::os::raw::c_uint = 4;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_FLAGS: ::std::os::raw::c_uint = 8;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_EXTRADATA: ::std::os::raw::c_uint = 16;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_RESOLUTION: ::std::os::raw::c_uint = 256;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_CROPPING: ::std::os::raw::c_uint = 512;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_FRAME_RATE: ::std::os::raw::c_uint = 1024;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_ASPECT_RATIO: ::std::os::raw::c_uint = 2048;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_COLOR_SPACE: ::std::os::raw::c_uint = 4096;
-pub const MMAL_ES_FORMAT_COMPARE_FLAG_ES_OTHER: ::std::os::raw::c_uint = 268435456;
-pub const MMAL_BUFFER_HEADER_FLAG_EOS: ::std::os::raw::c_uint = 1;
-pub const MMAL_BUFFER_HEADER_FLAG_FRAME_START: ::std::os::raw::c_uint = 2;
-pub const MMAL_BUFFER_HEADER_FLAG_FRAME_END: ::std::os::raw::c_uint = 4;
-pub const MMAL_BUFFER_HEADER_FLAG_FRAME: ::std::os::raw::c_uint = 6;
-pub const MMAL_BUFFER_HEADER_FLAG_KEYFRAME: ::std::os::raw::c_uint = 8;
-pub const MMAL_BUFFER_HEADER_FLAG_DISCONTINUITY: ::std::os::raw::c_uint = 16;
-pub const MMAL_BUFFER_HEADER_FLAG_CONFIG: ::std::os::raw::c_uint = 32;
-pub const MMAL_BUFFER_HEADER_FLAG_ENCRYPTED: ::std::os::raw::c_uint = 64;
-pub const MMAL_BUFFER_HEADER_FLAG_CODECSIDEINFO: ::std::os::raw::c_uint = 128;
-pub const MMAL_BUFFER_HEADER_FLAGS_SNAPSHOT: ::std::os::raw::c_uint = 256;
-pub const MMAL_BUFFER_HEADER_FLAG_CORRUPTED: ::std::os::raw::c_uint = 512;
-pub const MMAL_BUFFER_HEADER_FLAG_TRANSMISSION_FAILED: ::std::os::raw::c_uint = 1024;
-pub const MMAL_BUFFER_HEADER_FLAG_DECODEONLY: ::std::os::raw::c_uint = 2048;
-pub const MMAL_BUFFER_HEADER_FLAG_USER0: ::std::os::raw::c_uint = 268435456;
-pub const MMAL_BUFFER_HEADER_FLAG_USER1: ::std::os::raw::c_uint = 536870912;
-pub const MMAL_BUFFER_HEADER_FLAG_USER2: ::std::os::raw::c_uint = 1073741824;
-pub const MMAL_BUFFER_HEADER_FLAG_USER3: ::std::os::raw::c_uint = 2147483648;
-pub const MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START: ::std::os::raw::c_uint = 65536;
-pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_INTERLACED: ::std::os::raw::c_uint = 65536;
-pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_TOP_FIELD_FIRST: ::std::os::raw::c_uint = 131072;
-pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL: ::std::os::raw::c_uint = 524288;
-pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_PROTECTED: ::std::os::raw::c_uint = 1048576;
-pub const MMAL_PARAMETER_GROUP_COMMON: ::std::os::raw::c_uint = 0;
-pub const MMAL_PARAMETER_GROUP_CAMERA: ::std::os::raw::c_uint = 65536;
-pub const MMAL_PARAMETER_GROUP_VIDEO: ::std::os::raw::c_uint = 131072;
-pub const MMAL_PARAMETER_GROUP_AUDIO: ::std::os::raw::c_uint = 196608;
-pub const MMAL_PARAMETER_GROUP_CLOCK: ::std::os::raw::c_uint = 262144;
-pub const MMAL_PARAMETER_GROUP_MIRACAST: ::std::os::raw::c_uint = 327680;
-pub const MMAL_PARAM_SEEK_FLAG_PRECISE: ::std::os::raw::c_uint = 1;
-pub const MMAL_PARAM_SEEK_FLAG_FORWARD: ::std::os::raw::c_uint = 2;
-pub const MMAL_MAX_IMAGEFX_PARAMETERS: ::std::os::raw::c_uint = 6;
-pub const MMAL_PARAMETER_CAMERA_INFO_MAX_CAMERAS: ::std::os::raw::c_uint = 4;
-pub const MMAL_PARAMETER_CAMERA_INFO_MAX_FLASHES: ::std::os::raw::c_uint = 2;
-pub const MMAL_PARAMETER_CAMERA_INFO_MAX_STR_LEN: ::std::os::raw::c_uint = 16;
-pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN: ::std::os::raw::c_uint = 32;
-pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2: ::std::os::raw::c_uint = 256;
-pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3: ::std::os::raw::c_uint = 256;
-pub const MMAL_CLOCK_EVENT_INVALID: ::std::os::raw::c_uint = 0;
-pub const MMAL_FIXED_16_16_ONE: ::std::os::raw::c_uint = 65536;
-pub const MMAL_PORT_CAPABILITY_PASSTHROUGH: ::std::os::raw::c_uint = 1;
-pub const MMAL_PORT_CAPABILITY_ALLOCATION: ::std::os::raw::c_uint = 2;
-pub const MMAL_PORT_CAPABILITY_SUPPORTS_EVENT_FORMAT_CHANGE: ::std::os::raw::c_uint = 4;
-pub const MMAL_VERSION_MAJOR: ::std::os::raw::c_uint = 0;
-pub const MMAL_VERSION_MINOR: ::std::os::raw::c_uint = 1;
-pub const MMAL_VERSION: ::std::os::raw::c_uint = 1;
+pub const MMAL_FALSE: u32 = 0;
+pub const MMAL_TRUE: u32 = 1;
+pub const MMAL_ENCODING_VARIANT_H264_DEFAULT: u32 = 0;
+pub const MMAL_ENCODING_VARIANT_MP4A_DEFAULT: u32 = 0;
+pub const MMAL_COLOR_SPACE_UNKNOWN: u32 = 0;
+pub const MMAL_ES_FORMAT_FLAG_FRAMED: u32 = 1;
+pub const MMAL_ENCODING_UNKNOWN: u32 = 0;
+pub const MMAL_ENCODING_VARIANT_DEFAULT: u32 = 0;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_TYPE: u32 = 1;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_ENCODING: u32 = 2;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_BITRATE: u32 = 4;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_FLAGS: u32 = 8;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_EXTRADATA: u32 = 16;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_RESOLUTION: u32 = 256;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_CROPPING: u32 = 512;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_FRAME_RATE: u32 = 1024;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_ASPECT_RATIO: u32 = 2048;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_VIDEO_COLOR_SPACE: u32 = 4096;
+pub const MMAL_ES_FORMAT_COMPARE_FLAG_ES_OTHER: u32 = 268435456;
+pub const MMAL_BUFFER_HEADER_FLAG_EOS: u32 = 1;
+pub const MMAL_BUFFER_HEADER_FLAG_FRAME_START: u32 = 2;
+pub const MMAL_BUFFER_HEADER_FLAG_FRAME_END: u32 = 4;
+pub const MMAL_BUFFER_HEADER_FLAG_FRAME: u32 = 6;
+pub const MMAL_BUFFER_HEADER_FLAG_KEYFRAME: u32 = 8;
+pub const MMAL_BUFFER_HEADER_FLAG_DISCONTINUITY: u32 = 16;
+pub const MMAL_BUFFER_HEADER_FLAG_CONFIG: u32 = 32;
+pub const MMAL_BUFFER_HEADER_FLAG_ENCRYPTED: u32 = 64;
+pub const MMAL_BUFFER_HEADER_FLAG_CODECSIDEINFO: u32 = 128;
+pub const MMAL_BUFFER_HEADER_FLAGS_SNAPSHOT: u32 = 256;
+pub const MMAL_BUFFER_HEADER_FLAG_CORRUPTED: u32 = 512;
+pub const MMAL_BUFFER_HEADER_FLAG_TRANSMISSION_FAILED: u32 = 1024;
+pub const MMAL_BUFFER_HEADER_FLAG_DECODEONLY: u32 = 2048;
+pub const MMAL_BUFFER_HEADER_FLAG_NAL_END: u32 = 4096;
+pub const MMAL_BUFFER_HEADER_FLAG_USER0: u32 = 268435456;
+pub const MMAL_BUFFER_HEADER_FLAG_USER1: u32 = 536870912;
+pub const MMAL_BUFFER_HEADER_FLAG_USER2: u32 = 1073741824;
+pub const MMAL_BUFFER_HEADER_FLAG_USER3: u32 = 2147483648;
+pub const MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START: u32 = 65536;
+pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_INTERLACED: u32 = 65536;
+pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_TOP_FIELD_FIRST: u32 = 131072;
+pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL: u32 = 524288;
+pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_PROTECTED: u32 = 1048576;
+pub const MMAL_PARAMETER_GROUP_COMMON: u32 = 0;
+pub const MMAL_PARAMETER_GROUP_CAMERA: u32 = 65536;
+pub const MMAL_PARAMETER_GROUP_VIDEO: u32 = 131072;
+pub const MMAL_PARAMETER_GROUP_AUDIO: u32 = 196608;
+pub const MMAL_PARAMETER_GROUP_CLOCK: u32 = 262144;
+pub const MMAL_PARAMETER_GROUP_MIRACAST: u32 = 327680;
+pub const MMAL_PARAM_SEEK_FLAG_PRECISE: u32 = 1;
+pub const MMAL_PARAM_SEEK_FLAG_FORWARD: u32 = 2;
+pub const MMAL_MAX_IMAGEFX_PARAMETERS: u32 = 6;
+pub const MMAL_PARAMETER_CAMERA_INFO_MAX_CAMERAS: u32 = 4;
+pub const MMAL_PARAMETER_CAMERA_INFO_MAX_FLASHES: u32 = 2;
+pub const MMAL_PARAMETER_CAMERA_INFO_MAX_STR_LEN: u32 = 16;
+pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN: u32 = 32;
+pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2: u32 = 256;
+pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3: u32 = 256;
+pub const MMAL_CLOCK_EVENT_INVALID: u32 = 0;
+pub const MMAL_FIXED_16_16_ONE: u32 = 65536;
+pub const MMAL_PORT_CAPABILITY_PASSTHROUGH: u32 = 1;
+pub const MMAL_PORT_CAPABILITY_ALLOCATION: u32 = 2;
+pub const MMAL_PORT_CAPABILITY_SUPPORTS_EVENT_FORMAT_CHANGE: u32 = 4;
+pub const MMAL_VERSION_MAJOR: u32 = 0;
+pub const MMAL_VERSION_MINOR: u32 = 1;
+pub const MMAL_VERSION: u32 = 1;
 pub const MMAL_COMPONENT_DEFAULT_CONTAINER_READER: &'static [u8; 17usize] = b"container_reader\0";
 pub const MMAL_COMPONENT_DEFAULT_CONTAINER_WRITER: &'static [u8; 17usize] = b"container_writer\0";
 pub const MMAL_COMPONENT_DEFAULT_VIDEO_DECODER: &'static [u8; 20usize] = b"vc.ril.video_decode\0";
@@ -162,11 +182,11 @@ pub const MMAL_COMPONENT_DEFAULT_AUDIO_RENDERER: &'static [u8; 20usize] = b"vc.r
 pub const MMAL_COMPONENT_DEFAULT_MIRACAST: &'static [u8; 12usize] = b"vc.miracast\0";
 pub const MMAL_COMPONENT_DEFAULT_CLOCK: &'static [u8; 9usize] = b"vc.clock\0";
 pub const MMAL_COMPONENT_DEFAULT_CAMERA_INFO: &'static [u8; 15usize] = b"vc.camera_info\0";
-pub const MMAL_CONNECTION_FLAG_TUNNELLING: ::std::os::raw::c_uint = 1;
-pub const MMAL_CONNECTION_FLAG_ALLOCATION_ON_INPUT: ::std::os::raw::c_uint = 2;
-pub const MMAL_CONNECTION_FLAG_ALLOCATION_ON_OUTPUT: ::std::os::raw::c_uint = 4;
-pub const MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS: ::std::os::raw::c_uint = 8;
-pub const MMAL_CONNECTION_FLAG_DIRECT: ::std::os::raw::c_uint = 16;
+pub const MMAL_CONNECTION_FLAG_TUNNELLING: u32 = 1;
+pub const MMAL_CONNECTION_FLAG_ALLOCATION_ON_INPUT: u32 = 2;
+pub const MMAL_CONNECTION_FLAG_ALLOCATION_ON_OUTPUT: u32 = 4;
+pub const MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS: u32 = 8;
+pub const MMAL_CONNECTION_FLAG_DIRECT: u32 = 16;
 pub const MMAL_DEV_VCHIQ_PATH: &'static [u8; 11usize] = b"/dev/vchiq\0";
 pub type __time_t = ::std::os::raw::c_long;
 pub type __syscall_slong_t = ::std::os::raw::c_long;
@@ -480,6 +500,11 @@ fn bindgen_test_layout_pthread_cond_t__bindgen_ty_1() {
         concat!("Size of: ", stringify!(pthread_cond_t__bindgen_ty_1))
     );
     assert_eq!(
+        ::std::mem::align_of::<pthread_cond_t__bindgen_ty_1>(),
+        8usize,
+        concat!("Alignment of ", stringify!(pthread_cond_t__bindgen_ty_1))
+    );
+    assert_eq!(
         unsafe {
             &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__lock as *const _ as usize
         },
@@ -588,6 +613,11 @@ fn bindgen_test_layout_pthread_cond_t() {
         concat!("Size of: ", stringify!(pthread_cond_t))
     );
     assert_eq!(
+        ::std::mem::align_of::<pthread_cond_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(pthread_cond_t))
+    );
+    assert_eq!(
         unsafe { &(*(::std::ptr::null::<pthread_cond_t>())).__data as *const _ as usize },
         0usize,
         concat!(
@@ -649,7 +679,7 @@ pub const VCOS_STATUS_T_VCOS_ENOSYS: VCOS_STATUS_T = 7;
 pub const VCOS_STATUS_T_VCOS_EEXIST: VCOS_STATUS_T = 8;
 pub const VCOS_STATUS_T_VCOS_ENXIO: VCOS_STATUS_T = 9;
 pub const VCOS_STATUS_T_VCOS_EINTR: VCOS_STATUS_T = 10;
-pub type VCOS_STATUS_T = ::std::os::raw::c_uint;
+pub type VCOS_STATUS_T = u32;
 extern "C" {
     pub fn vcos_verify_bkpts_enabled() -> ::std::os::raw::c_int;
 }
@@ -660,7 +690,6 @@ extern "C" {
     pub fn vcos_abort();
 }
 extern "C" {
-
     /// Print out a backtrace, on supported platforms.
     pub fn vcos_backtrace_self();
 }
@@ -741,6 +770,11 @@ fn bindgen_test_layout_VCOS_TIMER_T() {
         ::std::mem::size_of::<VCOS_TIMER_T>(),
         104usize,
         concat!("Size of: ", stringify!(VCOS_TIMER_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<VCOS_TIMER_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(VCOS_TIMER_T))
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<VCOS_TIMER_T>())).thread as *const _ as usize },
@@ -980,6 +1014,11 @@ fn bindgen_test_layout_VCOS_THREAD_T() {
         concat!("Size of: ", stringify!(VCOS_THREAD_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<VCOS_THREAD_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(VCOS_THREAD_T))
+    );
+    assert_eq!(
         unsafe { &(*(::std::ptr::null::<VCOS_THREAD_T>())).thread as *const _ as usize },
         0usize,
         concat!(
@@ -1112,6 +1151,24 @@ impl ::std::fmt::Debug for VCOS_THREAD_T {
         write ! ( f , "VCOS_THREAD_T {{ thread: {:?}, entry: {:?}, arg: {:?}, suspend: {:?}, task_timer: {:?}, task_timer_created: {:?}, orig_task_timer_expiration_routine: {:?}, orig_task_timer_context: {:?}, legacy: {:?}, name: {:?}, dummy: {:?}, at_exit: {:?} }}" , self . thread , self . entry , self . arg , self . suspend , self . task_timer , self . task_timer_created , self . orig_task_timer_expiration_routine , self . orig_task_timer_context , self . legacy , self . name , self . dummy , self . at_exit )
     }
 }
+/// \file
+///
+/// This provides event flags (as per Nucleus Event Groups) based on a
+/// mutex, a semaphore (per waiting thread) and a timer (per waiting
+/// thread).
+///
+/// The data structure is a 32 bit unsigned int (the current set of
+/// flags) and a linked list of clients waiting to be 'satisfied'.
+///
+/// The mutex merely locks access to the data structure. If a client
+/// calls vcos_event_flags_get() and the requested bits are not already
+/// present, it then sleeps on its per-thread semaphore after adding
+/// this semaphore to the queue waiting. It also sets up a timer.
+///
+/// The per-thread semaphore and timer are actually stored in the
+/// thread context (joinable thread). In future it may become necessary
+/// to support non-VCOS threads by using thread local storage to
+/// create these objects and associate them with the thread.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct VCOS_EVENT_WAITER_T {
@@ -1694,7 +1751,6 @@ extern "C" {
     ) -> u32;
 }
 extern "C" {
-
     /// \file
     ///
     /// Create the vcos malloc API from a regular system malloc/free library.
@@ -1727,7 +1783,6 @@ extern "C" {
     ) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-
     /// Convert errno values into the values recognized by vcos
     pub fn vcos_pthreads_map_error(error: ::std::os::raw::c_int) -> VCOS_STATUS_T;
 }
@@ -1735,7 +1790,6 @@ extern "C" {
     pub fn vcos_pthreads_map_errno() -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// Register a function to be called when the current thread exits.
     pub fn vcos_thread_at_exit(
         pfn: ::std::option::Option<unsafe extern "C" fn(arg1: *mut ::std::os::raw::c_void)>,
@@ -1743,7 +1797,6 @@ extern "C" {
     ) -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// Threads
     ///
     pub fn vcos_dummy_thread_create() -> *mut VCOS_THREAD_T;
@@ -1752,7 +1805,6 @@ extern "C" {
     pub fn vcos_getmicrosecs64_internal() -> u64;
 }
 extern "C" {
-
     /// Timers
     ///
     pub fn vcos_pthreads_timer_create(
@@ -1903,14 +1955,12 @@ extern "C" {
     ) -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// \brief Delete a semaphore, releasing any resources consumed by it.
     ///
     /// @param sem Semaphore to wait on
     pub fn vcos_named_semaphore_delete(sem: *mut VCOS_NAMED_SEMAPHORE_T);
 }
 extern "C" {
-
     /// vcos initialization. Call this function before using other vcos functions.
     /// Calls can be nested within the same process; they are reference counted so
     /// that only a call from uninitialized state has any effect.
@@ -1920,7 +1970,6 @@ extern "C" {
     pub fn vcos_init() -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// vcos deinitialization. Call this function when vcos is no longer required,
     /// in order to free resources.
     /// Calls can be nested within the same process; they are reference counted so
@@ -1931,32 +1980,26 @@ extern "C" {
     pub fn vcos_deinit();
 }
 extern "C" {
-
     /// Acquire global lock. This must be available independent of vcos_init()/vcos_deinit().
     pub fn vcos_global_lock();
 }
 extern "C" {
-
     /// Release global lock. This must be available independent of vcos_init()/vcos_deinit().
     pub fn vcos_global_unlock();
 }
 extern "C" {
-
     /// Pass in the argv/argc arguments passed to main()
     pub fn vcos_set_args(argc: ::std::os::raw::c_int, argv: *mut *const ::std::os::raw::c_char);
 }
 extern "C" {
-
     /// Return argc.
     pub fn vcos_get_argc() -> ::std::os::raw::c_int;
 }
 extern "C" {
-
     /// Return argv.
     pub fn vcos_get_argv() -> *mut *const ::std::os::raw::c_char;
 }
 extern "C" {
-
     /// Platform-specific initialisation.
     /// VCOS internal function, not part of public API, do not call from outside
     /// vcos. vcos_init()/vcos_deinit() reference count calls, so this function is
@@ -1968,7 +2011,6 @@ extern "C" {
     pub fn vcos_platform_init() -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// Platform-specific de-initialisation.
     /// VCOS internal function, not part of public API, do not call from outside
     /// vcos.
@@ -1977,13 +2019,11 @@ extern "C" {
     pub fn vcos_platform_deinit();
 }
 extern "C" {
-
     /// Report whether or not we have an RTOS at all, and hence the ability to
     /// create threads.
     pub fn vcos_have_rtos() -> ::std::os::raw::c_int;
 }
 extern "C" {
-
     /// Create a thread. It must be cleaned up by calling vcos_thread_join().
     ///
     /// @param thread   Filled in on return with thread
@@ -2000,7 +2040,6 @@ extern "C" {
     ) -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// Exit the thread from within the thread function itself.
     /// Resources must still be cleaned up via a call to thread_join().
     ///
@@ -2010,7 +2049,6 @@ extern "C" {
     pub fn vcos_thread_exit(data: *mut ::std::os::raw::c_void);
 }
 extern "C" {
-
     /// Wait for a thread to terminate and then clean up its resources.
     ///
     /// @param thread Thread to wait for
@@ -2019,7 +2057,6 @@ extern "C" {
     pub fn vcos_thread_join(thread: *mut VCOS_THREAD_T, pData: *mut *mut ::std::os::raw::c_void);
 }
 extern "C" {
-
     /// \brief Create a thread using an API similar to the one "traditionally"
     /// used under Nucleus.
     ///
@@ -2054,7 +2091,6 @@ extern "C" {
     ) -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// Return the name of the given thread.
     pub fn vcos_thread_get_name(thread: *const VCOS_THREAD_T) -> *const ::std::os::raw::c_char;
 }
@@ -2081,7 +2117,8 @@ pub const VCOS_LOG_LEVEL_T_VCOS_LOG_ERROR: VCOS_LOG_LEVEL_T = 2;
 pub const VCOS_LOG_LEVEL_T_VCOS_LOG_WARN: VCOS_LOG_LEVEL_T = 3;
 pub const VCOS_LOG_LEVEL_T_VCOS_LOG_INFO: VCOS_LOG_LEVEL_T = 4;
 pub const VCOS_LOG_LEVEL_T_VCOS_LOG_TRACE: VCOS_LOG_LEVEL_T = 5;
-pub type VCOS_LOG_LEVEL_T = ::std::os::raw::c_uint;
+/// Logging levels
+pub type VCOS_LOG_LEVEL_T = u32;
 /// A registered logging category.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2097,11 +2134,11 @@ pub struct VCOS_LOG_CAT_T {
     pub platform_data: *mut ::std::os::raw::c_void,
 }
 #[repr(C)]
+#[repr(align(4))]
 #[derive(Debug, Copy, Clone)]
 pub struct VCOS_LOG_CAT_T__bindgen_ty_1 {
     pub _bitfield_1: __BindgenBitfieldUnit<[u8; 1usize], u8>,
     pub __bindgen_padding_0: [u8; 3usize],
-    pub __bindgen_align: [u32; 0usize],
 }
 #[test]
 fn bindgen_test_layout_VCOS_LOG_CAT_T__bindgen_ty_1() {
@@ -2223,13 +2260,11 @@ pub type VCOS_VLOG_IMPL_FUNC_T = ::std::option::Option<
     ),
 >;
 extern "C" {
-
     /// Convert a VCOS_LOG_LEVEL_T into a printable string.
     /// The platform needs to implement this function.
     pub fn vcos_log_level_to_string(level: VCOS_LOG_LEVEL_T) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
-
     /// Convert a string into a VCOS_LOG_LEVEL_T
     /// The platform needs to implement this function.
     pub fn vcos_string_to_log_level(
@@ -2238,7 +2273,6 @@ extern "C" {
     ) -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// Log a message. Basic API. Normal code should not use this.
     /// The platform needs to implement this function.
     pub fn vcos_log_impl(
@@ -2249,7 +2283,6 @@ extern "C" {
     );
 }
 extern "C" {
-
     /// Log a message using a varargs parameter list. Normal code should
     /// not use this.
     pub fn vcos_vlog_impl(
@@ -2260,14 +2293,12 @@ extern "C" {
     );
 }
 extern "C" {
-
     /// Set the function which does the actual logging output.
     /// Passing in NULL causes the default logging function to be
     /// used.
     pub fn vcos_set_vlog_impl(vlog_impl_func: VCOS_VLOG_IMPL_FUNC_T);
 }
 extern "C" {
-
     /// The default logging function, which is provided by each
     /// platform.
     pub fn vcos_vlog_default_impl(
@@ -2281,7 +2312,6 @@ extern "C" {
     pub fn vcos_logging_init();
 }
 extern "C" {
-
     /// Register a logging category.
     ///
     /// @param name the name of this category.
@@ -2289,12 +2319,10 @@ extern "C" {
     pub fn vcos_log_register(name: *const ::std::os::raw::c_char, category: *mut VCOS_LOG_CAT_T);
 }
 extern "C" {
-
     /// Unregister a logging category.
     pub fn vcos_log_unregister(category: *mut VCOS_LOG_CAT_T);
 }
 extern "C" {
-
     /// Return a default logging category, for people too lazy to create their own.
     ///
     /// Using the default category will be slow (there's an extra function
@@ -2571,7 +2599,6 @@ extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-
     /// Like vsnprintf, except it places the output at the specified offset.
     /// Output is truncated to fit in buflen bytes, and is guaranteed to be NUL-terminated.
     /// Returns the string length before/without truncation.
@@ -2584,7 +2611,6 @@ extern "C" {
     ) -> usize;
 }
 extern "C" {
-
     /// Like snprintf, except it places the output at the specified offset.
     /// Output is truncated to fit in buflen bytes, and is guaranteed to be NUL-terminated.
     /// Returns the string length before/without truncation.
@@ -2597,7 +2623,6 @@ extern "C" {
     ) -> usize;
 }
 extern "C" {
-
     /// Copies string src to dst at the specified offset.
     /// Output is truncated to fit in dstlen bytes, i.e. the string is at most
     /// (buflen - 1) characters long. Unlike strncpy, exactly one NUL is written
@@ -2611,14 +2636,12 @@ extern "C" {
     ) -> usize;
 }
 extern "C" {
-
     /// Initialize thread attribute struct. This call does not allocate memory,
     /// and so cannot fail.
     ///
     pub fn vcos_thread_attr_init(attrs: *mut VCOS_THREAD_ATTR_T);
 }
 extern "C" {
-
     /// Perform timer subsystem initialization. This function is not needed
     /// on non-Windows platforms but is still present so that it can be
     /// called. On Windows it is needed because vcos_init() gets called
@@ -2630,7 +2653,6 @@ extern "C" {
     pub fn vcos_timer_init() -> VCOS_STATUS_T;
 }
 extern "C" {
-
     /// \file vcos_once.h
     ///
     /// Ensure something is called only once.
@@ -2764,23 +2786,44 @@ fn bindgen_test_layout_MMAL_CORE_PORT_STATISTICS_T() {
 /// Unsigned 16.16 fixed point value, also known as Q16.16
 pub type MMAL_FIXED_16_16_T = u32;
 pub mod MMAL_STATUS_T {
-    pub type Type = ::std::os::raw::c_uint;
+    /// Status return codes from the API.
+    ///
+    /// \internal Please try to keep this similar to the standard POSIX codes
+    /// rather than making up new ones!
+    pub type Type = u32;
+    /// < Success
     pub const MMAL_SUCCESS: Type = 0;
+    /// < Out of memory
     pub const MMAL_ENOMEM: Type = 1;
+    /// < Out of resources (other than memory)
     pub const MMAL_ENOSPC: Type = 2;
+    /// < Argument is invalid
     pub const MMAL_EINVAL: Type = 3;
+    /// < Function not implemented
     pub const MMAL_ENOSYS: Type = 4;
+    /// < No such file or directory
     pub const MMAL_ENOENT: Type = 5;
+    /// < No such device or address
     pub const MMAL_ENXIO: Type = 6;
+    /// < I/O error
     pub const MMAL_EIO: Type = 7;
+    /// < Illegal seek
     pub const MMAL_ESPIPE: Type = 8;
+    /// < Data is corrupt \attention FIXME: not POSIX
     pub const MMAL_ECORRUPT: Type = 9;
+    /// < Component is not ready \attention FIXME: not POSIX
     pub const MMAL_ENOTREADY: Type = 10;
+    /// < Component is not configured \attention FIXME: not POSIX
     pub const MMAL_ECONFIG: Type = 11;
+    /// < Port is already connected
     pub const MMAL_EISCONN: Type = 12;
+    /// < Port is disconnected
     pub const MMAL_ENOTCONN: Type = 13;
+    /// < Resource temporarily unavailable. Try again later
     pub const MMAL_EAGAIN: Type = 14;
+    /// < Bad address
     pub const MMAL_EFAULT: Type = 15;
+    /// < Force to 32 bit
     pub const MMAL_STATUS_MAX: Type = 2147483647;
 }
 /// Describes a rectangle
@@ -2893,12 +2936,19 @@ fn bindgen_test_layout_MMAL_RATIONAL_T() {
 }
 /// Four Character Code type
 pub type MMAL_FOURCC_T = u32;
+/// < Unknown elementary stream type
 pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_UNKNOWN: MMAL_ES_TYPE_T = 0;
+/// < Elementary stream of control commands
 pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_CONTROL: MMAL_ES_TYPE_T = 1;
+/// < Audio elementary stream
 pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_AUDIO: MMAL_ES_TYPE_T = 2;
+/// < Video elementary stream
 pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_VIDEO: MMAL_ES_TYPE_T = 3;
+/// < Sub-picture elementary stream (e.g. subtitles, overlays)
 pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_SUBPICTURE: MMAL_ES_TYPE_T = 4;
-pub type MMAL_ES_TYPE_T = ::std::os::raw::c_uint;
+/// Enumeration of the different types of elementary streams.
+/// This divides elementary streams into 4 big categories, plus an invalid type.
+pub type MMAL_ES_TYPE_T = u32;
 /// Definition of a video format.
 /// This describes the properties specific to a video stream
 #[repr(C)]
@@ -3293,21 +3343,18 @@ fn bindgen_test_layout_MMAL_ES_FORMAT_T() {
     );
 }
 extern "C" {
-
     /// Allocate and initialise a \ref MMAL_ES_FORMAT_T structure.
     ///
     /// @return a \ref MMAL_ES_FORMAT_T structure
     pub fn mmal_format_alloc() -> *mut MMAL_ES_FORMAT_T;
 }
 extern "C" {
-
     /// Free a \ref MMAL_ES_FORMAT_T structure allocated by \ref mmal_format_alloc.
     ///
     /// @param format the \ref MMAL_ES_FORMAT_T structure to free
     pub fn mmal_format_free(format: *mut MMAL_ES_FORMAT_T);
 }
 extern "C" {
-
     /// Allocate the extradata buffer in \ref MMAL_ES_FORMAT_T.
     /// This buffer will be freed automatically when the format is destroyed or
     /// another allocation is done.
@@ -3321,7 +3368,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Shallow copy a format structure.
     /// It is worth noting that the extradata buffer will not be copied in the new format.
     ///
@@ -3330,7 +3376,6 @@ extern "C" {
     pub fn mmal_format_copy(format_dest: *mut MMAL_ES_FORMAT_T, format_src: *mut MMAL_ES_FORMAT_T);
 }
 extern "C" {
-
     /// Fully copy a format structure, including the extradata buffer.
     ///
     /// @param format_dest destination \ref MMAL_ES_FORMAT_T for the copy
@@ -3342,7 +3387,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Compare 2 format structures and returns a set of flags describing the differences.
     /// The result will be zero if the structures are the same, or a combination of
     /// one or more of the \ref comparisonflags "Comparison flags" if different.
@@ -3529,6 +3573,11 @@ fn bindgen_test_layout_MMAL_BUFFER_HEADER_T() {
         concat!("Size of: ", stringify!(MMAL_BUFFER_HEADER_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_BUFFER_HEADER_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_BUFFER_HEADER_T))
+    );
+    assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_BUFFER_HEADER_T>())).next as *const _ as usize },
         0usize,
         concat!(
@@ -3650,7 +3699,6 @@ fn bindgen_test_layout_MMAL_BUFFER_HEADER_T() {
     );
 }
 extern "C" {
-
     /// Acquire a buffer header.
     /// Acquiring a buffer header increases a reference counter on it and makes sure that the
     /// buffer header won't be recycled until all the references to it are gone.
@@ -3661,7 +3709,6 @@ extern "C" {
     pub fn mmal_buffer_header_acquire(header: *mut MMAL_BUFFER_HEADER_T);
 }
 extern "C" {
-
     /// Reset a buffer header.
     /// Resets all header variables to default values.
     ///
@@ -3669,7 +3716,6 @@ extern "C" {
     pub fn mmal_buffer_header_reset(header: *mut MMAL_BUFFER_HEADER_T);
 }
 extern "C" {
-
     /// Release a buffer header.
     /// Releasing a buffer header will decrease its reference counter and when no more references
     /// are left, the buffer header will be recycled by calling its 'release' callback function.
@@ -3683,7 +3729,6 @@ extern "C" {
     pub fn mmal_buffer_header_release(header: *mut MMAL_BUFFER_HEADER_T);
 }
 extern "C" {
-
     /// Continue the buffer header release process.
     /// This should be called to complete buffer header recycling once all pre-release activity
     /// has been completed.
@@ -3708,7 +3753,6 @@ pub type MMAL_BH_PRE_RELEASE_CB_T = ::std::option::Option<
         -> MMAL_BOOL_T,
 >;
 extern "C" {
-
     /// Set a buffer header pre-release callback.
     /// If the callback is NULL, the buffer will be released back into the pool
     /// immediately as usual.
@@ -3723,7 +3767,6 @@ extern "C" {
     );
 }
 extern "C" {
-
     /// Replicate a buffer header into another one.
     /// Replicating a buffer header will not only do an exact copy of all the public fields of the
     /// buffer header (including data and alloc_size), but it will also acquire a reference to the
@@ -3738,7 +3781,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Lock the data buffer contained in the buffer header in memory.
     /// This call does nothing on all platforms except VideoCore where it is needed to pin a
     /// buffer in memory before any access to it.
@@ -3747,7 +3789,6 @@ extern "C" {
     pub fn mmal_buffer_header_mem_lock(header: *mut MMAL_BUFFER_HEADER_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Unlock the data buffer contained in the buffer header.
     /// This call does nothing on all platforms except VideoCore where it is needed to un-pin a
     /// buffer in memory after any access to it.
@@ -3755,23 +3796,40 @@ extern "C" {
     /// @param header buffer header to unlock
     pub fn mmal_buffer_header_mem_unlock(header: *mut MMAL_BUFFER_HEADER_T);
 }
+/// < Never a valid parameter ID
 pub const MMAL_PARAMETER_UNUSED: _bindgen_ty_24 = 0;
+/// < Takes a MMAL_PARAMETER_ENCODING_T
 pub const MMAL_PARAMETER_SUPPORTED_ENCODINGS: _bindgen_ty_24 = 1;
+/// < Takes a MMAL_PARAMETER_URI_T
 pub const MMAL_PARAMETER_URI: _bindgen_ty_24 = 2;
+/// < Takes a MMAL_PARAMETER_CHANGE_EVENT_REQUEST_T
 pub const MMAL_PARAMETER_CHANGE_EVENT_REQUEST: _bindgen_ty_24 = 3;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_ZERO_COPY: _bindgen_ty_24 = 4;
+/// < Takes a MMAL_PARAMETER_BUFFER_REQUIREMENTS_T
 pub const MMAL_PARAMETER_BUFFER_REQUIREMENTS: _bindgen_ty_24 = 5;
+/// < Takes a MMAL_PARAMETER_STATISTICS_T
 pub const MMAL_PARAMETER_STATISTICS: _bindgen_ty_24 = 6;
+/// < Takes a MMAL_PARAMETER_CORE_STATISTICS_T
 pub const MMAL_PARAMETER_CORE_STATISTICS: _bindgen_ty_24 = 7;
+/// < Takes a MMAL_PARAMETER_MEM_USAGE_T
 pub const MMAL_PARAMETER_MEM_USAGE: _bindgen_ty_24 = 8;
+/// < Takes a MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_BUFFER_FLAG_FILTER: _bindgen_ty_24 = 9;
+/// < Takes a MMAL_PARAMETER_SEEK_T
 pub const MMAL_PARAMETER_SEEK: _bindgen_ty_24 = 10;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_POWERMON_ENABLE: _bindgen_ty_24 = 11;
+/// < Takes a MMAL_PARAMETER_LOGGING_T
 pub const MMAL_PARAMETER_LOGGING: _bindgen_ty_24 = 12;
+/// < Takes a MMAL_PARAMETER_UINT64_T
 pub const MMAL_PARAMETER_SYSTEM_TIME: _bindgen_ty_24 = 13;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_NO_IMAGE_PADDING: _bindgen_ty_24 = 14;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_LOCKSTEP_ENABLE: _bindgen_ty_24 = 15;
-pub type _bindgen_ty_24 = ::std::os::raw::c_uint;
+/// Common MMAL parameter IDs.
+pub type _bindgen_ty_24 = u32;
 /// Parameter header type. All parameter structures need to begin with this type.
 /// The \ref id field must be set to a parameter ID, such as one of those listed on
 /// the \ref MMAL_PARAMETER_IDS "Pre-defined MMAL parameter IDs" page.
@@ -4023,6 +4081,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_SEEK_T() {
         concat!("Size of: ", stringify!(MMAL_PARAMETER_SEEK_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_SEEK_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_PARAMETER_SEEK_T))
+    );
+    assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_PARAMETER_SEEK_T>())).hdr as *const _ as usize },
         0usize,
         concat!(
@@ -4084,6 +4147,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_STATISTICS_T() {
         ::std::mem::size_of::<MMAL_PARAMETER_STATISTICS_T>(),
         48usize,
         concat!("Size of: ", stringify!(MMAL_PARAMETER_STATISTICS_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_STATISTICS_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_PARAMETER_STATISTICS_T))
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_PARAMETER_STATISTICS_T>())).hdr as *const _ as usize },
@@ -4200,7 +4268,7 @@ fn bindgen_test_layout_MMAL_PARAMETER_STATISTICS_T() {
 pub const MMAL_CORE_STATS_DIR_MMAL_CORE_STATS_RX: MMAL_CORE_STATS_DIR = 0;
 pub const MMAL_CORE_STATS_DIR_MMAL_CORE_STATS_TX: MMAL_CORE_STATS_DIR = 1;
 pub const MMAL_CORE_STATS_DIR_MMAL_CORE_STATS_MAX: MMAL_CORE_STATS_DIR = 2147483647;
-pub type MMAL_CORE_STATS_DIR = ::std::os::raw::c_uint;
+pub type MMAL_CORE_STATS_DIR = u32;
 /// MMAL core statistics. These are collected by the core itself.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4372,98 +4440,191 @@ fn bindgen_test_layout_MMAL_PARAMETER_LOGGING_T() {
         )
     );
 }
+/// < Takes a @ref MMAL_PARAMETER_THUMBNAIL_CONFIG_T
 pub const MMAL_PARAMETER_THUMBNAIL_CONFIGURATION: _bindgen_ty_25 = 65536;
+/// < Unused?
 pub const MMAL_PARAMETER_CAPTURE_QUALITY: _bindgen_ty_25 = 65537;
+/// < Takes a @ref MMAL_PARAMETER_INT32_T
 pub const MMAL_PARAMETER_ROTATION: _bindgen_ty_25 = 65538;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_EXIF_DISABLE: _bindgen_ty_25 = 65539;
+/// < Takes a @ref MMAL_PARAMETER_EXIF_T
 pub const MMAL_PARAMETER_EXIF: _bindgen_ty_25 = 65540;
+/// < Takes a @ref MMAL_PARAM_AWBMODE_T
 pub const MMAL_PARAMETER_AWB_MODE: _bindgen_ty_25 = 65541;
+/// < Takes a @ref MMAL_PARAMETER_IMAGEFX_T
 pub const MMAL_PARAMETER_IMAGE_EFFECT: _bindgen_ty_25 = 65542;
+/// < Takes a @ref MMAL_PARAMETER_COLOURFX_T
 pub const MMAL_PARAMETER_COLOUR_EFFECT: _bindgen_ty_25 = 65543;
+/// < Takes a @ref MMAL_PARAMETER_FLICKERAVOID_T
 pub const MMAL_PARAMETER_FLICKER_AVOID: _bindgen_ty_25 = 65544;
+/// < Takes a @ref MMAL_PARAMETER_FLASH_T
 pub const MMAL_PARAMETER_FLASH: _bindgen_ty_25 = 65545;
+/// < Takes a @ref MMAL_PARAMETER_REDEYE_T
 pub const MMAL_PARAMETER_REDEYE: _bindgen_ty_25 = 65546;
+/// < Takes a @ref MMAL_PARAMETER_FOCUS_T
 pub const MMAL_PARAMETER_FOCUS: _bindgen_ty_25 = 65547;
+/// < Unused?
 pub const MMAL_PARAMETER_FOCAL_LENGTHS: _bindgen_ty_25 = 65548;
+/// < Takes a @ref MMAL_PARAMETER_INT32_T or MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_EXPOSURE_COMP: _bindgen_ty_25 = 65549;
+/// < Takes a @ref MMAL_PARAMETER_SCALEFACTOR_T
 pub const MMAL_PARAMETER_ZOOM: _bindgen_ty_25 = 65550;
+/// < Takes a @ref MMAL_PARAMETER_MIRROR_T
 pub const MMAL_PARAMETER_MIRROR: _bindgen_ty_25 = 65551;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_CAMERA_NUM: _bindgen_ty_25 = 65552;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_CAPTURE: _bindgen_ty_25 = 65553;
+/// < Takes a @ref MMAL_PARAMETER_EXPOSUREMODE_T
 pub const MMAL_PARAMETER_EXPOSURE_MODE: _bindgen_ty_25 = 65554;
+/// < Takes a @ref MMAL_PARAMETER_EXPOSUREMETERINGMODE_T
 pub const MMAL_PARAMETER_EXP_METERING_MODE: _bindgen_ty_25 = 65555;
+/// < Takes a @ref MMAL_PARAMETER_FOCUS_STATUS_T
 pub const MMAL_PARAMETER_FOCUS_STATUS: _bindgen_ty_25 = 65556;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_CONFIG_T
 pub const MMAL_PARAMETER_CAMERA_CONFIG: _bindgen_ty_25 = 65557;
+/// < Takes a @ref MMAL_PARAMETER_CAPTURE_STATUS_T
 pub const MMAL_PARAMETER_CAPTURE_STATUS: _bindgen_ty_25 = 65558;
+/// < Takes a @ref MMAL_PARAMETER_FACE_TRACK_T
 pub const MMAL_PARAMETER_FACE_TRACK: _bindgen_ty_25 = 65559;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_DRAW_BOX_FACES_AND_FOCUS: _bindgen_ty_25 = 65560;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_JPEG_Q_FACTOR: _bindgen_ty_25 = 65561;
+/// < Takes a @ref MMAL_PARAMETER_FRAME_RATE_T
 pub const MMAL_PARAMETER_FRAME_RATE: _bindgen_ty_25 = 65562;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_STC_MODE_T
 pub const MMAL_PARAMETER_USE_STC: _bindgen_ty_25 = 65563;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_INFO_T
 pub const MMAL_PARAMETER_CAMERA_INFO: _bindgen_ty_25 = 65564;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_STABILISATION: _bindgen_ty_25 = 65565;
+/// < Takes a @ref MMAL_PARAMETER_FACE_TRACK_RESULTS_T
 pub const MMAL_PARAMETER_FACE_TRACK_RESULTS: _bindgen_ty_25 = 65566;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_ENABLE_RAW_CAPTURE: _bindgen_ty_25 = 65567;
+/// < Takes a @ref MMAL_PARAMETER_URI_T
 pub const MMAL_PARAMETER_DPF_FILE: _bindgen_ty_25 = 65568;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_ENABLE_DPF_FILE: _bindgen_ty_25 = 65569;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_DPF_FAIL_IS_FATAL: _bindgen_ty_25 = 65570;
+/// < Takes a @ref MMAL_PARAMETER_CAPTUREMODE_T
 pub const MMAL_PARAMETER_CAPTURE_MODE: _bindgen_ty_25 = 65571;
+/// < Takes a @ref MMAL_PARAMETER_FOCUS_REGIONS_T
 pub const MMAL_PARAMETER_FOCUS_REGIONS: _bindgen_ty_25 = 65572;
+/// < Takes a @ref MMAL_PARAMETER_INPUT_CROP_T
 pub const MMAL_PARAMETER_INPUT_CROP: _bindgen_ty_25 = 65573;
+/// < Takes a @ref MMAL_PARAMETER_SENSOR_INFORMATION_T
 pub const MMAL_PARAMETER_SENSOR_INFORMATION: _bindgen_ty_25 = 65574;
+/// < Takes a @ref MMAL_PARAMETER_FLASH_SELECT_T
 pub const MMAL_PARAMETER_FLASH_SELECT: _bindgen_ty_25 = 65575;
+/// < Takes a @ref MMAL_PARAMETER_FIELD_OF_VIEW_T
 pub const MMAL_PARAMETER_FIELD_OF_VIEW: _bindgen_ty_25 = 65576;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_HIGH_DYNAMIC_RANGE: _bindgen_ty_25 = 65577;
+/// < Takes a @ref MMAL_PARAMETER_DRC_T
 pub const MMAL_PARAMETER_DYNAMIC_RANGE_COMPRESSION: _bindgen_ty_25 = 65578;
+/// < Takes a @ref MMAL_PARAMETER_ALGORITHM_CONTROL_T
 pub const MMAL_PARAMETER_ALGORITHM_CONTROL: _bindgen_ty_25 = 65579;
+/// < Takes a @ref MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_SHARPNESS: _bindgen_ty_25 = 65580;
+/// < Takes a @ref MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_CONTRAST: _bindgen_ty_25 = 65581;
+/// < Takes a @ref MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_BRIGHTNESS: _bindgen_ty_25 = 65582;
+/// < Takes a @ref MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_SATURATION: _bindgen_ty_25 = 65583;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_ISO: _bindgen_ty_25 = 65584;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_ANTISHAKE: _bindgen_ty_25 = 65585;
+/// < Takes a @ref MMAL_PARAMETER_IMAGEFX_PARAMETERS_T
 pub const MMAL_PARAMETER_IMAGE_EFFECT_PARAMETERS: _bindgen_ty_25 = 65586;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_CAMERA_BURST_CAPTURE: _bindgen_ty_25 = 65587;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_CAMERA_MIN_ISO: _bindgen_ty_25 = 65588;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_USE_CASE_T
 pub const MMAL_PARAMETER_CAMERA_USE_CASE: _bindgen_ty_25 = 65589;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_CAPTURE_STATS_PASS: _bindgen_ty_25 = 65590;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG: _bindgen_ty_25 = 65591;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_ENABLE_REGISTER_FILE: _bindgen_ty_25 = 65592;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_REGISTER_FAIL_IS_FATAL: _bindgen_ty_25 = 65593;
+/// < Takes a @ref MMAL_PARAMETER_CONFIGFILE_T
 pub const MMAL_PARAMETER_CONFIGFILE_REGISTERS: _bindgen_ty_25 = 65594;
+/// < Takes a @ref MMAL_PARAMETER_CONFIGFILE_CHUNK_T
 pub const MMAL_PARAMETER_CONFIGFILE_CHUNK_REGISTERS: _bindgen_ty_25 = 65595;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_JPEG_ATTACH_LOG: _bindgen_ty_25 = 65596;
+/// < Takes a @ref MMAL_PARAMETER_ZEROSHUTTERLAG_T
 pub const MMAL_PARAMETER_ZERO_SHUTTER_LAG: _bindgen_ty_25 = 65597;
+/// < Takes a @ref MMAL_PARAMETER_FPS_RANGE_T
 pub const MMAL_PARAMETER_FPS_RANGE: _bindgen_ty_25 = 65598;
+/// < Takes a @ref MMAL_PARAMETER_INT32_T
 pub const MMAL_PARAMETER_CAPTURE_EXPOSURE_COMP: _bindgen_ty_25 = 65599;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_SW_SHARPEN_DISABLE: _bindgen_ty_25 = 65600;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_FLASH_REQUIRED: _bindgen_ty_25 = 65601;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_SW_SATURATION_DISABLE: _bindgen_ty_25 = 65602;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_SHUTTER_SPEED: _bindgen_ty_25 = 65603;
+/// < Takes a @ref MMAL_PARAMETER_AWB_GAINS_T
 pub const MMAL_PARAMETER_CUSTOM_AWB_GAINS: _bindgen_ty_25 = 65604;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_SETTINGS_T
 pub const MMAL_PARAMETER_CAMERA_SETTINGS: _bindgen_ty_25 = 65605;
+/// < Takes a @ref MMAL_PARAMETER_PRIVACY_INDICATOR_T
 pub const MMAL_PARAMETER_PRIVACY_INDICATOR: _bindgen_ty_25 = 65606;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_DENOISE: _bindgen_ty_25 = 65607;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_STILLS_DENOISE: _bindgen_ty_25 = 65608;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_ANNOTATE_T
 pub const MMAL_PARAMETER_ANNOTATE: _bindgen_ty_25 = 65609;
+/// < Takes a @ref MMAL_PARAMETER_STEREOSCOPIC_MODE_T
 pub const MMAL_PARAMETER_STEREOSCOPIC_MODE: _bindgen_ty_25 = 65610;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_INTERFACE_T
 pub const MMAL_PARAMETER_CAMERA_INTERFACE: _bindgen_ty_25 = 65611;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_CLOCKING_MODE_T
 pub const MMAL_PARAMETER_CAMERA_CLOCKING_MODE: _bindgen_ty_25 = 65612;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_RX_CONFIG_T
 pub const MMAL_PARAMETER_CAMERA_RX_CONFIG: _bindgen_ty_25 = 65613;
+/// < Takes a @ref MMAL_PARAMETER_CAMERA_RX_TIMING_T
 pub const MMAL_PARAMETER_CAMERA_RX_TIMING: _bindgen_ty_25 = 65614;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_DPF_CONFIG: _bindgen_ty_25 = 65615;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_JPEG_RESTART_INTERVAL: _bindgen_ty_25 = 65616;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE: _bindgen_ty_25 = 65617;
+/// < Takes a @ref MMAL_PARAMETER_LENS_SHADING_T
 pub const MMAL_PARAMETER_LENS_SHADING_OVERRIDE: _bindgen_ty_25 = 65618;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_BLACK_LEVEL: _bindgen_ty_25 = 65619;
+/// < Takes a @ref MMAL_PARAMETER_RESIZE_T
 pub const MMAL_PARAMETER_RESIZE_PARAMS: _bindgen_ty_25 = 65620;
+/// < Takes a @ref MMAL_PARAMETER_CROP_T
 pub const MMAL_PARAMETER_CROP: _bindgen_ty_25 = 65621;
+/// < Takes a @ref MMAL_PARAMETER_INT32_T
 pub const MMAL_PARAMETER_OUTPUT_SHIFT: _bindgen_ty_25 = 65622;
+/// < Takes a @ref MMAL_PARAMETER_INT32_T
 pub const MMAL_PARAMETER_CCM_SHIFT: _bindgen_ty_25 = 65623;
+/// < Takes a @ref MMAL_PARAMETER_CUSTOM_CCM_T
 pub const MMAL_PARAMETER_CUSTOM_CCM: _bindgen_ty_25 = 65624;
+/// < Takes a @ref MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_ANALOG_GAIN: _bindgen_ty_25 = 65625;
+/// < Takes a @ref MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_DIGITAL_GAIN: _bindgen_ty_25 = 65626;
-pub type _bindgen_ty_25 = ::std::os::raw::c_uint;
+/// Camera-specific MMAL parameter IDs.
+/// @ingroup MMAL_PARAMETER_IDS
+pub type _bindgen_ty_25 = u32;
 /// Thumbnail configuration parameter type
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4657,7 +4818,8 @@ pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_FIREWORKS: MMAL_PARA
     12;
 pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_MAX: MMAL_PARAM_EXPOSUREMODE_T =
     2147483647;
-pub type MMAL_PARAM_EXPOSUREMODE_T = ::std::os::raw::c_uint;
+/// Exposure modes.
+pub type MMAL_PARAM_EXPOSUREMODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_EXPOSUREMODE_T {
@@ -4712,7 +4874,7 @@ pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_MATR
     MMAL_PARAM_EXPOSUREMETERINGMODE_T = 3;
 pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_MAX:
     MMAL_PARAM_EXPOSUREMETERINGMODE_T = 2147483647;
-pub type MMAL_PARAM_EXPOSUREMETERINGMODE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_EXPOSUREMETERINGMODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_EXPOSUREMETERINGMODE_T {
@@ -4776,7 +4938,8 @@ pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_INCANDESCENT: MMAL_PARAM_AWBMO
 pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_FLASH: MMAL_PARAM_AWBMODE_T = 8;
 pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_HORIZON: MMAL_PARAM_AWBMODE_T = 9;
 pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_MAX: MMAL_PARAM_AWBMODE_T = 2147483647;
-pub type MMAL_PARAM_AWBMODE_T = ::std::os::raw::c_uint;
+/// AWB parameter modes.
+pub type MMAL_PARAM_AWBMODE_T = u32;
 /// AWB parameter type.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4845,7 +5008,8 @@ pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DEINTERLACE_DOUBLE: MMAL_PARAM
 pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DEINTERLACE_ADV: MMAL_PARAM_IMAGEFX_T = 24;
 pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DEINTERLACE_FAST: MMAL_PARAM_IMAGEFX_T = 25;
 pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_MAX: MMAL_PARAM_IMAGEFX_T = 2147483647;
-pub type MMAL_PARAM_IMAGEFX_T = ::std::os::raw::c_uint;
+/// Image effect
+pub type MMAL_PARAM_IMAGEFX_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_IMAGEFX_T {
@@ -5028,11 +5192,14 @@ fn bindgen_test_layout_MMAL_PARAMETER_COLOURFX_T() {
         )
     );
 }
+/// < Frames do not have STCs, as needed in OpenMAX/IL
 pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_OFF: MMAL_CAMERA_STC_MODE_T = 0;
+/// < Use raw clock STC, needed for true pause/resume support
 pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_RAW: MMAL_CAMERA_STC_MODE_T = 1;
+/// < Start the STC from the start of capture, only for quick demo code
 pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_COOKED: MMAL_CAMERA_STC_MODE_T = 2;
 pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_MAX: MMAL_CAMERA_STC_MODE_T = 2147483647;
-pub type MMAL_CAMERA_STC_MODE_T = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_STC_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAMERA_STC_MODE_T {
@@ -5085,7 +5252,7 @@ pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_50HZ: MMAL_PARAM_FLI
 pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_60HZ: MMAL_PARAM_FLICKERAVOID_T = 3;
 pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_MAX: MMAL_PARAM_FLICKERAVOID_T =
     2147483647;
-pub type MMAL_PARAM_FLICKERAVOID_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_FLICKERAVOID_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_FLICKERAVOID_T {
@@ -5137,7 +5304,7 @@ pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_REDEYE: MMAL_PARAM_FLASH_T = 3;
 pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_FILLIN: MMAL_PARAM_FLASH_T = 4;
 pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_TORCH: MMAL_PARAM_FLASH_T = 5;
 pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_MAX: MMAL_PARAM_FLASH_T = 2147483647;
-pub type MMAL_PARAM_FLASH_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_FLASH_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_FLASH_T {
@@ -5182,7 +5349,7 @@ pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_OFF: MMAL_PARAM_REDEYE_T = 0;
 pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_ON: MMAL_PARAM_REDEYE_T = 1;
 pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_SIMPLE: MMAL_PARAM_REDEYE_T = 2;
 pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_MAX: MMAL_PARAM_REDEYE_T = 2147483647;
-pub type MMAL_PARAM_REDEYE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_REDEYE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_REDEYE_T {
@@ -5239,7 +5406,7 @@ pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_NEAR_FAST: MMAL_PARAM_FOCUS_T 
 pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_MACRO_FAST: MMAL_PARAM_FOCUS_T = 13;
 pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_FIXED_CURRENT: MMAL_PARAM_FOCUS_T = 14;
 pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_MAX: MMAL_PARAM_FOCUS_T = 2147483647;
-pub type MMAL_PARAM_FOCUS_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_FOCUS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_FOCUS_T {
@@ -5288,7 +5455,7 @@ pub const MMAL_PARAM_CAPTURE_STATUS_T_MMAL_PARAM_CAPTURE_STATUS_CAPTURE_ENDED:
     MMAL_PARAM_CAPTURE_STATUS_T = 2;
 pub const MMAL_PARAM_CAPTURE_STATUS_T_MMAL_PARAM_CAPTURE_STATUS_MAX: MMAL_PARAM_CAPTURE_STATUS_T =
     2147483647;
-pub type MMAL_PARAM_CAPTURE_STATUS_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_CAPTURE_STATUS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAPTURE_STATUS_T {
@@ -5355,7 +5522,7 @@ pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_CAF_SCENE_CHANGED:
     MMAL_PARAM_FOCUS_STATUS_T = 11;
 pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_MAX: MMAL_PARAM_FOCUS_STATUS_T =
     2147483647;
-pub type MMAL_PARAM_FOCUS_STATUS_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_FOCUS_STATUS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_FOCUS_STATUS_T {
@@ -5400,12 +5567,14 @@ fn bindgen_test_layout_MMAL_PARAMETER_FOCUS_STATUS_T() {
         )
     );
 }
+/// < Disables face detection
 pub const MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_NONE: MMAL_PARAM_FACE_TRACK_MODE_T =
     0;
+/// < Enables face detection
 pub const MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_ON: MMAL_PARAM_FACE_TRACK_MODE_T = 1;
 pub const MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_MAX: MMAL_PARAM_FACE_TRACK_MODE_T =
     2147483647;
-pub type MMAL_PARAM_FACE_TRACK_MODE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_FACE_TRACK_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_FACE_TRACK_T {
@@ -5674,9 +5843,13 @@ fn bindgen_test_layout_MMAL_PARAMETER_FACE_TRACK_RESULTS_T() {
     );
 }
 pub mod MMAL_PARAMETER_CAMERA_CONFIG_TIMESTAMP_MODE_T {
-    pub type Type = ::std::os::raw::c_uint;
+    pub type Type = u32;
+    /// < Always timestamp frames as 0
     pub const MMAL_PARAM_TIMESTAMP_MODE_ZERO: Type = 0;
+    /// < Use the raw STC value for the frame timestamp
     pub const MMAL_PARAM_TIMESTAMP_MODE_RAW_STC: Type = 1;
+    /// < Use the STC timestamp but subtract the timestamp
+    /// of the first frame sent to give a zero based timestamp.
     pub const MMAL_PARAM_TIMESTAMP_MODE_RESET_STC: Type = 2;
     pub const MMAL_PARAM_TIMESTAMP_MODE_MAX: Type = 2147483647;
 }
@@ -5957,7 +6130,7 @@ pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T_MMAL_PARAMETER_CAMERA_INFO_FLA
     MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 2;
 pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T_MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_MAX:
     MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 2147483647;
-pub type MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAMERA_INFO_FLASH_T {
@@ -6076,13 +6249,17 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_INFO_T() {
         )
     );
 }
+/// < Resumes preview once capture is completed.
 pub const MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END:
     MMAL_PARAMETER_CAPTUREMODE_MODE_T = 0;
+/// < Resumes preview once capture is completed, and hold the image for subsequent reprocessing.
 pub const MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END_AND_HOLD:
     MMAL_PARAMETER_CAPTUREMODE_MODE_T = 1;
+/// < Resumes preview as soon as possible once capture frame is received from the sensor.
+/// Requires fast_preview_resume to be set via MMAL_PARAMETER_CAMERA_CONFIG.
 pub const MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_RESUME_VF_IMMEDIATELY:
     MMAL_PARAMETER_CAPTUREMODE_MODE_T = 2;
-pub type MMAL_PARAMETER_CAPTUREMODE_MODE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAMETER_CAPTUREMODE_MODE_T = u32;
 /// Stills capture mode control.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6127,13 +6304,15 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAPTUREMODE_T() {
         )
     );
 }
+/// < Region defines a generic region
 pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_NORMAL:
     MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 0;
+/// < Region defines a face
 pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_FACE:
     MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 1;
 pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_MAX:
     MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 2;
-pub type MMAL_PARAMETER_FOCUS_REGION_TYPE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAMETER_FOCUS_REGION_TYPE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_FOCUS_REGION_T {
@@ -6544,7 +6723,7 @@ pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_HIGH:
     MMAL_PARAMETER_DRC_STRENGTH_T = 3;
 pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_MAX:
     MMAL_PARAMETER_DRC_STRENGTH_T = 2147483647;
-pub type MMAL_PARAMETER_DRC_STRENGTH_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAMETER_DRC_STRENGTH_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_DRC_T {
@@ -6600,7 +6779,7 @@ pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM
 pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_SCENE_DETECTION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 12 ;
 pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_HIGH_DYNAMIC_RANGE : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 13 ;
 pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_MAX : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 2147483647 ;
-pub type MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_ALGORITHM_CONTROL_T {
@@ -6662,15 +6841,18 @@ fn bindgen_test_layout_MMAL_PARAMETER_ALGORITHM_CONTROL_T() {
         )
     );
 }
+/// < Compromise on behaviour as use case totally unknown
 pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_UNKNOWN:
     MMAL_PARAM_CAMERA_USE_CASE_T = 0;
+/// < Stills capture use case
 pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_STILLS_CAPTURE:
     MMAL_PARAM_CAMERA_USE_CASE_T = 1;
+/// < Video encode (camcorder) use case
 pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_VIDEO_CAPTURE:
     MMAL_PARAM_CAMERA_USE_CASE_T = 2;
 pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_MAX:
     MMAL_PARAM_CAMERA_USE_CASE_T = 2147483647;
-pub type MMAL_PARAM_CAMERA_USE_CASE_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_CAMERA_USE_CASE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAMERA_USE_CASE_T {
@@ -7009,15 +7191,22 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_SETTINGS_T() {
         )
     );
 }
+/// < Indicator will be off.
 pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_OFF:
     MMAL_PARAM_PRIVACY_INDICATOR_T = 0;
+/// < Indicator will come on just after a stills capture and
+/// and remain on for 2seconds, or will be on whilst output[1]
+/// is actively producing images.
 pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_ON:
     MMAL_PARAM_PRIVACY_INDICATOR_T = 1;
+/// < Turns indicator of for 2s independent of capture status.
+/// Set this mode repeatedly to keep the indicator on for a
+/// longer period.
 pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON:
     MMAL_PARAM_PRIVACY_INDICATOR_T = 2;
 pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_MAX:
     MMAL_PARAM_PRIVACY_INDICATOR_T = 2147483647;
-pub type MMAL_PARAM_PRIVACY_INDICATOR_T = ::std::os::raw::c_uint;
+pub type MMAL_PARAM_PRIVACY_INDICATOR_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_PRIVACY_INDICATOR_T {
@@ -7667,7 +7856,7 @@ pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_SIDE_BY_SIDE: MMAL_STE
 pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_TOP_BOTTOM: MMAL_STEREOSCOPIC_MODE_T = 2;
 pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_MAX: MMAL_STEREOSCOPIC_MODE_T =
     2147483647;
-pub type MMAL_STEREOSCOPIC_MODE_T = ::std::os::raw::c_uint;
+pub type MMAL_STEREOSCOPIC_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_STEREOSCOPIC_MODE_T {
@@ -7746,7 +7935,7 @@ pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_CSI2: MMAL_CAMERA_INTERF
 pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_CCP2: MMAL_CAMERA_INTERFACE_T = 1;
 pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_CPI: MMAL_CAMERA_INTERFACE_T = 2;
 pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_MAX: MMAL_CAMERA_INTERFACE_T = 2147483647;
-pub type MMAL_CAMERA_INTERFACE_T = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_INTERFACE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAMERA_INTERFACE_T {
@@ -7799,7 +7988,7 @@ pub const MMAL_CAMERA_CLOCKING_MODE_T_MMAL_CAMERA_CLOCKING_MODE_CLOCK: MMAL_CAME
     1;
 pub const MMAL_CAMERA_CLOCKING_MODE_T_MMAL_CAMERA_CLOCKING_MODE_MAX: MMAL_CAMERA_CLOCKING_MODE_T =
     2147483647;
-pub type MMAL_CAMERA_CLOCKING_MODE_T = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_CLOCKING_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAMERA_CLOCKING_MODE_T {
@@ -7877,7 +8066,7 @@ pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO16:
     MMAL_CAMERA_RX_CONFIG_DECODE = 11;
 pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_MAX:
     MMAL_CAMERA_RX_CONFIG_DECODE = 2147483647;
-pub type MMAL_CAMERA_RX_CONFIG_DECODE = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_RX_CONFIG_DECODE = u32;
 pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_NONE:
     MMAL_CAMERA_RX_CONFIG_ENCODE = 0;
 pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM10TO8:
@@ -7888,7 +8077,7 @@ pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM14TO8:
     MMAL_CAMERA_RX_CONFIG_ENCODE = 3;
 pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_MAX:
     MMAL_CAMERA_RX_CONFIG_ENCODE = 2147483647;
-pub type MMAL_CAMERA_RX_CONFIG_ENCODE = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_RX_CONFIG_ENCODE = u32;
 pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_NONE:
     MMAL_CAMERA_RX_CONFIG_UNPACK = 0;
 pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_6:
@@ -7907,7 +8096,7 @@ pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_16:
     MMAL_CAMERA_RX_CONFIG_UNPACK = 7;
 pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_MAX:
     MMAL_CAMERA_RX_CONFIG_UNPACK = 2147483647;
-pub type MMAL_CAMERA_RX_CONFIG_UNPACK = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_RX_CONFIG_UNPACK = u32;
 pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_NONE: MMAL_CAMERA_RX_CONFIG_PACK =
     0;
 pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_8: MMAL_CAMERA_RX_CONFIG_PACK = 1;
@@ -7921,7 +8110,7 @@ pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_RAW12: MMAL_CAME
     7;
 pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_MAX: MMAL_CAMERA_RX_CONFIG_PACK =
     2147483647;
-pub type MMAL_CAMERA_RX_CONFIG_PACK = ::std::os::raw::c_uint;
+pub type MMAL_CAMERA_RX_CONFIG_PACK = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_CAMERA_RX_CONFIG_T {
@@ -8355,7 +8544,7 @@ pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_CROP: MMAL_RESIZEMODE_T = 1;
 pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_BOX: MMAL_RESIZEMODE_T = 2;
 pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_BYTES: MMAL_RESIZEMODE_T = 3;
 pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_DUMMY: MMAL_RESIZEMODE_T = 2147483647;
-pub type MMAL_RESIZEMODE_T = ::std::os::raw::c_uint;
+pub type MMAL_RESIZEMODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_RESIZE_T {
@@ -8593,58 +8782,122 @@ fn bindgen_test_layout_MMAL_PARAMETER_CUSTOM_CCM_T() {
         )
     );
 }
+/// < Takes a @ref MMAL_DISPLAYREGION_T
 pub const MMAL_PARAMETER_DISPLAYREGION: _bindgen_ty_26 = 131072;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_PROFILE_T
 pub const MMAL_PARAMETER_SUPPORTED_PROFILES: _bindgen_ty_26 = 131073;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_PROFILE_T
 pub const MMAL_PARAMETER_PROFILE: _bindgen_ty_26 = 131074;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_INTRAPERIOD: _bindgen_ty_26 = 131075;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_RATECONTROL_T
 pub const MMAL_PARAMETER_RATECONTROL: _bindgen_ty_26 = 131076;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_NALUNITFORMAT_T
 pub const MMAL_PARAMETER_NALUNITFORMAT: _bindgen_ty_26 = 131077;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_MINIMISE_FRAGMENTATION: _bindgen_ty_26 = 131078;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
+/// Setting the value to zero resets to the default (one slice per frame).
 pub const MMAL_PARAMETER_MB_ROWS_PER_SLICE: _bindgen_ty_26 = 131079;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION_T
 pub const MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION: _bindgen_ty_26 = 131080;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_EEDE_ENABLE_T
 pub const MMAL_PARAMETER_VIDEO_EEDE_ENABLE: _bindgen_ty_26 = 131081;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE_T
 pub const MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE: _bindgen_ty_26 = 131082;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T.
+/// Request an I-frame.
 pub const MMAL_PARAMETER_VIDEO_REQUEST_I_FRAME: _bindgen_ty_26 = 131083;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_INTRA_REFRESH_T
 pub const MMAL_PARAMETER_VIDEO_INTRA_REFRESH: _bindgen_ty_26 = 131084;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_IMMUTABLE_INPUT: _bindgen_ty_26 = 131085;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
+/// Run-time bit rate control
 pub const MMAL_PARAMETER_VIDEO_BIT_RATE: _bindgen_ty_26 = 131086;
+/// < Takes a @ref MMAL_PARAMETER_FRAME_RATE_T
 pub const MMAL_PARAMETER_VIDEO_FRAME_RATE: _bindgen_ty_26 = 131087;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_MIN_QUANT: _bindgen_ty_26 = 131088;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_MAX_QUANT: _bindgen_ty_26 = 131089;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL: _bindgen_ty_26 = 131090;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_EXTRA_BUFFERS: _bindgen_ty_26 = 131091;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
+/// Changing this paramater from the default can reduce frame rate
+/// because image buffers need to be re-pitched.
 pub const MMAL_PARAMETER_VIDEO_ALIGN_HORIZ: _bindgen_ty_26 = 131092;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
+/// Changing this paramater from the default can reduce frame rate
+/// because image buffers need to be re-pitched.
 pub const MMAL_PARAMETER_VIDEO_ALIGN_VERT: _bindgen_ty_26 = 131093;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAMES: _bindgen_ty_26 = 131094;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_INITIAL_QUANT: _bindgen_ty_26 = 131095;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_QP_P: _bindgen_ty_26 = 131096;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_RC_SLICE_DQUANT: _bindgen_ty_26 = 131097;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_VIDEO_ENCODE_FRAME_LIMIT_BITS: _bindgen_ty_26 = 131098;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_PEAK_RATE: _bindgen_ty_26 = 131099;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_DISABLE_CABAC: _bindgen_ty_26 = 131100;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_LATENCY: _bindgen_ty_26 = 131101;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_AU_DELIMITERS: _bindgen_ty_26 = 131102;
+/// < Takes a @ref MMAL_PARAMETER_UINT32_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_DEBLOCK_IDC: _bindgen_ty_26 = 131103;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_ENCODER_H264_MB_INTRA_MODES_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_MB_INTRA_MODE: _bindgen_ty_26 = 131104;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_ENCODE_HEADER_ON_OPEN: _bindgen_ty_26 = 131105;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_ENCODE_PRECODE_FOR_QP: _bindgen_ty_26 = 131106;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_DRM_INIT_INFO_T.
 pub const MMAL_PARAMETER_VIDEO_DRM_INIT_INFO: _bindgen_ty_26 = 131107;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_TIMESTAMP_FIFO: _bindgen_ty_26 = 131108;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_DECODE_ERROR_CONCEALMENT: _bindgen_ty_26 = 131109;
+/// < Takes a @ref MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T.
 pub const MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER: _bindgen_ty_26 = 131110;
+/// < Takes a @ref MMAL_PARAMETER_BYTES_T
 pub const MMAL_PARAMETER_VIDEO_DECODE_CONFIG_VD3: _bindgen_ty_26 = 131111;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_VCL_HRD_PARAMETERS: _bindgen_ty_26 = 131112;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG: _bindgen_ty_26 = 131113;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER: _bindgen_ty_26 = 131114;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE: _bindgen_ty_26 = 131115;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T.
 pub const MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS: _bindgen_ty_26 = 131116;
+/// < Take a @ref MMAL_PARAMETER_VIDEO_RENDER_STATS_T.
 pub const MMAL_PARAMETER_VIDEO_RENDER_STATS: _bindgen_ty_26 = 131117;
+/// < Take a @ref MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T.
 pub const MMAL_PARAMETER_VIDEO_INTERLACE_TYPE: _bindgen_ty_26 = 131118;
+/// < Takes a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_INTERPOLATE_TIMESTAMPS: _bindgen_ty_26 = 131119;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_VIDEO_ENCODE_SPS_TIMING: _bindgen_ty_26 = 131120;
+/// < Take a @ref MMAL_PARAMETER_UINT32_T
 pub const MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS: _bindgen_ty_26 = 131121;
+/// < Take a @ref MMAL_PARAMETER_SOURCE_PATTERN_T
 pub const MMAL_PARAMETER_VIDEO_SOURCE_PATTERN: _bindgen_ty_26 = 131122;
-pub type _bindgen_ty_26 = ::std::os::raw::c_uint;
+/// < Take a @ref MMAL_PARAMETER_BOOLEAN_T
+pub const MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS: _bindgen_ty_26 = 131123;
+/// < Take a @ref MMAL_PARAMETER_UINT32_T
+pub const MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH: _bindgen_ty_26 = 131124;
+/// Video-specific MMAL parameter IDs.
+/// @ingroup MMAL_PARAMETER_IDS
+pub type _bindgen_ty_26 = u32;
 pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT0: MMAL_DISPLAYTRANSFORM_T = 0;
 pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT0: MMAL_DISPLAYTRANSFORM_T = 1;
 pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT180: MMAL_DISPLAYTRANSFORM_T = 2;
@@ -8654,7 +8907,12 @@ pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT270: MMAL_DISPLAYTRANSFORM_T =
 pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT90: MMAL_DISPLAYTRANSFORM_T = 6;
 pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT270: MMAL_DISPLAYTRANSFORM_T = 7;
 pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_DUMMY: MMAL_DISPLAYTRANSFORM_T = 2147483647;
-pub type MMAL_DISPLAYTRANSFORM_T = ::std::os::raw::c_uint;
+/// Display transformations.
+/// Although an enumeration, the values correspond to combinations of:
+/// \li 1 Reflect in a vertical axis
+/// \li 2 180 degree rotation
+/// \li 4 Reflect in the leading diagonal
+pub type MMAL_DISPLAYTRANSFORM_T = u32;
 pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_FILL: MMAL_DISPLAYMODE_T = 0;
 pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_LETTERBOX: MMAL_DISPLAYMODE_T = 1;
 pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_LEFT_TO_LEFT: MMAL_DISPLAYMODE_T = 2;
@@ -8662,7 +8920,8 @@ pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_TOP_TO_TOP: MMAL_DISPLAYMO
 pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_LEFT_TO_TOP: MMAL_DISPLAYMODE_T = 4;
 pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_TOP_TO_LEFT: MMAL_DISPLAYMODE_T = 5;
 pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_DUMMY: MMAL_DISPLAYMODE_T = 2147483647;
-pub type MMAL_DISPLAYMODE_T = ::std::os::raw::c_uint;
+/// Display modes.
+pub type MMAL_DISPLAYMODE_T = u32;
 pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_NONE: MMAL_DISPLAYSET_T = 0;
 pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_NUM: MMAL_DISPLAYSET_T = 1;
 pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_FULLSCREEN: MMAL_DISPLAYSET_T = 2;
@@ -8676,7 +8935,9 @@ pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_LAYER: MMAL_DISPLAYSET_T = 256;
 pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_COPYPROTECT: MMAL_DISPLAYSET_T = 512;
 pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_ALPHA: MMAL_DISPLAYSET_T = 1024;
 pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_DUMMY: MMAL_DISPLAYSET_T = 2147483647;
-pub type MMAL_DISPLAYSET_T = ::std::os::raw::c_uint;
+/// Values used to indicate which fields are used when setting the
+/// display configuration
+pub type MMAL_DISPLAYSET_T = u32;
 /// This config sets the output display device, as well as the region used
 /// on the output display, any display transformation, and some flags to
 /// indicate how to scale the image.
@@ -8921,7 +9182,10 @@ pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH444: MMAL_VIDEO_PROFI
 pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_CONSTRAINED_BASELINE: MMAL_VIDEO_PROFILE_T =
     32;
 pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_DUMMY: MMAL_VIDEO_PROFILE_T = 2147483647;
-pub type MMAL_VIDEO_PROFILE_T = ::std::os::raw::c_uint;
+/// Video profiles.
+/// Only certain combinations of profile and level will be valid.
+/// @ref MMAL_VIDEO_LEVEL_T
+pub type MMAL_VIDEO_PROFILE_T = u32;
 pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_10: MMAL_VIDEO_LEVEL_T = 0;
 pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_20: MMAL_VIDEO_LEVEL_T = 1;
 pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_30: MMAL_VIDEO_LEVEL_T = 2;
@@ -8956,7 +9220,10 @@ pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_42: MMAL_VIDEO_LEVEL_T = 30;
 pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_5: MMAL_VIDEO_LEVEL_T = 31;
 pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_51: MMAL_VIDEO_LEVEL_T = 32;
 pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_DUMMY: MMAL_VIDEO_LEVEL_T = 2147483647;
-pub type MMAL_VIDEO_LEVEL_T = ::std::os::raw::c_uint;
+/// Video levels.
+/// Only certain combinations of profile and level will be valid.
+/// @ref MMAL_VIDEO_PROFILE_T
+pub type MMAL_VIDEO_LEVEL_T = u32;
 /// Video profile and level setting.
 /// This is a variable length structure when querying the supported profiles and
 /// levels. To get more than one, pass a structure with more profile/level pairs.
@@ -9063,7 +9330,8 @@ pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_CONSTANT_SKIP_FRAMES:
     MMAL_VIDEO_RATECONTROL_T = 4;
 pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_DUMMY: MMAL_VIDEO_RATECONTROL_T =
     2147483647;
-pub type MMAL_VIDEO_RATECONTROL_T = ::std::os::raw::c_uint;
+/// Manner of video rate control
+pub type MMAL_VIDEO_RATECONTROL_T = u32;
 pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_CYCLIC: MMAL_VIDEO_INTRA_REFRESH_T =
     0;
 pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_ADAPTIVE: MMAL_VIDEO_INTRA_REFRESH_T =
@@ -9081,7 +9349,8 @@ pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_MAX: MMAL_VIDEO_IN
     2130706435;
 pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_DUMMY: MMAL_VIDEO_INTRA_REFRESH_T =
     2147483647;
-pub type MMAL_VIDEO_INTRA_REFRESH_T = ::std::os::raw::c_uint;
+/// Intra refresh modes
+pub type MMAL_VIDEO_INTRA_REFRESH_T = u32;
 pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_DEFAULT:
     MMAL_VIDEO_ENCODE_RC_MODEL_T = 0;
 pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_JVT:
@@ -9094,7 +9363,7 @@ pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_LAST:
     MMAL_VIDEO_ENCODE_RC_MODEL_T = 3;
 pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_DUMMY:
     MMAL_VIDEO_ENCODE_RC_MODEL_T = 2147483647;
-pub type MMAL_VIDEO_ENCODE_RC_MODEL_T = ::std::os::raw::c_uint;
+pub type MMAL_VIDEO_ENCODE_RC_MODEL_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL_T {
@@ -9202,7 +9471,7 @@ pub const MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T_MMAL_VIDEO_ENCODER_H264_MB_16x
     MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 4;
 pub const MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T_MMAL_VIDEO_ENCODER_H264_MB_INTRA_DUMMY:
     MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 2147483647;
-pub type MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = ::std::os::raw::c_uint;
+pub type MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_VIDEO_ENCODER_H264_MB_INTRA_MODES_T {
@@ -9266,7 +9535,8 @@ pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_FOURBYTEINTERLEAVE
     MMAL_VIDEO_NALUNITFORMAT_T = 16;
 pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_DUMMY: MMAL_VIDEO_NALUNITFORMAT_T =
     2147483647;
-pub type MMAL_VIDEO_NALUNITFORMAT_T = ::std::os::raw::c_uint;
+/// NAL unit formats
+pub type MMAL_VIDEO_NALUNITFORMAT_T = u32;
 /// NAL unit format setting
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -9933,16 +10203,29 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_RENDER_STATS_T() {
         )
     );
 }
+/// < The data is not interlaced, it is progressive scan
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceProgressive: MMAL_INTERLACETYPE_T = 0;
+/// < The data is interlaced, fields sent
+/// separately in temporal order, with upper field first
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleUpperFirst: MMAL_INTERLACETYPE_T = 1;
+/// < The data is interlaced, fields sent
+/// separately in temporal order, with lower field first
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleLowerFirst: MMAL_INTERLACETYPE_T = 2;
+/// < The data is interlaced, two fields sent together line
+/// interleaved, with the upper field temporally earlier
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedUpperFirst: MMAL_INTERLACETYPE_T = 3;
+/// < The data is interlaced, two fields sent together line
+/// interleaved, with the lower field temporally earlier
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedLowerFirst: MMAL_INTERLACETYPE_T = 4;
+/// < The stream may contain a mixture of progressive
+/// and interlaced frames
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceMixed: MMAL_INTERLACETYPE_T = 5;
+/// < Reserved region for introducing Khronos Standard Extensions
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceKhronosExtensions: MMAL_INTERLACETYPE_T = 1862270976;
+/// < Reserved region for introducing Vendor Extensions
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceVendorStartUnused: MMAL_INTERLACETYPE_T = 2130706432;
 pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceMax: MMAL_INTERLACETYPE_T = 2147483647;
-pub type MMAL_INTERLACETYPE_T = ::std::os::raw::c_uint;
+pub type MMAL_INTERLACETYPE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T {
@@ -10019,7 +10302,7 @@ pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_COLOUR: MMAL_SOURCE_PA
 pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_BLOCKS: MMAL_SOURCE_PATTERN_T = 6;
 pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_SWIRLY: MMAL_SOURCE_PATTERN_T = 7;
 pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_DUMMY: MMAL_SOURCE_PATTERN_T = 2147483647;
-pub type MMAL_SOURCE_PATTERN_T = ::std::os::raw::c_uint;
+pub type MMAL_SOURCE_PATTERN_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T {
@@ -10116,11 +10399,16 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T() {
         )
     );
 }
+/// < Takes a MMAL_PARAMETER_STRING_T
 pub const MMAL_PARAMETER_AUDIO_DESTINATION: _bindgen_ty_27 = 196608;
+/// < Takes a MMAL_PARAMETER_AUDIO_LATENCY_TARGET_T
 pub const MMAL_PARAMETER_AUDIO_LATENCY_TARGET: _bindgen_ty_27 = 196609;
 pub const MMAL_PARAMETER_AUDIO_SOURCE: _bindgen_ty_27 = 196610;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_AUDIO_PASSTHROUGH: _bindgen_ty_27 = 196611;
-pub type _bindgen_ty_27 = ::std::os::raw::c_uint;
+/// Audio-specific MMAL parameter IDs.
+/// @ingroup MMAL_PARAMETER_IDS
+pub type _bindgen_ty_27 = u32;
 /// Audio latency target to maintain.
 /// These settings are used to adjust the clock speed in order
 /// to match the measured audio latency to a specified value.
@@ -10283,6 +10571,11 @@ fn bindgen_test_layout_MMAL_CLOCK_UPDATE_THRESHOLD_T() {
         concat!("Size of: ", stringify!(MMAL_CLOCK_UPDATE_THRESHOLD_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_UPDATE_THRESHOLD_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CLOCK_UPDATE_THRESHOLD_T))
+    );
+    assert_eq!(
         unsafe {
             &(*(::std::ptr::null::<MMAL_CLOCK_UPDATE_THRESHOLD_T>())).threshold_lower as *const _
                 as usize
@@ -10325,6 +10618,11 @@ fn bindgen_test_layout_MMAL_CLOCK_DISCONT_THRESHOLD_T() {
         ::std::mem::size_of::<MMAL_CLOCK_DISCONT_THRESHOLD_T>(),
         16usize,
         concat!("Size of: ", stringify!(MMAL_CLOCK_DISCONT_THRESHOLD_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_DISCONT_THRESHOLD_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CLOCK_DISCONT_THRESHOLD_T))
     );
     assert_eq!(
         unsafe {
@@ -10371,6 +10669,11 @@ fn bindgen_test_layout_MMAL_CLOCK_REQUEST_THRESHOLD_T() {
         concat!("Size of: ", stringify!(MMAL_CLOCK_REQUEST_THRESHOLD_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_REQUEST_THRESHOLD_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CLOCK_REQUEST_THRESHOLD_T))
+    );
+    assert_eq!(
         unsafe {
             &(*(::std::ptr::null::<MMAL_CLOCK_REQUEST_THRESHOLD_T>())).threshold as *const _
                 as usize
@@ -10411,6 +10714,11 @@ fn bindgen_test_layout_MMAL_CLOCK_BUFFER_INFO_T() {
         ::std::mem::size_of::<MMAL_CLOCK_BUFFER_INFO_T>(),
         16usize,
         concat!("Size of: ", stringify!(MMAL_CLOCK_BUFFER_INFO_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_BUFFER_INFO_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CLOCK_BUFFER_INFO_T))
     );
     assert_eq!(
         unsafe {
@@ -10455,6 +10763,11 @@ fn bindgen_test_layout_MMAL_CLOCK_LATENCY_T() {
         ::std::mem::size_of::<MMAL_CLOCK_LATENCY_T>(),
         24usize,
         concat!("Size of: ", stringify!(MMAL_CLOCK_LATENCY_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_LATENCY_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CLOCK_LATENCY_T))
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_CLOCK_LATENCY_T>())).target as *const _ as usize },
@@ -10535,6 +10848,14 @@ fn bindgen_test_layout_MMAL_CLOCK_EVENT_T__bindgen_ty_1() {
         ::std::mem::size_of::<MMAL_CLOCK_EVENT_T__bindgen_ty_1>(),
         24usize,
         concat!("Size of: ", stringify!(MMAL_CLOCK_EVENT_T__bindgen_ty_1))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_EVENT_T__bindgen_ty_1>(),
+        8usize,
+        concat!(
+            "Alignment of ",
+            stringify!(MMAL_CLOCK_EVENT_T__bindgen_ty_1)
+        )
     );
     assert_eq!(
         unsafe {
@@ -10651,6 +10972,11 @@ fn bindgen_test_layout_MMAL_CLOCK_EVENT_T() {
         concat!("Size of: ", stringify!(MMAL_CLOCK_EVENT_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_CLOCK_EVENT_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CLOCK_EVENT_T))
+    );
+    assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_CLOCK_EVENT_T>())).id as *const _ as usize },
         0usize,
         concat!(
@@ -10716,17 +11042,29 @@ impl ::std::fmt::Debug for MMAL_CLOCK_EVENT_T {
         write ! ( f , "MMAL_CLOCK_EVENT_T {{ id: {:?}, magic: {:?}, buffer: {:?}, padding0: {:?}, data: {:?}, padding1: {:?} }}" , self . id , self . magic , self . buffer , self . padding0 , self . data , self . padding1 )
     }
 }
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_CLOCK_REFERENCE: _bindgen_ty_28 = 262144;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_CLOCK_ACTIVE: _bindgen_ty_28 = 262145;
+/// < Takes a MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_CLOCK_SCALE: _bindgen_ty_28 = 262146;
+/// < Takes a MMAL_PARAMETER_INT64_T
 pub const MMAL_PARAMETER_CLOCK_TIME: _bindgen_ty_28 = 262147;
+/// < Takes a MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T
 pub const MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD: _bindgen_ty_28 = 262148;
+/// < Takes a MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T
 pub const MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD: _bindgen_ty_28 = 262149;
+/// < Takes a MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T
 pub const MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD: _bindgen_ty_28 = 262150;
+/// < Takes a MMAL_PARAMETER_BOOLEAN_T
 pub const MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO: _bindgen_ty_28 = 262151;
+/// < Takes a MMAL_PARAMETER_RATIONAL_T
 pub const MMAL_PARAMETER_CLOCK_FRAME_RATE: _bindgen_ty_28 = 262152;
+/// < Takes a MMAL_PARAMETER_CLOCK_LATENCY_T
 pub const MMAL_PARAMETER_CLOCK_LATENCY: _bindgen_ty_28 = 262153;
-pub type _bindgen_ty_28 = ::std::os::raw::c_uint;
+/// Clock-specific MMAL parameter IDs.
+/// @ingroup MMAL_PARAMETER_IDS
+pub type _bindgen_ty_28 = u32;
 /// Media-time update thresholds
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -10741,6 +11079,14 @@ fn bindgen_test_layout_MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T() {
         24usize,
         concat!(
             "Size of: ",
+            stringify!(MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T>(),
+        8usize,
+        concat!(
+            "Alignment of ",
             stringify!(MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T)
         )
     );
@@ -10789,6 +11135,14 @@ fn bindgen_test_layout_MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T() {
         )
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T>(),
+        8usize,
+        concat!(
+            "Alignment of ",
+            stringify!(MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T)
+        )
+    );
+    assert_eq!(
         unsafe {
             &(*(::std::ptr::null::<MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T>())).hdr as *const _
                 as usize
@@ -10829,6 +11183,14 @@ fn bindgen_test_layout_MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T() {
         24usize,
         concat!(
             "Size of: ",
+            stringify!(MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T>(),
+        8usize,
+        concat!(
+            "Alignment of ",
             stringify!(MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T)
         )
     );
@@ -10874,6 +11236,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_CLOCK_LATENCY_T() {
         concat!("Size of: ", stringify!(MMAL_PARAMETER_CLOCK_LATENCY_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_CLOCK_LATENCY_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_PARAMETER_CLOCK_LATENCY_T))
+    );
+    assert_eq!(
         unsafe {
             &(*(::std::ptr::null::<MMAL_PARAMETER_CLOCK_LATENCY_T>())).hdr as *const _ as usize
         },
@@ -10914,6 +11281,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_UINT64_T() {
         concat!("Size of: ", stringify!(MMAL_PARAMETER_UINT64_T))
     );
     assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_UINT64_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_PARAMETER_UINT64_T))
+    );
+    assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_PARAMETER_UINT64_T>())).hdr as *const _ as usize },
         0usize,
         concat!(
@@ -10948,6 +11320,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_INT64_T() {
         ::std::mem::size_of::<MMAL_PARAMETER_INT64_T>(),
         16usize,
         concat!("Size of: ", stringify!(MMAL_PARAMETER_INT64_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_INT64_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_PARAMETER_INT64_T))
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_PARAMETER_INT64_T>())).hdr as *const _ as usize },
@@ -11279,7 +11656,8 @@ pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_NONE: MMAL_PARAM_MIRROR_T = 0;
 pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_VERTICAL: MMAL_PARAM_MIRROR_T = 1;
 pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_HORIZONTAL: MMAL_PARAM_MIRROR_T = 2;
 pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_BOTH: MMAL_PARAM_MIRROR_T = 3;
-pub type MMAL_PARAM_MIRROR_T = ::std::os::raw::c_uint;
+/// Valid mirror modes
+pub type MMAL_PARAM_MIRROR_T = u32;
 /// Generic mirror parameter type
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -11582,13 +11960,20 @@ fn bindgen_test_layout_MMAL_PARAMETER_CONFIGFILE_CHUNK_T() {
         )
     );
 }
+/// < Unknown port type
 pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_UNKNOWN: MMAL_PORT_TYPE_T = 0;
+/// < Control port
 pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CONTROL: MMAL_PORT_TYPE_T = 1;
+/// < Input port
 pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INPUT: MMAL_PORT_TYPE_T = 2;
+/// < Output port
 pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_OUTPUT: MMAL_PORT_TYPE_T = 3;
+/// < Clock port
 pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CLOCK: MMAL_PORT_TYPE_T = 4;
+/// < Dummy value to force 32bit enum
 pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INVALID: MMAL_PORT_TYPE_T = 4294967295;
-pub type MMAL_PORT_TYPE_T = ::std::os::raw::c_uint;
+/// List of port types
+pub type MMAL_PORT_TYPE_T = u32;
 /// Definition of a port.
 /// A port is the entity that is exposed by components to receive or transmit
 /// buffer headers (\ref MMAL_BUFFER_HEADER_T). A port is defined by its
@@ -11836,7 +12221,6 @@ fn bindgen_test_layout_MMAL_PORT_T() {
     );
 }
 extern "C" {
-
     /// Commit format changes on a port.
     ///
     /// @param port The port for which format changes are to be committed.
@@ -11852,7 +12236,6 @@ pub type MMAL_PORT_BH_CB_T = ::std::option::Option<
     unsafe extern "C" fn(port: *mut MMAL_PORT_T, buffer: *mut MMAL_BUFFER_HEADER_T),
 >;
 extern "C" {
-
     /// Enable processing on a port
     ///
     /// If this port is connected to another, the given callback must be NULL, while for a
@@ -11873,7 +12256,6 @@ extern "C" {
     pub fn mmal_port_enable(port: *mut MMAL_PORT_T, cb: MMAL_PORT_BH_CB_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Disable processing on a port
     ///
     /// Disabling a port will stop all processing on this port and return all (non-processed)
@@ -11887,7 +12269,6 @@ extern "C" {
     pub fn mmal_port_disable(port: *mut MMAL_PORT_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Ask a port to release all the buffer headers it currently has.
     ///
     /// Flushing a port will ask the port to send all the buffer headers it currently has
@@ -11905,7 +12286,6 @@ extern "C" {
     pub fn mmal_port_flush(port: *mut MMAL_PORT_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Set a parameter on a port.
     ///
     /// @param port The port to which the request is sent.
@@ -11917,7 +12297,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Get a parameter from a port.
     /// The size field must be set on input to the maximum size of the parameter
     /// (including the header) and will be set on output to the actual size of the
@@ -11937,7 +12316,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Send a buffer header to a port.
     ///
     /// @param port The port to which the buffer header is to be sent.
@@ -11949,7 +12327,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Connect an output port to an input port.
     ///
     /// When connected and enabled, buffers will automatically progress from the
@@ -11970,7 +12347,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Disconnect a connected port.
     ///
     /// If the port is not connected, an error will be returned. Otherwise, if the
@@ -11982,7 +12358,6 @@ extern "C" {
     pub fn mmal_port_disconnect(port: *mut MMAL_PORT_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Allocate a payload buffer.
     /// This allows a client to allocate memory for a payload buffer based on the preferences
     /// of a port. This for instance will allow the port to allocate memory which can be shared
@@ -11997,7 +12372,6 @@ extern "C" {
     pub fn mmal_port_payload_alloc(port: *mut MMAL_PORT_T, payload_size: u32) -> *mut u8;
 }
 extern "C" {
-
     /// Free a payload buffer.
     /// This allows a client to free memory allocated by a previous call to \ref mmal_port_payload_alloc.
     ///
@@ -12008,7 +12382,6 @@ extern "C" {
     pub fn mmal_port_payload_free(port: *mut MMAL_PORT_T, payload: *mut u8);
 }
 extern "C" {
-
     /// Get an empty event buffer header from a port
     ///
     /// @param port The port from which to get the event buffer header.
@@ -12218,7 +12591,6 @@ fn bindgen_test_layout_MMAL_COMPONENT_T() {
     );
 }
 extern "C" {
-
     /// Create an instance of a component.
     /// The newly created component will expose ports to the client. All the exposed ports are
     /// disabled by default.
@@ -12234,7 +12606,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Acquire a reference on a component.
     /// Acquiring a reference on a component will prevent a component from being destroyed until
     /// the acquired reference is released (by a call to \ref mmal_component_destroy).
@@ -12245,7 +12616,6 @@ extern "C" {
     pub fn mmal_component_acquire(component: *mut MMAL_COMPONENT_T);
 }
 extern "C" {
-
     /// Release a reference on a component
     /// Release an acquired reference on a component. Triggers the destruction of the component when
     /// the last reference is being released.
@@ -12257,7 +12627,6 @@ extern "C" {
     pub fn mmal_component_release(component: *mut MMAL_COMPONENT_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Destroy a previously created component
     /// Release an acquired reference on a component. Only actually destroys the component when
     /// the last reference is being released.
@@ -12267,14 +12636,12 @@ extern "C" {
     pub fn mmal_component_destroy(component: *mut MMAL_COMPONENT_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Enable processing on a component
     /// @param component component to enable
     /// @return MMAL_SUCCESS on success
     pub fn mmal_component_enable(component: *mut MMAL_COMPONENT_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Disable processing on a component
     /// @param component component to disable
     /// @return MMAL_SUCCESS on success
@@ -12383,7 +12750,6 @@ fn bindgen_test_layout_MMAL_METATDATA_HELLO_WORLD_T() {
 }
 pub type MMAL_METADATA_HELLO_WORLD_T = MMAL_METATDATA_HELLO_WORLD_T;
 extern "C" {
-
     /// Get metadata item from buffer header.
     /// This will search through all the metadata in the buffer header and return a pointer to the
     /// first instance of the requested metadata id.
@@ -12395,7 +12761,6 @@ extern "C" {
     pub fn mmal_metadata_get(header: *mut MMAL_BUFFER_HEADER_T, id: u32) -> *mut MMAL_METADATA_T;
 }
 extern "C" {
-
     /// Set metadata item in buffer header.
     /// This will store the metadata item into the buffer header. This operation can fail if not
     /// enough memory is available in the data section of the buffer header.
@@ -12416,14 +12781,12 @@ pub struct MMAL_QUEUE_T {
     _unused: [u8; 0],
 }
 extern "C" {
-
     /// Create a queue of MMAL_BUFFER_HEADER_T
     ///
     /// @return Pointer to the newly created queue or NULL on failure.
     pub fn mmal_queue_create() -> *mut MMAL_QUEUE_T;
 }
 extern "C" {
-
     /// Put a MMAL_BUFFER_HEADER_T into a queue
     ///
     /// @param queue  Pointer to a queue
@@ -12431,7 +12794,6 @@ extern "C" {
     pub fn mmal_queue_put(queue: *mut MMAL_QUEUE_T, buffer: *mut MMAL_BUFFER_HEADER_T);
 }
 extern "C" {
-
     /// Put a MMAL_BUFFER_HEADER_T back at the start of a queue.
     /// This is used when a buffer header was removed from the queue but not
     /// fully processed and needs to be put back where it was originally taken.
@@ -12441,7 +12803,6 @@ extern "C" {
     pub fn mmal_queue_put_back(queue: *mut MMAL_QUEUE_T, buffer: *mut MMAL_BUFFER_HEADER_T);
 }
 extern "C" {
-
     /// Get a MMAL_BUFFER_HEADER_T from a queue
     ///
     /// @param queue  Pointer to a queue
@@ -12450,7 +12811,6 @@ extern "C" {
     pub fn mmal_queue_get(queue: *mut MMAL_QUEUE_T) -> *mut MMAL_BUFFER_HEADER_T;
 }
 extern "C" {
-
     /// Wait for a MMAL_BUFFER_HEADER_T from a queue.
     /// This is the same as a get except that this will block until a buffer header is
     /// available.
@@ -12461,7 +12821,6 @@ extern "C" {
     pub fn mmal_queue_wait(queue: *mut MMAL_QUEUE_T) -> *mut MMAL_BUFFER_HEADER_T;
 }
 extern "C" {
-
     /// Wait for a MMAL_BUFFER_HEADER_T from a queue, up to a given timeout.
     /// This is the same as a wait, except that it will abort in case of timeout.
     ///
@@ -12476,7 +12835,6 @@ extern "C" {
     ) -> *mut MMAL_BUFFER_HEADER_T;
 }
 extern "C" {
-
     /// Get the number of MMAL_BUFFER_HEADER_T currently in a queue.
     ///
     /// @param queue  Pointer to a queue
@@ -12485,7 +12843,6 @@ extern "C" {
     pub fn mmal_queue_length(queue: *mut MMAL_QUEUE_T) -> ::std::os::raw::c_uint;
 }
 extern "C" {
-
     /// Destroy a queue of MMAL_BUFFER_HEADER_T.
     ///
     /// @param queue  Pointer to a queue
@@ -12562,7 +12919,6 @@ pub type mmal_pool_allocator_free_t = ::std::option::Option<
     unsafe extern "C" fn(context: *mut ::std::os::raw::c_void, mem: *mut ::std::os::raw::c_void),
 >;
 extern "C" {
-
     /// Create a pool of MMAL_BUFFER_HEADER_T.
     /// After allocation, all allocated buffer headers will have been added to the queue.
     ///
@@ -12584,7 +12940,6 @@ extern "C" {
         -> *mut MMAL_POOL_T;
 }
 extern "C" {
-
     /// Create a pool of MMAL_BUFFER_HEADER_T.
     /// After allocation, all allocated buffer headers will have been added to the queue.
     ///
@@ -12610,7 +12965,6 @@ extern "C" {
     ) -> *mut MMAL_POOL_T;
 }
 extern "C" {
-
     /// Destroy a pool of MMAL_BUFFER_HEADER_T.
     /// This will also deallocate all of the memory which was allocated when creating or
     /// resizing the pool.
@@ -12623,7 +12977,6 @@ extern "C" {
     pub fn mmal_pool_destroy(pool: *mut MMAL_POOL_T);
 }
 extern "C" {
-
     /// Resize a pool of MMAL_BUFFER_HEADER_T.
     /// This allows modifying either the number of allocated buffers, the payload size or both at the
     /// same time.
@@ -12657,7 +13010,6 @@ pub type MMAL_POOL_BH_CB_T = ::std::option::Option<
     ) -> MMAL_BOOL_T,
 >;
 extern "C" {
-
     /// Set a buffer header release callback to the pool.
     /// Each time a buffer header is released to the pool, the callback will be triggered.
     ///
@@ -12671,7 +13023,6 @@ extern "C" {
     );
 }
 extern "C" {
-
     /// Set a pre-release callback for all buffer headers in the pool.
     /// Each time a buffer header is about to be released to the pool, the callback
     /// will be triggered.
@@ -12860,7 +13211,6 @@ fn bindgen_test_layout_MMAL_EVENT_PARAMETER_CHANGED_T() {
     );
 }
 extern "C" {
-
     /// Get a pointer to the \ref MMAL_EVENT_FORMAT_CHANGED_T structure contained in the buffer header.
     /// Note that the pointer will point inside the data contained in the buffer header
     /// so doesn't need to be freed explicitly.
@@ -12914,6 +13264,11 @@ fn bindgen_test_layout_MMAL_CONNECTION_T() {
         ::std::mem::size_of::<MMAL_CONNECTION_T>(),
         64usize,
         concat!("Size of: ", stringify!(MMAL_CONNECTION_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_CONNECTION_T>(),
+        8usize,
+        concat!("Alignment of ", stringify!(MMAL_CONNECTION_T))
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<MMAL_CONNECTION_T>())).user_data as *const _ as usize },
@@ -13037,7 +13392,6 @@ fn bindgen_test_layout_MMAL_CONNECTION_T() {
     );
 }
 extern "C" {
-
     /// Create a connection between two ports.
     /// The connection shall include a pool of buffer headers suitable for the current format of
     /// the output port. The format of the input port shall have been set to the same as that of
@@ -13060,7 +13414,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Acquire a reference on a connection.
     /// Acquiring a reference on a connection will prevent a connection from being destroyed until
     /// the acquired reference is released (by a call to \ref mmal_connection_destroy).
@@ -13071,7 +13424,6 @@ extern "C" {
     pub fn mmal_connection_acquire(connection: *mut MMAL_CONNECTION_T);
 }
 extern "C" {
-
     /// Release a reference on a connection
     /// Release an acquired reference on a connection. Triggers the destruction of the connection when
     /// the last reference is being released.
@@ -13083,7 +13435,6 @@ extern "C" {
     pub fn mmal_connection_release(connection: *mut MMAL_CONNECTION_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Destroy a connection.
     /// Release an acquired reference on a connection. Only actually destroys the connection when
     /// the last reference is being released.
@@ -13095,7 +13446,6 @@ extern "C" {
     pub fn mmal_connection_destroy(connection: *mut MMAL_CONNECTION_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Enable a connection.
     /// The format of the two ports must have been committed before calling this function,
     /// although note that on creation, the connection automatically copies and commits the
@@ -13110,7 +13460,6 @@ extern "C" {
     pub fn mmal_connection_enable(connection: *mut MMAL_CONNECTION_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Disable a connection.
     ///
     /// @param connection The connection to be disabled.
@@ -13118,7 +13467,6 @@ extern "C" {
     pub fn mmal_connection_disable(connection: *mut MMAL_CONNECTION_T) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Apply a format changed event to the connection.
     /// This function can be used when the client is processing buffer headers and receives
     /// a format changed event (\ref MMAL_EVENT_FORMAT_CHANGED). The connection is
@@ -13134,7 +13482,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Convert a status to a statically-allocated string.
     ///
     /// @param status The MMAL status code.
@@ -13142,7 +13489,6 @@ extern "C" {
     pub fn mmal_status_to_string(status: MMAL_STATUS_T::Type) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
-
     /// Convert stride to pixel width for a given pixel encoding.
     ///
     /// @param encoding The pixel encoding (such as one of the \ref MmalEncodings "pre-defined encodings")
@@ -13151,7 +13497,6 @@ extern "C" {
     pub fn mmal_encoding_stride_to_width(encoding: u32, stride: u32) -> u32;
 }
 extern "C" {
-
     /// Convert pixel width to stride for a given pixel encoding
     ///
     /// @param encoding The pixel encoding (such as one of the \ref MmalEncodings "pre-defined encodings")
@@ -13160,7 +13505,6 @@ extern "C" {
     pub fn mmal_encoding_width_to_stride(encoding: u32, width: u32) -> u32;
 }
 extern "C" {
-
     /// Return the 16 line high sliced version of a given pixel encoding
     ///
     /// @param encoding The pixel encoding (such as one of the \ref MmalEncodings "pre-defined encodings")
@@ -13168,7 +13512,6 @@ extern "C" {
     pub fn mmal_encoding_get_slice_variant(encoding: u32) -> u32;
 }
 extern "C" {
-
     /// Convert a port type to a string.
     ///
     /// @param type The MMAL port type.
@@ -13176,7 +13519,6 @@ extern "C" {
     pub fn mmal_port_type_to_string(type_: MMAL_PORT_TYPE_T) -> *const ::std::os::raw::c_char;
 }
 extern "C" {
-
     /// Get a parameter from a port allocating the required amount of memory
     /// for the parameter (i.e. for variable length parameters like URI or arrays).
     /// The size field will be set on output to the actual size of the
@@ -13197,7 +13539,6 @@ extern "C" {
     ) -> *mut MMAL_PARAMETER_HEADER_T;
 }
 extern "C" {
-
     /// Free a parameter structure previously allocated via
     /// \ref mmal_port_parameter_alloc_get().
     ///
@@ -13205,7 +13546,6 @@ extern "C" {
     pub fn mmal_port_parameter_free(param: *mut MMAL_PARAMETER_HEADER_T);
 }
 extern "C" {
-
     /// Copy buffer header metadata from source to destination.
     ///
     /// @param dest The destination buffer header.
@@ -13216,7 +13556,6 @@ extern "C" {
     );
 }
 extern "C" {
-
     /// Create a pool of MMAL_BUFFER_HEADER_T associated with a specific port.
     /// This allows a client to allocate memory for the payload buffers based on the preferences
     /// of a port. This for instance will allow the port to allocate memory which can be shared
@@ -13239,7 +13578,6 @@ extern "C" {
     ) -> *mut MMAL_POOL_T;
 }
 extern "C" {
-
     /// Destroy a pool of MMAL_BUFFER_HEADER_T associated with a specific port.
     /// This will also deallocate all of the memory which was allocated when creating or
     /// resizing the pool.
@@ -13249,21 +13587,18 @@ extern "C" {
     pub fn mmal_port_pool_destroy(port: *mut MMAL_PORT_T, pool: *mut MMAL_POOL_T);
 }
 extern "C" {
-
     /// Log the content of a \ref MMAL_PORT_T structure.
     ///
     /// @param port  Pointer to the port to dump.
     pub fn mmal_log_dump_port(port: *mut MMAL_PORT_T);
 }
 extern "C" {
-
     /// Log the content of a \ref MMAL_ES_FORMAT_T structure.
     ///
     /// @param format  Pointer to the format to dump.
     pub fn mmal_log_dump_format(format: *mut MMAL_ES_FORMAT_T);
 }
 extern "C" {
-
     /// Return the nth port.
     ///
     /// @param comp   component to query
@@ -13278,7 +13613,6 @@ extern "C" {
     ) -> *mut MMAL_PORT_T;
 }
 extern "C" {
-
     /// Convert a 4cc into a string.
     ///
     /// @param buf    Destination for result
@@ -13293,7 +13627,6 @@ extern "C" {
     ) -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-
     /// On FW prior to June 2016, camera and video_splitter
     /// had BGR24 and RGB24 support reversed.
     /// This is now fixed, and this function will return whether the
@@ -13305,7 +13638,6 @@ extern "C" {
     pub fn mmal_util_rgb_order_fixed(port: *mut MMAL_PORT_T) -> ::std::os::raw::c_int;
 }
 extern "C" {
-
     /// Helper function to set the value of a boolean parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13319,7 +13651,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to get the value of a boolean parameter.
     /// @param port   port on which to get the parameter
     /// @param id     parameter id
@@ -13333,7 +13664,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of a 64 bits unsigned integer parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13347,7 +13677,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to get the value of a 64 bits unsigned integer parameter.
     /// @param port   port on which to get the parameter
     /// @param id     parameter id
@@ -13361,7 +13690,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of a 64 bits signed integer parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13375,7 +13703,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to get the value of a 64 bits signed integer parameter.
     /// @param port   port on which to get the parameter
     /// @param id     parameter id
@@ -13389,7 +13716,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of a 32 bits unsigned integer parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13403,7 +13729,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to get the value of a 32 bits unsigned integer parameter.
     /// @param port   port on which to get the parameter
     /// @param id     parameter id
@@ -13417,7 +13742,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of a 32 bits signed integer parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13431,7 +13755,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to get the value of a 32 bits signed integer parameter.
     /// @param port   port on which to get the parameter
     /// @param id     parameter id
@@ -13445,7 +13768,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of a rational parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13459,7 +13781,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to get the value of a rational parameter.
     /// @param port   port on which to get the parameter
     /// @param id     parameter id
@@ -13473,7 +13794,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of a string parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13487,7 +13807,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set the value of an array of bytes parameter.
     /// @param port   port on which to set the parameter
     /// @param id     parameter id
@@ -13503,7 +13822,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Helper function to set a MMAL_PARAMETER_URI_T parameter on a port.
     /// @param port   port on which to set the parameter
     /// @param uri    URI string
@@ -13515,7 +13833,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Set the display region.
     /// @param port   port to configure
     /// @param region region
@@ -13527,7 +13844,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Tell the camera to use the STC for timestamps rather than the clock.
     ///
     /// @param port   port to configure
@@ -13539,7 +13855,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Get the MMAL core statistics for a given port.
     ///
     /// @param port  port to query
@@ -13574,7 +13889,9 @@ pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_CREATED: MMAL_STATS_COMP_STATE
 pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_DESTROYING: MMAL_STATS_COMP_STATE_T = 2;
 pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_DESTROYED: MMAL_STATS_COMP_STATE_T = 3;
 pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_UNUSED: MMAL_STATS_COMP_STATE_T = 4294967295;
-pub type MMAL_STATS_COMP_STATE_T = ::std::os::raw::c_uint;
+/// State of components created by the VC adaptation layer, used for
+/// statistics reporting.
+pub type MMAL_STATS_COMP_STATE_T = u32;
 /// Per-component statistics collected by the VC adaptation layer.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -14347,7 +14664,8 @@ pub const MMAL_STATS_RESULT_T_MMAL_STATS_FOUND: MMAL_STATS_RESULT_T = 0;
 pub const MMAL_STATS_RESULT_T_MMAL_STATS_COMPONENT_NOT_FOUND: MMAL_STATS_RESULT_T = 1;
 pub const MMAL_STATS_RESULT_T_MMAL_STATS_PORT_NOT_FOUND: MMAL_STATS_RESULT_T = 2;
 pub const MMAL_STATS_RESULT_T_MMAL_STATS_INVALID: MMAL_STATS_RESULT_T = 2147483647;
-pub type MMAL_STATS_RESULT_T = ::std::os::raw::c_uint;
+/// Status from querying MMAL core statistics.
+pub type MMAL_STATS_RESULT_T = u32;
 extern "C" {
     pub fn mmal_vc_init() -> MMAL_STATUS_T::Type;
 }
@@ -14377,7 +14695,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Return the MMAL core statistics for a given component/port.
     ///
     /// @param stats         Updated with given port statistics
@@ -14401,7 +14718,6 @@ extern "C" {
     ) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Stores an arbitrary text message in a circular buffer inside the MMAL VC server.
     /// The purpose of this message is to log high level events from the host in order
     /// to diagnose problems that require multiple actions to reproduce. e.g. taking
@@ -14413,7 +14729,6 @@ extern "C" {
     pub fn mmal_vc_host_log(msg: *const ::std::os::raw::c_char) -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Consumes memory in the relocatable heap.
     ///
     /// The existing reserved memory is freed first then the new chunk is allocated.
@@ -14437,16 +14752,14 @@ pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_DISCARD: MMAL_VC_COMPACT_MODE_T
 pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_AGGRESSIVE: MMAL_VC_COMPACT_MODE_T = 4;
 pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_SHUFFLE: MMAL_VC_COMPACT_MODE_T = 128;
 pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_ALL: MMAL_VC_COMPACT_MODE_T = 7;
-pub type MMAL_VC_COMPACT_MODE_T = ::std::os::raw::c_uint;
+pub type MMAL_VC_COMPACT_MODE_T = u32;
 extern "C" {
-
     /// Trigger relocatable heap compaction.
     /// @internal
     pub fn mmal_vc_compact(mode: MMAL_VC_COMPACT_MODE_T, duration: *mut u32)
         -> MMAL_STATUS_T::Type;
 }
 extern "C" {
-
     /// Trigger LMK action from VC, for diagnostics.
     /// @internal
     pub fn mmal_vc_lmk(alloc_size: u32) -> MMAL_STATUS_T::Type;

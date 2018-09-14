@@ -48,9 +48,7 @@ fn generate_bindings() {
 
         .derive_debug(true)
         .impl_debug(true)
-        // Without this, we get `__BindgenUnionField` in
-        // places and it isn't very pretty.
-        .rust_target(bindgen::RustTarget::Nightly)
+        .rust_target(bindgen::RustTarget::Stable_1_25)
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h");
