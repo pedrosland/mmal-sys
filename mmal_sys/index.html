@@ -1137,7 +1137,8 @@ This describes the properties specific to a video stream</p>
                            <td><a class="struct" href="struct.VCOS_EVENT_WAITER_T.html"
                                   title='struct mmal_sys::VCOS_EVENT_WAITER_T'>VCOS_EVENT_WAITER_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>\file</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -1339,6 +1340,13 @@ the calls can fail, and inits must match deletes.</p>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_FLAG_KEYFRAME.html"
                                   title='constant mmal_sys::MMAL_BUFFER_HEADER_FLAG_KEYFRAME'>MMAL_BUFFER_HEADER_FLAG_KEYFRAME</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_FLAG_NAL_END.html"
+                                  title='constant mmal_sys::MMAL_BUFFER_HEADER_FLAG_NAL_END'>MMAL_BUFFER_HEADER_FLAG_NAL_END</a></td>
                            <td class='docblock-short'>
                                 
                            </td>
@@ -1732,7 +1740,8 @@ the calls can fail, and inits must match deletes.</p>
                            <td><a class="constant" href="constant.MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_COOKED.html"
                                   title='constant mmal_sys::MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_COOKED'>MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_COOKED</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Start the STC from the start of capture, only for quick demo code</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -1746,14 +1755,16 @@ the calls can fail, and inits must match deletes.</p>
                            <td><a class="constant" href="constant.MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_OFF.html"
                                   title='constant mmal_sys::MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_OFF'>MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_OFF</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Frames do not have STCs, as needed in OpenMAX/IL</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_RAW.html"
                                   title='constant mmal_sys::MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_RAW'>MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_RAW</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Use raw clock STC, needed for true pause/resume support</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3169,35 +3180,40 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_ES_TYPE_T_MMAL_ES_TYPE_AUDIO.html"
                                   title='constant mmal_sys::MMAL_ES_TYPE_T_MMAL_ES_TYPE_AUDIO'>MMAL_ES_TYPE_T_MMAL_ES_TYPE_AUDIO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Audio elementary stream</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_ES_TYPE_T_MMAL_ES_TYPE_CONTROL.html"
                                   title='constant mmal_sys::MMAL_ES_TYPE_T_MMAL_ES_TYPE_CONTROL'>MMAL_ES_TYPE_T_MMAL_ES_TYPE_CONTROL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Elementary stream of control commands</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_ES_TYPE_T_MMAL_ES_TYPE_SUBPICTURE.html"
                                   title='constant mmal_sys::MMAL_ES_TYPE_T_MMAL_ES_TYPE_SUBPICTURE'>MMAL_ES_TYPE_T_MMAL_ES_TYPE_SUBPICTURE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Sub-picture elementary stream (e.g. subtitles, overlays)</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_ES_TYPE_T_MMAL_ES_TYPE_UNKNOWN.html"
                                   title='constant mmal_sys::MMAL_ES_TYPE_T_MMAL_ES_TYPE_UNKNOWN'>MMAL_ES_TYPE_T_MMAL_ES_TYPE_UNKNOWN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Unknown elementary stream type</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_ES_TYPE_T_MMAL_ES_TYPE_VIDEO.html"
                                   title='constant mmal_sys::MMAL_ES_TYPE_T_MMAL_ES_TYPE_VIDEO'>MMAL_ES_TYPE_T_MMAL_ES_TYPE_VIDEO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Video elementary stream</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3251,35 +3267,44 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleLowerFirst.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleLowerFirst'>MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleLowerFirst</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; The data is interlaced, fields sent
+separately in temporal order, with lower field first</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleUpperFirst.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleUpperFirst'>MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleUpperFirst</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; The data is interlaced, fields sent
+separately in temporal order, with upper field first</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedLowerFirst.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedLowerFirst'>MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedLowerFirst</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; The data is interlaced, two fields sent together line
+interleaved, with the lower field temporally earlier</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedUpperFirst.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedUpperFirst'>MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedUpperFirst</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; The data is interlaced, two fields sent together line
+interleaved, with the upper field temporally earlier</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceKhronosExtensions.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceKhronosExtensions'>MMAL_INTERLACETYPE_T_MMAL_InterlaceKhronosExtensions</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Reserved region for introducing Khronos Standard Extensions</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3293,21 +3318,25 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceMixed.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceMixed'>MMAL_INTERLACETYPE_T_MMAL_InterlaceMixed</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; The stream may contain a mixture of progressive
+and interlaced frames</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceProgressive.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceProgressive'>MMAL_INTERLACETYPE_T_MMAL_InterlaceProgressive</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; The data is not interlaced, it is progressive scan</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_INTERLACETYPE_T_MMAL_InterlaceVendorStartUnused.html"
                                   title='constant mmal_sys::MMAL_INTERLACETYPE_T_MMAL_InterlaceVendorStartUnused'>MMAL_INTERLACETYPE_T_MMAL_InterlaceVendorStartUnused</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Reserved region for introducing Vendor Extensions</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3321,7 +3350,8 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ALGORITHM_CONTROL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ALGORITHM_CONTROL'>MMAL_PARAMETER_ALGORITHM_CONTROL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_ALGORITHM_CONTROL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3433,42 +3463,48 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ANALOG_GAIN.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ANALOG_GAIN'>MMAL_PARAMETER_ANALOG_GAIN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ANNOTATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ANNOTATE'>MMAL_PARAMETER_ANNOTATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_ANNOTATE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ANTISHAKE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ANTISHAKE'>MMAL_PARAMETER_ANTISHAKE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_AUDIO_DESTINATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_AUDIO_DESTINATION'>MMAL_PARAMETER_AUDIO_DESTINATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_STRING_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_AUDIO_LATENCY_TARGET.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_AUDIO_LATENCY_TARGET'>MMAL_PARAMETER_AUDIO_LATENCY_TARGET</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_AUDIO_LATENCY_TARGET_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_AUDIO_PASSTHROUGH.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_AUDIO_PASSTHROUGH'>MMAL_PARAMETER_AUDIO_PASSTHROUGH</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3482,70 +3518,80 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_AWB_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_AWB_MODE'>MMAL_PARAMETER_AWB_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAM_AWBMODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_BLACK_LEVEL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_BLACK_LEVEL'>MMAL_PARAMETER_BLACK_LEVEL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_BRIGHTNESS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_BRIGHTNESS'>MMAL_PARAMETER_BRIGHTNESS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_BUFFER_FLAG_FILTER.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_BUFFER_FLAG_FILTER'>MMAL_PARAMETER_BUFFER_FLAG_FILTER</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_BUFFER_REQUIREMENTS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_BUFFER_REQUIREMENTS'>MMAL_PARAMETER_BUFFER_REQUIREMENTS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BUFFER_REQUIREMENTS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_BURST_CAPTURE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_BURST_CAPTURE'>MMAL_PARAMETER_CAMERA_BURST_CAPTURE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_CLOCKING_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_CLOCKING_MODE'>MMAL_PARAMETER_CAMERA_CLOCKING_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_CLOCKING_MODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_CONFIG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_CONFIG'>MMAL_PARAMETER_CAMERA_CONFIG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_CONFIG_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG'>MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_INFO.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_INFO'>MMAL_PARAMETER_CAMERA_INFO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_INFO_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3601,301 +3647,345 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_INTERFACE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_INTERFACE'>MMAL_PARAMETER_CAMERA_INTERFACE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_INTERFACE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE'>MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_MIN_ISO.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_MIN_ISO'>MMAL_PARAMETER_CAMERA_MIN_ISO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_NUM.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_NUM'>MMAL_PARAMETER_CAMERA_NUM</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_RX_CONFIG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_RX_CONFIG'>MMAL_PARAMETER_CAMERA_RX_CONFIG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_RX_CONFIG_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_RX_TIMING.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_RX_TIMING'>MMAL_PARAMETER_CAMERA_RX_TIMING</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_RX_TIMING_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_SETTINGS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_SETTINGS'>MMAL_PARAMETER_CAMERA_SETTINGS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_SETTINGS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAMERA_USE_CASE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAMERA_USE_CASE'>MMAL_PARAMETER_CAMERA_USE_CASE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_USE_CASE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTURE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTURE'>MMAL_PARAMETER_CAPTURE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_RESUME_VF_IMMEDIATELY.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_RESUME_VF_IMMEDIATELY'>MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_RESUME_VF_IMMEDIATELY</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Resumes preview as soon as possible once capture frame is received from the sensor.
+Requires fast_preview_resume to be set via MMAL_PARAMETER_CAMERA_CONFIG.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END'>MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Resumes preview once capture is completed.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END_AND_HOLD.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END_AND_HOLD'>MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END_AND_HOLD</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Resumes preview once capture is completed, and hold the image for subsequent reprocessing.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTURE_EXPOSURE_COMP.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTURE_EXPOSURE_COMP'>MMAL_PARAMETER_CAPTURE_EXPOSURE_COMP</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_INT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTURE_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTURE_MODE'>MMAL_PARAMETER_CAPTURE_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAPTUREMODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTURE_QUALITY.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTURE_QUALITY'>MMAL_PARAMETER_CAPTURE_QUALITY</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Unused?</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTURE_STATS_PASS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTURE_STATS_PASS'>MMAL_PARAMETER_CAPTURE_STATS_PASS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CAPTURE_STATUS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CAPTURE_STATUS'>MMAL_PARAMETER_CAPTURE_STATUS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAPTURE_STATUS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CCM_SHIFT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CCM_SHIFT'>MMAL_PARAMETER_CCM_SHIFT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_INT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CHANGE_EVENT_REQUEST.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CHANGE_EVENT_REQUEST'>MMAL_PARAMETER_CHANGE_EVENT_REQUEST</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_CHANGE_EVENT_REQUEST_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_ACTIVE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_ACTIVE'>MMAL_PARAMETER_CLOCK_ACTIVE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD'>MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO'>MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_FRAME_RATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_FRAME_RATE'>MMAL_PARAMETER_CLOCK_FRAME_RATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_LATENCY.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_LATENCY'>MMAL_PARAMETER_CLOCK_LATENCY</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_CLOCK_LATENCY_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_REFERENCE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_REFERENCE'>MMAL_PARAMETER_CLOCK_REFERENCE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD'>MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_SCALE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_SCALE'>MMAL_PARAMETER_CLOCK_SCALE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_TIME.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_TIME'>MMAL_PARAMETER_CLOCK_TIME</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_INT64_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD'>MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_COLOUR_EFFECT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_COLOUR_EFFECT'>MMAL_PARAMETER_COLOUR_EFFECT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_COLOURFX_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CONFIGFILE_CHUNK_REGISTERS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CONFIGFILE_CHUNK_REGISTERS'>MMAL_PARAMETER_CONFIGFILE_CHUNK_REGISTERS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CONFIGFILE_CHUNK_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CONFIGFILE_REGISTERS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CONFIGFILE_REGISTERS'>MMAL_PARAMETER_CONFIGFILE_REGISTERS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CONFIGFILE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CONTRAST.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CONTRAST'>MMAL_PARAMETER_CONTRAST</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CORE_STATISTICS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CORE_STATISTICS'>MMAL_PARAMETER_CORE_STATISTICS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_CORE_STATISTICS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CROP.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CROP'>MMAL_PARAMETER_CROP</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CROP_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CUSTOM_AWB_GAINS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CUSTOM_AWB_GAINS'>MMAL_PARAMETER_CUSTOM_AWB_GAINS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_AWB_GAINS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_CUSTOM_CCM.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_CUSTOM_CCM'>MMAL_PARAMETER_CUSTOM_CCM</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CUSTOM_CCM_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DIGITAL_GAIN.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DIGITAL_GAIN'>MMAL_PARAMETER_DIGITAL_GAIN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DISPLAYREGION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DISPLAYREGION'>MMAL_PARAMETER_DISPLAYREGION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_DISPLAYREGION_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DPF_CONFIG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DPF_CONFIG'>MMAL_PARAMETER_DPF_CONFIG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DPF_FAIL_IS_FATAL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DPF_FAIL_IS_FATAL'>MMAL_PARAMETER_DPF_FAIL_IS_FATAL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DPF_FILE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DPF_FILE'>MMAL_PARAMETER_DPF_FILE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_URI_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DRAW_BOX_FACES_AND_FOCUS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DRAW_BOX_FACES_AND_FOCUS'>MMAL_PARAMETER_DRAW_BOX_FACES_AND_FOCUS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -3937,147 +4027,168 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_DYNAMIC_RANGE_COMPRESSION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_DYNAMIC_RANGE_COMPRESSION'>MMAL_PARAMETER_DYNAMIC_RANGE_COMPRESSION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_DRC_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ENABLE_DPF_FILE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ENABLE_DPF_FILE'>MMAL_PARAMETER_ENABLE_DPF_FILE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ENABLE_RAW_CAPTURE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ENABLE_RAW_CAPTURE'>MMAL_PARAMETER_ENABLE_RAW_CAPTURE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ENABLE_REGISTER_FILE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ENABLE_REGISTER_FILE'>MMAL_PARAMETER_ENABLE_REGISTER_FILE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_EXIF.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_EXIF'>MMAL_PARAMETER_EXIF</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_EXIF_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_EXIF_DISABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_EXIF_DISABLE'>MMAL_PARAMETER_EXIF_DISABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_EXPOSURE_COMP.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_EXPOSURE_COMP'>MMAL_PARAMETER_EXPOSURE_COMP</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_INT32_T or MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_EXPOSURE_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_EXPOSURE_MODE'>MMAL_PARAMETER_EXPOSURE_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_EXPOSUREMODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_EXP_METERING_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_EXP_METERING_MODE'>MMAL_PARAMETER_EXP_METERING_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_EXPOSUREMETERINGMODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_EXTRA_BUFFERS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_EXTRA_BUFFERS'>MMAL_PARAMETER_EXTRA_BUFFERS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FACE_TRACK.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FACE_TRACK'>MMAL_PARAMETER_FACE_TRACK</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FACE_TRACK_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FACE_TRACK_RESULTS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FACE_TRACK_RESULTS'>MMAL_PARAMETER_FACE_TRACK_RESULTS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FACE_TRACK_RESULTS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FIELD_OF_VIEW.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FIELD_OF_VIEW'>MMAL_PARAMETER_FIELD_OF_VIEW</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FIELD_OF_VIEW_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FLASH.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FLASH'>MMAL_PARAMETER_FLASH</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FLASH_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FLASH_REQUIRED.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FLASH_REQUIRED'>MMAL_PARAMETER_FLASH_REQUIRED</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FLASH_SELECT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FLASH_SELECT'>MMAL_PARAMETER_FLASH_SELECT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FLASH_SELECT_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FLICKER_AVOID.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FLICKER_AVOID'>MMAL_PARAMETER_FLICKER_AVOID</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FLICKERAVOID_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FOCAL_LENGTHS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FOCAL_LENGTHS'>MMAL_PARAMETER_FOCAL_LENGTHS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Unused?</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FOCUS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FOCUS'>MMAL_PARAMETER_FOCUS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FOCUS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FOCUS_REGIONS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FOCUS_REGIONS'>MMAL_PARAMETER_FOCUS_REGIONS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FOCUS_REGIONS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_FACE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_FACE'>MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_FACE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Region defines a face</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -4091,28 +4202,32 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_NORMAL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_NORMAL'>MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_NORMAL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Region defines a generic region</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FOCUS_STATUS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FOCUS_STATUS'>MMAL_PARAMETER_FOCUS_STATUS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FOCUS_STATUS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FPS_RANGE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FPS_RANGE'>MMAL_PARAMETER_FPS_RANGE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FPS_RANGE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_FRAME_RATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_FRAME_RATE'>MMAL_PARAMETER_FRAME_RATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FRAME_RATE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -4161,637 +4276,751 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_HIGH_DYNAMIC_RANGE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_HIGH_DYNAMIC_RANGE'>MMAL_PARAMETER_HIGH_DYNAMIC_RANGE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_IMAGE_EFFECT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_IMAGE_EFFECT'>MMAL_PARAMETER_IMAGE_EFFECT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_IMAGEFX_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_IMAGE_EFFECT_PARAMETERS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_IMAGE_EFFECT_PARAMETERS'>MMAL_PARAMETER_IMAGE_EFFECT_PARAMETERS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_IMAGEFX_PARAMETERS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_INPUT_CROP.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_INPUT_CROP'>MMAL_PARAMETER_INPUT_CROP</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_INPUT_CROP_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_INTRAPERIOD.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_INTRAPERIOD'>MMAL_PARAMETER_INTRAPERIOD</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ISO.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ISO'>MMAL_PARAMETER_ISO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_JPEG_ATTACH_LOG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_JPEG_ATTACH_LOG'>MMAL_PARAMETER_JPEG_ATTACH_LOG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_JPEG_Q_FACTOR.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_JPEG_Q_FACTOR'>MMAL_PARAMETER_JPEG_Q_FACTOR</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_JPEG_RESTART_INTERVAL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_JPEG_RESTART_INTERVAL'>MMAL_PARAMETER_JPEG_RESTART_INTERVAL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_LENS_SHADING_OVERRIDE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_LENS_SHADING_OVERRIDE'>MMAL_PARAMETER_LENS_SHADING_OVERRIDE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_LENS_SHADING_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_LOCKSTEP_ENABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_LOCKSTEP_ENABLE'>MMAL_PARAMETER_LOCKSTEP_ENABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_LOGGING.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_LOGGING'>MMAL_PARAMETER_LOGGING</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_LOGGING_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_MB_ROWS_PER_SLICE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_MB_ROWS_PER_SLICE'>MMAL_PARAMETER_MB_ROWS_PER_SLICE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.
+Setting the value to zero resets to the default (one slice per frame).</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_MEM_USAGE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_MEM_USAGE'>MMAL_PARAMETER_MEM_USAGE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_MEM_USAGE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_MINIMISE_FRAGMENTATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_MINIMISE_FRAGMENTATION'>MMAL_PARAMETER_MINIMISE_FRAGMENTATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_MIRROR.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_MIRROR'>MMAL_PARAMETER_MIRROR</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_MIRROR_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_NALUNITFORMAT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_NALUNITFORMAT'>MMAL_PARAMETER_NALUNITFORMAT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_NALUNITFORMAT_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_NO_IMAGE_PADDING.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_NO_IMAGE_PADDING'>MMAL_PARAMETER_NO_IMAGE_PADDING</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_OUTPUT_SHIFT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_OUTPUT_SHIFT'>MMAL_PARAMETER_OUTPUT_SHIFT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_INT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_POWERMON_ENABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_POWERMON_ENABLE'>MMAL_PARAMETER_POWERMON_ENABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_PRIVACY_INDICATOR.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_PRIVACY_INDICATOR'>MMAL_PARAMETER_PRIVACY_INDICATOR</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_PRIVACY_INDICATOR_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_PROFILE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_PROFILE'>MMAL_PARAMETER_PROFILE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_PROFILE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_RATECONTROL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_RATECONTROL'>MMAL_PARAMETER_RATECONTROL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_RATECONTROL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_REDEYE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_REDEYE'>MMAL_PARAMETER_REDEYE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_REDEYE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_REGISTER_FAIL_IS_FATAL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_REGISTER_FAIL_IS_FATAL'>MMAL_PARAMETER_REGISTER_FAIL_IS_FATAL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_RESIZE_PARAMS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_RESIZE_PARAMS'>MMAL_PARAMETER_RESIZE_PARAMS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RESIZE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ROTATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ROTATION'>MMAL_PARAMETER_ROTATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_INT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SATURATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SATURATION'>MMAL_PARAMETER_SATURATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SEEK.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SEEK'>MMAL_PARAMETER_SEEK</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_SEEK_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SENSOR_INFORMATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SENSOR_INFORMATION'>MMAL_PARAMETER_SENSOR_INFORMATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_SENSOR_INFORMATION_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SHARPNESS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SHARPNESS'>MMAL_PARAMETER_SHARPNESS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_RATIONAL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SHUTTER_SPEED.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SHUTTER_SPEED'>MMAL_PARAMETER_SHUTTER_SPEED</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_STATISTICS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_STATISTICS'>MMAL_PARAMETER_STATISTICS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_STATISTICS_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_STEREOSCOPIC_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_STEREOSCOPIC_MODE'>MMAL_PARAMETER_STEREOSCOPIC_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_STEREOSCOPIC_MODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_STILLS_DENOISE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_STILLS_DENOISE'>MMAL_PARAMETER_STILLS_DENOISE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SUPPORTED_ENCODINGS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SUPPORTED_ENCODINGS'>MMAL_PARAMETER_SUPPORTED_ENCODINGS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_ENCODING_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SUPPORTED_PROFILES.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SUPPORTED_PROFILES'>MMAL_PARAMETER_SUPPORTED_PROFILES</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_PROFILE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SW_SATURATION_DISABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SW_SATURATION_DISABLE'>MMAL_PARAMETER_SW_SATURATION_DISABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SW_SHARPEN_DISABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SW_SHARPEN_DISABLE'>MMAL_PARAMETER_SW_SHARPEN_DISABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_SYSTEM_TIME.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_SYSTEM_TIME'>MMAL_PARAMETER_SYSTEM_TIME</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_UINT64_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_THUMBNAIL_CONFIGURATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_THUMBNAIL_CONFIGURATION'>MMAL_PARAMETER_THUMBNAIL_CONFIGURATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_THUMBNAIL_CONFIG_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_UNUSED.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_UNUSED'>MMAL_PARAMETER_UNUSED</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Never a valid parameter ID</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_URI.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_URI'>MMAL_PARAMETER_URI</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_URI_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_USE_STC.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_USE_STC'>MMAL_PARAMETER_USE_STC</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_CAMERA_STC_MODE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ALIGN_HORIZ.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ALIGN_HORIZ'>MMAL_PARAMETER_VIDEO_ALIGN_HORIZ</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.
+Changing this paramater from the default can reduce frame rate
+because image buffers need to be re-pitched.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ALIGN_VERT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ALIGN_VERT'>MMAL_PARAMETER_VIDEO_ALIGN_VERT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.
+Changing this paramater from the default can reduce frame rate
+because image buffers need to be re-pitched.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_BIT_RATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_BIT_RATE'>MMAL_PARAMETER_VIDEO_BIT_RATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.
+Run-time bit rate control</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DECODE_CONFIG_VD3.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DECODE_CONFIG_VD3'>MMAL_PARAMETER_VIDEO_DECODE_CONFIG_VD3</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BYTES_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DECODE_ERROR_CONCEALMENT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DECODE_ERROR_CONCEALMENT'>MMAL_PARAMETER_VIDEO_DECODE_ERROR_CONCEALMENT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DENOISE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DENOISE'>MMAL_PARAMETER_VIDEO_DENOISE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DRM_INIT_INFO.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DRM_INIT_INFO'>MMAL_PARAMETER_VIDEO_DRM_INIT_INFO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_DRM_INIT_INFO_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER'>MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAMES.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAMES'>MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAMES</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH.html"
+                                  title='constant mmal_sys::MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH'>MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH</a></td>
+                           <td class='docblock-short'>
+                                <p>&lt; Take a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_EEDE_ENABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_EEDE_ENABLE'>MMAL_PARAMETER_VIDEO_EEDE_ENABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_EEDE_ENABLE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE'>MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_FRAME_LIMIT_BITS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_FRAME_LIMIT_BITS'>MMAL_PARAMETER_VIDEO_ENCODE_FRAME_LIMIT_BITS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_AU_DELIMITERS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_AU_DELIMITERS'>MMAL_PARAMETER_VIDEO_ENCODE_H264_AU_DELIMITERS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_DEBLOCK_IDC.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_DEBLOCK_IDC'>MMAL_PARAMETER_VIDEO_ENCODE_H264_DEBLOCK_IDC</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_DISABLE_CABAC.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_DISABLE_CABAC'>MMAL_PARAMETER_VIDEO_ENCODE_H264_DISABLE_CABAC</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG'>MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_LATENCY.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_LATENCY'>MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_LATENCY</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_MB_INTRA_MODE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_MB_INTRA_MODE'>MMAL_PARAMETER_VIDEO_ENCODE_H264_MB_INTRA_MODE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_ENCODER_H264_MB_INTRA_MODES_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_H264_VCL_HRD_PARAMETERS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_H264_VCL_HRD_PARAMETERS'>MMAL_PARAMETER_VIDEO_ENCODE_H264_VCL_HRD_PARAMETERS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_HEADER_ON_OPEN.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_HEADER_ON_OPEN'>MMAL_PARAMETER_VIDEO_ENCODE_HEADER_ON_OPEN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_INITIAL_QUANT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_INITIAL_QUANT'>MMAL_PARAMETER_VIDEO_ENCODE_INITIAL_QUANT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER'>MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS'>MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_MAX_QUANT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_MAX_QUANT'>MMAL_PARAMETER_VIDEO_ENCODE_MAX_QUANT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_MIN_QUANT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_MIN_QUANT'>MMAL_PARAMETER_VIDEO_ENCODE_MIN_QUANT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_PEAK_RATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_PEAK_RATE'>MMAL_PARAMETER_VIDEO_ENCODE_PEAK_RATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_PRECODE_FOR_QP.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_PRECODE_FOR_QP'>MMAL_PARAMETER_VIDEO_ENCODE_PRECODE_FOR_QP</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_QP_P.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_QP_P'>MMAL_PARAMETER_VIDEO_ENCODE_QP_P</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL'>MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_RC_SLICE_DQUANT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_RC_SLICE_DQUANT'>MMAL_PARAMETER_VIDEO_ENCODE_RC_SLICE_DQUANT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_UINT32_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE'>MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS.html"
+                                  title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS'>MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS</a></td>
+                           <td class='docblock-short'>
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_ENCODE_SPS_TIMING.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_ENCODE_SPS_TIMING'>MMAL_PARAMETER_VIDEO_ENCODE_SPS_TIMING</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_FRAME_RATE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_FRAME_RATE'>MMAL_PARAMETER_VIDEO_FRAME_RATE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_FRAME_RATE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_IMMUTABLE_INPUT.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_IMMUTABLE_INPUT'>MMAL_PARAMETER_VIDEO_IMMUTABLE_INPUT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_INTERLACE_TYPE.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_INTERLACE_TYPE'>MMAL_PARAMETER_VIDEO_INTERLACE_TYPE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_INTERPOLATE_TIMESTAMPS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_INTERPOLATE_TIMESTAMPS'>MMAL_PARAMETER_VIDEO_INTERPOLATE_TIMESTAMPS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_INTRA_REFRESH.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_INTRA_REFRESH'>MMAL_PARAMETER_VIDEO_INTRA_REFRESH</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_INTRA_REFRESH_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION'>MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS'>MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_UINT32_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_RENDER_STATS.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_RENDER_STATS'>MMAL_PARAMETER_VIDEO_RENDER_STATS</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_VIDEO_RENDER_STATS_T.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_REQUEST_I_FRAME.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_REQUEST_I_FRAME'>MMAL_PARAMETER_VIDEO_REQUEST_I_FRAME</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T.
+Request an I-frame.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_SOURCE_PATTERN.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_SOURCE_PATTERN'>MMAL_PARAMETER_VIDEO_SOURCE_PATTERN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Take a @ref MMAL_PARAMETER_SOURCE_PATTERN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_STABILISATION.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_STABILISATION'>MMAL_PARAMETER_VIDEO_STABILISATION</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_VIDEO_TIMESTAMP_FIFO.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_VIDEO_TIMESTAMP_FIFO'>MMAL_PARAMETER_VIDEO_TIMESTAMP_FIFO</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ZERO_COPY.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ZERO_COPY'>MMAL_PARAMETER_ZERO_COPY</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a MMAL_PARAMETER_BOOLEAN_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ZERO_SHUTTER_LAG.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ZERO_SHUTTER_LAG'>MMAL_PARAMETER_ZERO_SHUTTER_LAG</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_ZEROSHUTTERLAG_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAMETER_ZOOM.html"
                                   title='constant mmal_sys::MMAL_PARAMETER_ZOOM'>MMAL_PARAMETER_ZOOM</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Takes a @ref MMAL_PARAMETER_SCALEFACTOR_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -4882,21 +5111,24 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_STILLS_CAPTURE.html"
                                   title='constant mmal_sys::MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_STILLS_CAPTURE'>MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_STILLS_CAPTURE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Stills capture use case</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_UNKNOWN.html"
                                   title='constant mmal_sys::MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_UNKNOWN'>MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_UNKNOWN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Compromise on behaviour as use case totally unknown</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_VIDEO_CAPTURE.html"
                                   title='constant mmal_sys::MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_VIDEO_CAPTURE'>MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_VIDEO_CAPTURE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Video encode (camcorder) use case</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -5071,14 +5303,16 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_NONE.html"
                                   title='constant mmal_sys::MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_NONE'>MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_NONE</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Disables face detection</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_ON.html"
                                   title='constant mmal_sys::MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_ON'>MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_ON</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Enables face detection</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -5589,7 +5823,10 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON.html"
                                   title='constant mmal_sys::MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON'>MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Turns indicator of for 2s independent of capture status.
+Set this mode repeatedly to keep the indicator on for a
+longer period.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -5603,14 +5840,18 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_OFF.html"
                                   title='constant mmal_sys::MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_OFF'>MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_OFF</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Indicator will be off.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_ON.html"
                                   title='constant mmal_sys::MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_ON'>MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_ON</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Indicator will come on just after a stills capture and
+and remain on for 2seconds, or will be on whilst output[1]
+is actively producing images.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -5680,42 +5921,48 @@ of YUV_UV_16 video.</p>
                            <td><a class="constant" href="constant.MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CLOCK.html"
                                   title='constant mmal_sys::MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CLOCK'>MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CLOCK</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Clock port</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CONTROL.html"
                                   title='constant mmal_sys::MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CONTROL'>MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CONTROL</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Control port</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INPUT.html"
                                   title='constant mmal_sys::MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INPUT'>MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INPUT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Input port</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INVALID.html"
                                   title='constant mmal_sys::MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INVALID'>MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INVALID</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Dummy value to force 32bit enum</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_OUTPUT.html"
                                   title='constant mmal_sys::MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_OUTPUT'>MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_OUTPUT</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Output port</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_UNKNOWN.html"
                                   title='constant mmal_sys::MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_UNKNOWN'>MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_UNKNOWN</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>&lt; Unknown port type</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8612,28 +8859,38 @@ that a buffer header is available either in the pool or in the output queue.</p>
                            <td><a class="type" href="type.MMAL_DISPLAYMODE_T.html"
                                   title='type mmal_sys::MMAL_DISPLAYMODE_T'>MMAL_DISPLAYMODE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Display modes.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_DISPLAYSET_T.html"
                                   title='type mmal_sys::MMAL_DISPLAYSET_T'>MMAL_DISPLAYSET_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Values used to indicate which fields are used when setting the
+display configuration</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_DISPLAYTRANSFORM_T.html"
                                   title='type mmal_sys::MMAL_DISPLAYTRANSFORM_T'>MMAL_DISPLAYTRANSFORM_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Display transformations.
+Although an enumeration, the values correspond to combinations of:
+\li 1 Reflect in a vertical axis
+\li 2 180 degree rotation
+\li 4 Reflect in the leading diagonal</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_ES_TYPE_T.html"
                                   title='type mmal_sys::MMAL_ES_TYPE_T'>MMAL_ES_TYPE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Enumeration of the different types of elementary streams.
+This divides elementary streams into 4 big categories, plus an invalid type.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8712,7 +8969,8 @@ that a buffer header is available either in the pool or in the output queue.</p>
                            <td><a class="type" href="type.MMAL_PARAM_AWBMODE_T.html"
                                   title='type mmal_sys::MMAL_PARAM_AWBMODE_T'>MMAL_PARAM_AWBMODE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>AWB parameter modes.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8740,7 +8998,8 @@ that a buffer header is available either in the pool or in the output queue.</p>
                            <td><a class="type" href="type.MMAL_PARAM_EXPOSUREMODE_T.html"
                                   title='type mmal_sys::MMAL_PARAM_EXPOSUREMODE_T'>MMAL_PARAM_EXPOSUREMODE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Exposure modes.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8782,14 +9041,16 @@ that a buffer header is available either in the pool or in the output queue.</p>
                            <td><a class="type" href="type.MMAL_PARAM_IMAGEFX_T.html"
                                   title='type mmal_sys::MMAL_PARAM_IMAGEFX_T'>MMAL_PARAM_IMAGEFX_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Image effect</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_PARAM_MIRROR_T.html"
                                   title='type mmal_sys::MMAL_PARAM_MIRROR_T'>MMAL_PARAM_MIRROR_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Valid mirror modes</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8828,7 +9089,8 @@ back to the user.</p>
                            <td><a class="type" href="type.MMAL_PORT_TYPE_T.html"
                                   title='type mmal_sys::MMAL_PORT_TYPE_T'>MMAL_PORT_TYPE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>List of port types</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8849,14 +9111,17 @@ back to the user.</p>
                            <td><a class="type" href="type.MMAL_STATS_COMP_STATE_T.html"
                                   title='type mmal_sys::MMAL_STATS_COMP_STATE_T'>MMAL_STATS_COMP_STATE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>State of components created by the VC adaptation layer, used for
+statistics reporting.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_STATS_RESULT_T.html"
                                   title='type mmal_sys::MMAL_STATS_RESULT_T'>MMAL_STATS_RESULT_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Status from querying MMAL core statistics.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8891,35 +9156,44 @@ back to the user.</p>
                            <td><a class="type" href="type.MMAL_VIDEO_INTRA_REFRESH_T.html"
                                   title='type mmal_sys::MMAL_VIDEO_INTRA_REFRESH_T'>MMAL_VIDEO_INTRA_REFRESH_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Intra refresh modes</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_VIDEO_LEVEL_T.html"
                                   title='type mmal_sys::MMAL_VIDEO_LEVEL_T'>MMAL_VIDEO_LEVEL_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Video levels.
+Only certain combinations of profile and level will be valid.
+@ref MMAL_VIDEO_PROFILE_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_VIDEO_NALUNITFORMAT_T.html"
                                   title='type mmal_sys::MMAL_VIDEO_NALUNITFORMAT_T'>MMAL_VIDEO_NALUNITFORMAT_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>NAL unit formats</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_VIDEO_PROFILE_T.html"
                                   title='type mmal_sys::MMAL_VIDEO_PROFILE_T'>MMAL_VIDEO_PROFILE_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Video profiles.
+Only certain combinations of profile and level will be valid.
+@ref MMAL_VIDEO_LEVEL_T</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_VIDEO_RATECONTROL_T.html"
                                   title='type mmal_sys::MMAL_VIDEO_RATECONTROL_T'>MMAL_VIDEO_RATECONTROL_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Manner of video rate control</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -8961,7 +9235,8 @@ back to the user.</p>
                            <td><a class="type" href="type.VCOS_LOG_LEVEL_T.html"
                                   title='type mmal_sys::VCOS_LOG_LEVEL_T'>VCOS_LOG_LEVEL_T</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Logging levels</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -9054,35 +9329,44 @@ with pthreads.</p>
                            <td><a class="type" href="type._bindgen_ty_24.html"
                                   title='type mmal_sys::_bindgen_ty_24'>_bindgen_ty_24</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Common MMAL parameter IDs.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type._bindgen_ty_25.html"
                                   title='type mmal_sys::_bindgen_ty_25'>_bindgen_ty_25</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Camera-specific MMAL parameter IDs.
+@ingroup MMAL_PARAMETER_IDS</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type._bindgen_ty_26.html"
                                   title='type mmal_sys::_bindgen_ty_26'>_bindgen_ty_26</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Video-specific MMAL parameter IDs.
+@ingroup MMAL_PARAMETER_IDS</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type._bindgen_ty_27.html"
                                   title='type mmal_sys::_bindgen_ty_27'>_bindgen_ty_27</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Audio-specific MMAL parameter IDs.
+@ingroup MMAL_PARAMETER_IDS</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="type" href="type._bindgen_ty_28.html"
                                   title='type mmal_sys::_bindgen_ty_28'>_bindgen_ty_28</a></td>
                            <td class='docblock-short'>
-                                
+                                <p>Clock-specific MMAL parameter IDs.
+@ingroup MMAL_PARAMETER_IDS</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
