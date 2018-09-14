@@ -7,10 +7,10 @@ SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
 # Pull requests and commits to other branches shouldn't deploy
-#if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-#    echo "Pull request or not master branch. Skipping docs deployment."
-#    exit 0
-#fi
+if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
+    echo "Pull request or not master branch. Skipping docs deployment."
+    exit 0
+fi
 
 # Save some useful information
 REPO=`git config remote.origin.url`
