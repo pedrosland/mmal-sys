@@ -5,6 +5,8 @@ cache: cargo
 language: rust
 rust:
   - nightly
+  - 1.25.0
+  - stable
 
 before_cache:
   # Travis can't cache files that are not readable by "others"
