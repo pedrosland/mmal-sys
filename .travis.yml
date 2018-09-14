@@ -28,6 +28,7 @@ deploy:
   # Runs on the master branch, not individual PRs
   provider: script
   script: bash ci/docs.sh
+  skip_cleanup: true
   on:
     branch: master
     rust: stable
