@@ -135,11 +135,14 @@ pub const MMAL_BUFFER_HEADER_FLAG_USER0: u32 = 268435456;
 pub const MMAL_BUFFER_HEADER_FLAG_USER1: u32 = 536870912;
 pub const MMAL_BUFFER_HEADER_FLAG_USER2: u32 = 1073741824;
 pub const MMAL_BUFFER_HEADER_FLAG_USER3: u32 = 2147483648;
+pub const MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START_BIT: u32 = 16;
 pub const MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START: u32 = 65536;
 pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_INTERLACED: u32 = 65536;
 pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_TOP_FIELD_FIRST: u32 = 131072;
 pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL: u32 = 524288;
 pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_PROTECTED: u32 = 1048576;
+pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_SHIFT: u32 = 24;
+pub const MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_MASK: u32 = 251658240;
 pub const MMAL_PARAMETER_GROUP_COMMON: u32 = 0;
 pub const MMAL_PARAMETER_GROUP_CAMERA: u32 = 65536;
 pub const MMAL_PARAMETER_GROUP_VIDEO: u32 = 131072;
@@ -155,6 +158,7 @@ pub const MMAL_PARAMETER_CAMERA_INFO_MAX_STR_LEN: u32 = 16;
 pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN: u32 = 32;
 pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2: u32 = 256;
 pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3: u32 = 256;
+pub const MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V4: u32 = 256;
 pub const MMAL_CLOCK_EVENT_INVALID: u32 = 0;
 pub const MMAL_FIXED_16_16_ONE: u32 = 65536;
 pub const MMAL_PORT_CAPABILITY_PASSTHROUGH: u32 = 1;
@@ -187,6 +191,7 @@ pub const MMAL_CONNECTION_FLAG_ALLOCATION_ON_INPUT: u32 = 2;
 pub const MMAL_CONNECTION_FLAG_ALLOCATION_ON_OUTPUT: u32 = 4;
 pub const MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS: u32 = 8;
 pub const MMAL_CONNECTION_FLAG_DIRECT: u32 = 16;
+pub const MMAL_CONNECTION_FLAG_KEEP_PORT_FORMATS: u32 = 32;
 pub const MMAL_DEV_VCHIQ_PATH: &'static [u8; 11usize] = b"/dev/vchiq\0";
 pub type __time_t = ::std::os::raw::c_long;
 pub type __syscall_slong_t = ::std::os::raw::c_long;
@@ -2333,6 +2338,14 @@ extern "C" {
     pub fn vcos_set_log_options(opt: *const ::std::os::raw::c_char);
 }
 extern "C" {
+    /// Set the logging levels for many categories at once.
+    ///
+    /// Set lots of categorys from a string cat:lev,cat:lev This can
+    /// be used at startup time to set a bunch of category levels from
+    /// a single string.  Used with C(vcos_logging_level)
+    pub fn vcos_log_set_level_all(levels: *mut ::std::os::raw::c_char);
+}
+extern "C" {
     pub fn vcos_log_dump_mem_impl(
         cat: *const VCOS_LOG_CAT_T,
         label: *const ::std::os::raw::c_char,
@@ -3528,8 +3541,8 @@ impl ::std::fmt::Debug for MMAL_BUFFER_HEADER_TYPE_SPECIFIC_T {
 /// Definition of the buffer header structure.
 /// A buffer header does not directly carry the data to be passed to a component but instead
 /// it references the actual data using a pointer (and an associated length).
-/// It also contains an internal area which can be used to store command or metadata to be
-/// associated with the external data.
+/// It also contains an internal area which can be used to store command to be associated
+/// with the external data.
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct MMAL_BUFFER_HEADER_T {
@@ -7848,6 +7861,352 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T() {
 impl ::std::fmt::Debug for MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         write ! ( f , "MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T {{ hdr: {:?}, enable: {:?}, show_shutter: {:?}, show_analog_gain: {:?}, show_lens: {:?}, show_caf: {:?}, show_motion: {:?}, show_frame_num: {:?}, enable_text_background: {:?}, custom_background_colour: {:?}, custom_background_Y: {:?}, custom_background_U: {:?}, custom_background_V: {:?}, dummy1: {:?}, custom_text_colour: {:?}, custom_text_Y: {:?}, custom_text_U: {:?}, custom_text_V: {:?}, text_size: {:?}, text: [{}] }}" , self . hdr , self . enable , self . show_shutter , self . show_analog_gain , self . show_lens , self . show_caf , self . show_motion , self . show_frame_num , self . enable_text_background , self . custom_background_colour , self . custom_background_Y , self . custom_background_U , self . custom_background_V , self . dummy1 , self . custom_text_colour , self . custom_text_Y , self . custom_text_U , self . custom_text_V , self . text_size , self . text . iter ( ) . enumerate ( ) . map ( | ( i , v ) | format ! ( "{}{:?}" , if i > 0 { ", " } else { "" } , v ) ) . collect :: < String > ( ) )
+    }
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T {
+    pub hdr: MMAL_PARAMETER_HEADER_T,
+    pub enable: MMAL_BOOL_T,
+    pub show_shutter: MMAL_BOOL_T,
+    pub show_analog_gain: MMAL_BOOL_T,
+    pub show_lens: MMAL_BOOL_T,
+    pub show_caf: MMAL_BOOL_T,
+    pub show_motion: MMAL_BOOL_T,
+    pub show_frame_num: MMAL_BOOL_T,
+    pub enable_text_background: MMAL_BOOL_T,
+    pub custom_background_colour: MMAL_BOOL_T,
+    pub custom_background_Y: u8,
+    pub custom_background_U: u8,
+    pub custom_background_V: u8,
+    pub dummy1: u8,
+    pub custom_text_colour: MMAL_BOOL_T,
+    pub custom_text_Y: u8,
+    pub custom_text_U: u8,
+    pub custom_text_V: u8,
+    pub text_size: u8,
+    pub text: [::std::os::raw::c_char; 256usize],
+    pub justify: u32,
+    pub x_offset: u32,
+    pub y_offset: u32,
+}
+#[test]
+fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T() {
+    assert_eq!(
+        ::std::mem::size_of::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>(),
+        324usize,
+        concat!("Size of: ", stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).hdr as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(hdr)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).enable as *const _
+                as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(enable)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).show_shutter as *const _
+                as usize
+        },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(show_shutter)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).show_analog_gain
+                as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(show_analog_gain)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).show_lens as *const _
+                as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(show_lens)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).show_caf as *const _
+                as usize
+        },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(show_caf)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).show_motion as *const _
+                as usize
+        },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(show_motion)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).show_frame_num
+                as *const _ as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(show_frame_num)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).enable_text_background
+                as *const _ as usize
+        },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(enable_text_background)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_background_colour
+                as *const _ as usize
+        },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_background_colour)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_background_Y
+                as *const _ as usize
+        },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_background_Y)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_background_U
+                as *const _ as usize
+        },
+        45usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_background_U)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_background_V
+                as *const _ as usize
+        },
+        46usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_background_V)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).dummy1 as *const _
+                as usize
+        },
+        47usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(dummy1)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_text_colour
+                as *const _ as usize
+        },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_text_colour)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_text_Y
+                as *const _ as usize
+        },
+        52usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_text_Y)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_text_U
+                as *const _ as usize
+        },
+        53usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_text_U)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).custom_text_V
+                as *const _ as usize
+        },
+        54usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(custom_text_V)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).text_size as *const _
+                as usize
+        },
+        55usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(text_size)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).text as *const _
+                as usize
+        },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(text)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).justify as *const _
+                as usize
+        },
+        312usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(justify)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).x_offset as *const _
+                as usize
+        },
+        316usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(x_offset)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T>())).y_offset as *const _
+                as usize
+        },
+        320usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T),
+            "::",
+            stringify!(y_offset)
+        )
+    );
+}
+impl ::std::fmt::Debug for MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        write ! ( f , "MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T {{ hdr: {:?}, enable: {:?}, show_shutter: {:?}, show_analog_gain: {:?}, show_lens: {:?}, show_caf: {:?}, show_motion: {:?}, show_frame_num: {:?}, enable_text_background: {:?}, custom_background_colour: {:?}, custom_background_Y: {:?}, custom_background_U: {:?}, custom_background_V: {:?}, dummy1: {:?}, custom_text_colour: {:?}, custom_text_Y: {:?}, custom_text_U: {:?}, custom_text_V: {:?}, text_size: {:?}, text: [{}], justify: {:?}, x_offset: {:?}, y_offset: {:?} }}" , self . hdr , self . enable , self . show_shutter , self . show_analog_gain , self . show_lens , self . show_caf , self . show_motion , self . show_frame_num , self . enable_text_background , self . custom_background_colour , self . custom_background_Y , self . custom_background_U , self . custom_background_V , self . dummy1 , self . custom_text_colour , self . custom_text_Y , self . custom_text_U , self . custom_text_V , self . text_size , self . text . iter ( ) . enumerate ( ) . map ( | ( i , v ) | format ! ( "{}{:?}" , if i > 0 { ", " } else { "" } , v ) ) . collect :: < String > ( ) , self . justify , self . x_offset , self . y_offset )
     }
 }
 pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_NONE: MMAL_STEREOSCOPIC_MODE_T = 0;
@@ -12646,134 +13005,6 @@ extern "C" {
     /// @param component component to disable
     /// @return MMAL_SUCCESS on success
     pub fn mmal_component_disable(component: *mut MMAL_COMPONENT_T) -> MMAL_STATUS_T::Type;
-}
-/// Generic metadata type. All metadata structures need to begin with these fields.
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct MMAL_METATDATA_T {
-    /// < Metadata id. This is a FourCC
-    pub id: u32,
-    /// < Size in bytes of the following metadata (not including id and size)
-    pub size: u32,
-}
-#[test]
-fn bindgen_test_layout_MMAL_METATDATA_T() {
-    assert_eq!(
-        ::std::mem::size_of::<MMAL_METATDATA_T>(),
-        8usize,
-        concat!("Size of: ", stringify!(MMAL_METATDATA_T))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<MMAL_METATDATA_T>(),
-        4usize,
-        concat!("Alignment of ", stringify!(MMAL_METATDATA_T))
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<MMAL_METATDATA_T>())).id as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(MMAL_METATDATA_T),
-            "::",
-            stringify!(id)
-        )
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<MMAL_METATDATA_T>())).size as *const _ as usize },
-        4usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(MMAL_METATDATA_T),
-            "::",
-            stringify!(size)
-        )
-    );
-}
-pub type MMAL_METADATA_T = MMAL_METATDATA_T;
-/// Hello World metadata.
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct MMAL_METATDATA_HELLO_WORLD_T {
-    /// < Metadata id. This is a FourCC
-    pub id: u32,
-    /// < Size in bytes of the following metadata (not including id and size)
-    pub size: u32,
-    /// < Metadata value
-    pub myvalue: u32,
-}
-#[test]
-fn bindgen_test_layout_MMAL_METATDATA_HELLO_WORLD_T() {
-    assert_eq!(
-        ::std::mem::size_of::<MMAL_METATDATA_HELLO_WORLD_T>(),
-        12usize,
-        concat!("Size of: ", stringify!(MMAL_METATDATA_HELLO_WORLD_T))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<MMAL_METATDATA_HELLO_WORLD_T>(),
-        4usize,
-        concat!("Alignment of ", stringify!(MMAL_METATDATA_HELLO_WORLD_T))
-    );
-    assert_eq!(
-        unsafe { &(*(::std::ptr::null::<MMAL_METATDATA_HELLO_WORLD_T>())).id as *const _ as usize },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(MMAL_METATDATA_HELLO_WORLD_T),
-            "::",
-            stringify!(id)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<MMAL_METATDATA_HELLO_WORLD_T>())).size as *const _ as usize
-        },
-        4usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(MMAL_METATDATA_HELLO_WORLD_T),
-            "::",
-            stringify!(size)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<MMAL_METATDATA_HELLO_WORLD_T>())).myvalue as *const _ as usize
-        },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(MMAL_METATDATA_HELLO_WORLD_T),
-            "::",
-            stringify!(myvalue)
-        )
-    );
-}
-pub type MMAL_METADATA_HELLO_WORLD_T = MMAL_METATDATA_HELLO_WORLD_T;
-extern "C" {
-    /// Get metadata item from buffer header.
-    /// This will search through all the metadata in the buffer header and return a pointer to the
-    /// first instance of the requested metadata id.
-    ///
-    /// @param header buffer header containing the metadata
-    /// @param id     requested metadata id
-    ///
-    /// @return Pointer to metadata requested or NULL if not found.
-    pub fn mmal_metadata_get(header: *mut MMAL_BUFFER_HEADER_T, id: u32) -> *mut MMAL_METADATA_T;
-}
-extern "C" {
-    /// Set metadata item in buffer header.
-    /// This will store the metadata item into the buffer header. This operation can fail if not
-    /// enough memory is available in the data section of the buffer header.
-    ///
-    /// @param header   buffer header to store the metadata into
-    /// @param metadata metadata item to store in buffer header
-    ///
-    /// @return MMAL_SUCCESS on success or MMAL_ENOMEM if not enough memory is available for storing
-    /// the metadata
-    pub fn mmal_metadata_set(
-        header: *mut MMAL_BUFFER_HEADER_T,
-        metadata: *mut MMAL_METADATA_T,
-    ) -> MMAL_STATUS_T::Type;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
