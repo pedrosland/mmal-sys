@@ -14,6 +14,8 @@ fn main() {
     println!("cargo:rustc-link-lib=mmal_vc_client");
     println!("cargo:rustc-link-lib=vcos");
     println!("cargo:rustc-link-lib=bcm_host");
+    println!("cargo:rustc-link-lib=vchiq_arm");
+    println!("cargo:rustc-link-lib=vcsm");
     println!("cargo:rerun-if-env-changed=HOST");
     println!("cargo:rerun-if-env-changed=TARGET");
     println!("cargo:rerun-if-env-changed=MMAL_INCLUDE_DIR");
