@@ -14,10 +14,10 @@ RUN apt-get update \
   && apt-get purge wget -y --auto-remove \
   && rm -rf /var/lib/apt/lists/*
 
-ENV firmware="1.20180817"
+ENV firmware="1.20180924"
 
 RUN apt-get update \
   && apt-get install -y wget \
-  && wget -O - https://github.com/raspberrypi/firmware/archive/$firmware.tar.gz | tar -xzf - -C / --strip-components 1 firmware-$firmware/opt/vc \
+  && wget -O - https://github.com/raspberrypi/firmware/archive/$firmware.tar.gz | tar -xzf - -C / --strip-components 2 firmware-$firmware/hardfp/opt/vc \
   && apt-get purge wget -y --auto-remove \
   && rm -rf /var/lib/apt/lists/*
