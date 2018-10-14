@@ -47,8 +47,8 @@ This describes the properties specific to an audio stream</p>
                                 <p>Definition of the buffer header structure.
 A buffer header does not directly carry the data to be passed to a component but instead
 it references the actual data using a pointer (and an associated length).
-It also contains an internal area which can be used to store command or metadata to be
-associated with the external data.</p>
+It also contains an internal area which can be used to store command to be associated
+with the external data.</p>
 
                            </td>
                        </tr>
@@ -207,22 +207,6 @@ cast the structure. The \ref MMAL_PARAMETER_HEADER_T::size field can be used to 
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class="struct" href="struct.MMAL_METATDATA_HELLO_WORLD_T.html"
-                                  title='struct mmal_sys::MMAL_METATDATA_HELLO_WORLD_T'>MMAL_METATDATA_HELLO_WORLD_T</a></td>
-                           <td class='docblock-short'>
-                                <p>Hello World metadata.</p>
-
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="struct" href="struct.MMAL_METATDATA_T.html"
-                                  title='struct mmal_sys::MMAL_METATDATA_T'>MMAL_METATDATA_T</a></td>
-                           <td class='docblock-short'>
-                                <p>Generic metadata type. All metadata structures need to begin with these fields.</p>
-
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
                            <td><a class="struct" href="struct.MMAL_PARAMETER_ALGORITHM_CONTROL_T.html"
                                   title='struct mmal_sys::MMAL_PARAMETER_ALGORITHM_CONTROL_T'>MMAL_PARAMETER_ALGORITHM_CONTROL_T</a></td>
                            <td class='docblock-short'>
@@ -296,6 +280,13 @@ This is mainly used to increase the requirements of a component.</p>
                        <tr class=' module-item'>
                            <td><a class="struct" href="struct.MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T.html"
                                   title='struct mmal_sys::MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T'>MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T.html"
+                                  title='struct mmal_sys::MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T'>MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T</a></td>
                            <td class='docblock-short'>
                                 
                            </td>
@@ -1317,6 +1308,13 @@ the calls can fail, and inits must match deletes.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START_BIT.html"
+                                  title='constant mmal_sys::MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START_BIT'>MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START_BIT</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_FLAG_FRAME.html"
                                   title='constant mmal_sys::MMAL_BUFFER_HEADER_FLAG_FRAME'>MMAL_BUFFER_HEADER_FLAG_FRAME</a></td>
                            <td class='docblock-short'>
@@ -1387,6 +1385,20 @@ the calls can fail, and inits must match deletes.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_MASK.html"
+                                  title='constant mmal_sys::MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_MASK'>MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_MASK</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_SHIFT.html"
+                                  title='constant mmal_sys::MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_SHIFT'>MMAL_BUFFER_HEADER_VIDEO_FLAG_COLUMN_LOG2_SHIFT</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL.html"
                                   title='constant mmal_sys::MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL'>MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL</a></td>
                            <td class='docblock-short'>
@@ -1431,6 +1443,13 @@ the calls can fail, and inits must match deletes.</p>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3.html"
                                   title='constant mmal_sys::MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3'>MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V4.html"
+                                  title='constant mmal_sys::MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V4'>MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V4</a></td>
                            <td class='docblock-short'>
                                 
                            </td>
@@ -2005,6 +2024,13 @@ If this ever breaks because C has this then we can delete this one.</p>
                        <tr class=' module-item'>
                            <td><a class="constant" href="constant.MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS.html"
                                   title='constant mmal_sys::MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS'>MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.MMAL_CONNECTION_FLAG_KEEP_PORT_FORMATS.html"
+                                  title='constant mmal_sys::MMAL_CONNECTION_FLAG_KEEP_PORT_FORMATS'>MMAL_CONNECTION_FLAG_KEEP_PORT_FORMATS</a></td>
                            <td class='docblock-short'>
                                 
                            </td>
@@ -7420,26 +7446,6 @@ another allocation is done.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class="fn" href="fn.mmal_metadata_get.html"
-                                  title='fn mmal_sys::mmal_metadata_get'>mmal_metadata_get</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
-                           <td class='docblock-short'>
-                                <p>Get metadata item from buffer header.
-This will search through all the metadata in the buffer header and return a pointer to the
-first instance of the requested metadata id.</p>
-
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="fn" href="fn.mmal_metadata_set.html"
-                                  title='fn mmal_sys::mmal_metadata_set'>mmal_metadata_set</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
-                           <td class='docblock-short'>
-                                <p>Set metadata item in buffer header.
-This will store the metadata item into the buffer header. This operation can fail if not
-enough memory is available in the data section of the buffer header.</p>
-
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
                            <td><a class="fn" href="fn.mmal_pool_callback_set.html"
                                   title='fn mmal_sys::mmal_pool_callback_set'>mmal_pool_callback_set</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
@@ -8458,6 +8464,14 @@ The platform needs to implement this function.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
+                           <td><a class="fn" href="fn.vcos_log_set_level_all.html"
+                                  title='fn mmal_sys::vcos_log_set_level_all'>vcos_log_set_level_all</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
+                                <p>Set the logging levels for many categories at once.</p>
+
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
                            <td><a class="fn" href="fn.vcos_log_status_cmd.html"
                                   title='fn mmal_sys::vcos_log_status_cmd'>vcos_log_status_cmd</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
                            <td class='docblock-short'>
@@ -8912,20 +8926,6 @@ This divides elementary streams into 4 big categories, plus an invalid type.</p>
                        <tr class=' module-item'>
                            <td><a class="type" href="type.MMAL_INTERLACETYPE_T.html"
                                   title='type mmal_sys::MMAL_INTERLACETYPE_T'>MMAL_INTERLACETYPE_T</a></td>
-                           <td class='docblock-short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="type" href="type.MMAL_METADATA_HELLO_WORLD_T.html"
-                                  title='type mmal_sys::MMAL_METADATA_HELLO_WORLD_T'>MMAL_METADATA_HELLO_WORLD_T</a></td>
-                           <td class='docblock-short'>
-                                
-                           </td>
-                       </tr>
-                       <tr class=' module-item'>
-                           <td><a class="type" href="type.MMAL_METADATA_T.html"
-                                  title='type mmal_sys::MMAL_METADATA_T'>MMAL_METADATA_T</a></td>
                            <td class='docblock-short'>
                                 
                            </td>
