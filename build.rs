@@ -9,8 +9,8 @@ use std::path::PathBuf;
 
 fn main() {
     // Tell cargo to tell rustc to link the system shared libraries.
-    println!("cargo:rustc-link-lib=mmal_core");
     println!("cargo:rustc-link-lib=mmal_util");
+    println!("cargo:rustc-link-lib=mmal_core");
     println!("cargo:rustc-link-lib=mmal_vc_client");
     println!("cargo:rustc-link-lib=vcos");
     println!("cargo:rustc-link-lib=bcm_host");
