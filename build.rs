@@ -61,8 +61,8 @@ fn generate_bindings() {
     if target == "armv7-unknown-linux-gnueabihf" && host != target {
         // We're cross-compiling
         bindings = bindings
-            .clang_arg("-I/usr/lib/gcc/arm-linux-gnueabihf/4.6/include-fixed/")
-            .clang_arg("-I/usr/lib/gcc/arm-linux-gnueabihf/4.6/include/")
+            .clang_arg("-I/usr/lib/gcc-cross/arm-linux-gnueabihf/4.8/include-fixed/")
+            .clang_arg("-I/usr/lib/gcc-cross/arm-linux-gnueabihf/4.8/include/")
             .clang_arg("-I/usr/arm-linux-gnueabihf/include/")
             .clang_arg("-nobuiltininc")
             .clang_arg("-nostdinc++");
