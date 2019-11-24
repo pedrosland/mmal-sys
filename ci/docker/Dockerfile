@@ -1,9 +1,5 @@
 FROM rustembedded/cross:armv7-unknown-linux-gnueabihf-0.1.16
 
-#RUN dpkg --add-architecture armhf && \
-#    apt-get update && \
-#    apt-get install libfoo:armhf
-
 ENV firmware="1.20190925"
 
 RUN apt-get update \
@@ -16,3 +12,4 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends llvm-3.9-dev libclang-3.9-dev clang-3.9 \
   && rm -rf /var/lib/apt/lists/*
 
+ENV LLVM_CONFIG_PATH=/usr/bin/llvm-config-3.9

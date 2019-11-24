@@ -8,4 +8,4 @@ passthrough = [
 
 # Raspberry Pi 3
 [target.armv7-unknown-linux-gnueabihf]
-image = "test-cross:armv7-unknown-linux-gnueabihf-0.1.16"
+image = "pedrosland/armv7-unknown-linux-gnueabihf:1.20190925"

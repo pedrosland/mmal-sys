@@ -11,12 +11,13 @@ categories = [ "external-ffi-bindings" ]
 links = "mmal"
 build = "build.rs"
 exclude = [ "ci/*" ]
+edition = "2018"
 
 [dependencies]
 libc = "0.2"
 
 [build-dependencies]
-bindgen = { version = "0.40.0", optional = true }
+bindgen = { version = "0.52.0", optional = true }
 
 [features]
 default = []
