@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/bindings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bindings.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">    1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/bindings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bindings.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../mmal_sys/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">    1</span>
 <span id="2">    2</span>
 <span id="3">    3</span>
 <span id="4">    4</span>
@@ -15077,12 +15077,12 @@
     <span class="ident">Storage</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">storage</span>: <span class="ident">Storage</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">storage</span>: <span class="ident">Storage</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> { <span class="ident">storage</span>, <span class="ident">align</span>: [] }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_bit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_bit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">index</span> <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
 
         <span class="kw">let</span> <span class="ident">byte_index</span> <span class="op">=</span> <span class="ident">index</span> <span class="op">/</span> <span class="number">8</span>;
@@ -15094,9 +15094,9 @@
             <span class="ident">index</span> <span class="op">%</span> <span class="number">8</span>
         };
 
-        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="ident">bit_index</span>;
+        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">bit_index</span>;
 
-        <span class="ident">byte</span> <span class="op">&amp;</span> <span class="ident">mask</span> <span class="op">==</span> <span class="ident">mask</span>
+        <span class="ident">byte</span> <span class="op">&amp;</span> <span class="ident">mask</span> <span class="op">=</span><span class="op">=</span> <span class="ident">mask</span>
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -15112,19 +15112,19 @@
             <span class="ident">index</span> <span class="op">%</span> <span class="number">8</span>
         };
 
-        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="ident">bit_index</span>;
+        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">bit_index</span>;
         <span class="kw">if</span> <span class="ident">val</span> {
-            <span class="kw-2">*</span><span class="ident">byte</span> <span class="op">|=</span> <span class="ident">mask</span>;
+            <span class="kw-2">*</span><span class="ident">byte</span> <span class="op">|</span><span class="op">=</span> <span class="ident">mask</span>;
         } <span class="kw">else</span> {
-            <span class="kw-2">*</span><span class="ident">byte</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="ident">mask</span>;
+            <span class="kw-2">*</span><span class="ident">byte</span> <span class="kw-2">&amp;</span><span class="op">=</span> <span class="op">!</span><span class="ident">mask</span>;
         }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">bit_offset</span>: <span class="ident">usize</span>, <span class="ident">bit_width</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">bit_width</span> <span class="op">&lt;=</span> <span class="number">64</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">bit_offset</span>: <span class="ident">usize</span>, <span class="ident">bit_width</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">bit_width</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">64</span>);
         <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">bit_offset</span> <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
-        <span class="macro">debug_assert</span><span class="macro">!</span>((<span class="ident">bit_offset</span> <span class="op">+</span> (<span class="ident">bit_width</span> <span class="kw">as</span> <span class="ident">usize</span>)) <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
+        <span class="macro">debug_assert</span><span class="macro">!</span>((<span class="ident">bit_offset</span> <span class="op">+</span> (<span class="ident">bit_width</span> <span class="kw">as</span> <span class="ident">usize</span>)) <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">val</span> <span class="op">=</span> <span class="number">0</span>;
 
@@ -15135,7 +15135,7 @@
                 } <span class="kw">else</span> {
                     <span class="ident">i</span>
                 };
-                <span class="ident">val</span> <span class="op">|=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="ident">index</span>;
+                <span class="ident">val</span> <span class="op">|</span><span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">index</span>;
             }
         }
 
@@ -15144,13 +15144,13 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bit_offset</span>: <span class="ident">usize</span>, <span class="ident">bit_width</span>: <span class="ident">u8</span>, <span class="ident">val</span>: <span class="ident">u64</span>) {
-        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">bit_width</span> <span class="op">&lt;=</span> <span class="number">64</span>);
+        <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">bit_width</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">64</span>);
         <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">bit_offset</span> <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
-        <span class="macro">debug_assert</span><span class="macro">!</span>((<span class="ident">bit_offset</span> <span class="op">+</span> (<span class="ident">bit_width</span> <span class="kw">as</span> <span class="ident">usize</span>)) <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
+        <span class="macro">debug_assert</span><span class="macro">!</span>((<span class="ident">bit_offset</span> <span class="op">+</span> (<span class="ident">bit_width</span> <span class="kw">as</span> <span class="ident">usize</span>)) <span class="op">/</span> <span class="number">8</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">len</span>());
 
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..(<span class="ident">bit_width</span> <span class="kw">as</span> <span class="ident">usize</span>) {
-            <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="ident">i</span>;
-            <span class="kw">let</span> <span class="ident">val_bit_is_set</span> <span class="op">=</span> <span class="ident">val</span> <span class="op">&amp;</span> <span class="ident">mask</span> <span class="op">==</span> <span class="ident">mask</span>;
+            <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">i</span>;
+            <span class="kw">let</span> <span class="ident">val_bit_is_set</span> <span class="op">=</span> <span class="ident">val</span> <span class="op">&amp;</span> <span class="ident">mask</span> <span class="op">=</span><span class="op">=</span> <span class="ident">mask</span>;
             <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">target_endian</span> <span class="op">=</span> <span class="string">&quot;big&quot;</span>) {
                 <span class="ident">bit_width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="number">1</span> <span class="op">-</span> <span class="ident">i</span>
             } <span class="kw">else</span> {
@@ -15397,7 +15397,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">pthread_mutex_t___pthread_mutex_s__bindgen_ty_1</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;pthread_mutex_t___pthread_mutex_s__bindgen_ty_1 {{ union }}&quot;</span>
@@ -15486,7 +15486,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">pthread_mutex_t___pthread_mutex_s</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;pthread_mutex_t___pthread_mutex_s {{ __lock: {:?}, __count: {:?}, __owner: {:?}, __kind: {:?}, __nusers: {:?}, __bindgen_anon_1: {:?} }}&quot;</span> , <span class="self">self</span> . <span class="ident">__lock</span> , <span class="self">self</span> . <span class="ident">__count</span> , <span class="self">self</span> . <span class="ident">__owner</span> , <span class="self">self</span> . <span class="ident">__kind</span> , <span class="self">self</span> . <span class="ident">__nusers</span> , <span class="self">self</span> . <span class="ident">__bindgen_anon_1</span> )
     }
 }
@@ -15534,7 +15534,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">pthread_mutex_t</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;pthread_mutex_t {{ union }}&quot;</span>)
     }
 }
@@ -15716,7 +15716,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">pthread_cond_t</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;pthread_cond_t {{ union }}&quot;</span>)
     }
 }
@@ -15733,7 +15733,7 @@
 <span class="doccomment">/// Thread entry point. Returns a void* for consistency</span>
 <span class="doccomment">/// with pthreads.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">VCOS_THREAD_ENTRY_FN_T</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span>
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
 <span class="op">&gt;</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VCOS_STATUS_T_VCOS_SUCCESS</span>: <span class="ident">VCOS_STATUS_T</span> <span class="op">=</span> <span class="number">0</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VCOS_STATUS_T_VCOS_EAGAIN</span>: <span class="ident">VCOS_STATUS_T</span> <span class="op">=</span> <span class="number">1</span>;
@@ -15748,10 +15748,10 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VCOS_STATUS_T_VCOS_EINTR</span>: <span class="ident">VCOS_STATUS_T</span> <span class="op">=</span> <span class="number">10</span>;
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">VCOS_STATUS_T</span> <span class="op">=</span> <span class="ident">u32</span>;
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_verify_bkpts_enabled</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_verify_bkpts_enabled</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_verify_bkpts_enable</span>(<span class="ident">enable</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_verify_bkpts_enable</span>(<span class="ident">enable</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_abort</span>();
@@ -15801,7 +15801,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">sem_t</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;sem_t {{ union }}&quot;</span>)
     }
 }
@@ -15917,7 +15917,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_TIMER_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;VCOS_TIMER_T {{ thread: {:?}, lock: {:?}, settings_changed: {:?}, quit: {:?}, expires: {:?}, orig_expiration_routine: {:?}, orig_context: {:?} }}&quot;</span> , <span class="self">self</span> . <span class="ident">thread</span> , <span class="self">self</span> . <span class="ident">lock</span> , <span class="self">self</span> . <span class="ident">settings_changed</span> , <span class="self">self</span> . <span class="ident">quit</span> , <span class="self">self</span> . <span class="ident">expires</span> , <span class="self">self</span> . <span class="ident">orig_expiration_routine</span> , <span class="self">self</span> . <span class="ident">orig_context</span> )
     }
 }
@@ -16214,7 +16214,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_THREAD_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;VCOS_THREAD_T {{ thread: {:?}, entry: {:?}, arg: {:?}, suspend: {:?}, task_timer: {:?}, task_timer_created: {:?}, orig_task_timer_expiration_routine: {:?}, orig_task_timer_context: {:?}, legacy: {:?}, name: {:?}, dummy: {:?}, at_exit: {:?} }}&quot;</span> , <span class="self">self</span> . <span class="ident">thread</span> , <span class="self">self</span> . <span class="ident">entry</span> , <span class="self">self</span> . <span class="ident">arg</span> , <span class="self">self</span> . <span class="ident">suspend</span> , <span class="self">self</span> . <span class="ident">task_timer</span> , <span class="self">self</span> . <span class="ident">task_timer_created</span> , <span class="self">self</span> . <span class="ident">orig_task_timer_expiration_routine</span> , <span class="self">self</span> . <span class="ident">orig_task_timer_context</span> , <span class="self">self</span> . <span class="ident">legacy</span> , <span class="self">self</span> . <span class="ident">name</span> , <span class="self">self</span> . <span class="ident">dummy</span> , <span class="self">self</span> . <span class="ident">at_exit</span> )
     }
 }
@@ -16342,7 +16342,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_EVENT_FLAGS_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;VCOS_EVENT_FLAGS_T {{ events: {:?}, lock: {:?}, waiters: {:?} }}&quot;</span>,
@@ -16354,7 +16354,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_event_flags_create</span>(
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_EVENT_FLAGS_T</span>,
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_event_flags_set</span>(
@@ -16373,7 +16373,7 @@
         <span class="ident">op</span>: <span class="ident">VCOS_OPTION</span>,
         <span class="ident">suspend</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">retrieved_events</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_UNSIGNED</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
@@ -16433,7 +16433,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_BLOCKPOOL_HEADER_TAG__bindgen_ty_1</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;VCOS_BLOCKPOOL_HEADER_TAG__bindgen_ty_1 {{ union }}&quot;</span>)
     }
 }
@@ -16461,7 +16461,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_BLOCKPOOL_HEADER_TAG</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;VCOS_BLOCKPOOL_HEADER_TAG {{ owner: {:?} }}&quot;</span>, <span class="self">self</span>.<span class="ident">owner</span>)
     }
 }
@@ -16747,7 +16747,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_BLOCKPOOL_TAG</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;VCOS_BLOCKPOOL_TAG {{ magic: {:?}, mutex: {:?}, align: {:?}, flags: {:?}, block_data_size: {:?}, block_size: {:?}, name: {:?}, num_subpools: {:?}, num_extension_blocks: {:?}, subpools: {:?} }}&quot;</span> , <span class="self">self</span> . <span class="ident">magic</span> , <span class="self">self</span> . <span class="ident">mutex</span> , <span class="self">self</span> . <span class="ident">align</span> , <span class="self">self</span> . <span class="ident">flags</span> , <span class="self">self</span> . <span class="ident">block_data_size</span> , <span class="self">self</span> . <span class="ident">block_size</span> , <span class="self">self</span> . <span class="ident">name</span> , <span class="self">self</span> . <span class="ident">num_subpools</span> , <span class="self">self</span> . <span class="ident">num_extension_blocks</span> , <span class="self">self</span> . <span class="ident">subpools</span> )
     }
 }
@@ -16762,7 +16762,7 @@
         <span class="ident">align</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">flags</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_create_on_heap</span>(
@@ -16772,50 +16772,50 @@
         <span class="ident">align</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">flags</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_extend</span>(
         <span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>,
         <span class="ident">num_extensions</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">num_blocks</span>: <span class="ident">VCOS_UNSIGNED</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_alloc</span>(<span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>)
-        <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+        <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_calloc</span>(
         <span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_free</span>(<span class="ident">block</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_available_count</span>(<span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_UNSIGNED</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_available_count</span>(<span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_UNSIGNED</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_used_count</span>(<span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_UNSIGNED</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_used_count</span>(<span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_UNSIGNED</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_delete</span>(<span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_elem_to_handle</span>(<span class="ident">block</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_elem_to_handle</span>(<span class="ident">block</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_elem_from_handle</span>(
         <span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>,
         <span class="ident">handle</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_blockpool_is_valid_elem</span>(
         <span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_BLOCKPOOL_T</span>,
         <span class="ident">block</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">u32</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// \file</span>
@@ -16830,14 +16830,14 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_mem_alloc</span>(
         <span class="ident">sz</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">desc</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_mem_calloc</span>(
         <span class="ident">count</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">sz</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">descr</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_mem_free</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>);
@@ -16847,29 +16847,29 @@
         <span class="ident">sz</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">align</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">desc</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert errno values into the values recognized by vcos</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_pthreads_map_error</span>(<span class="ident">error</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_pthreads_map_error</span>(<span class="ident">error</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_pthreads_map_errno</span>() <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_pthreads_map_errno</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Register a function to be called when the current thread exits.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_thread_at_exit</span>(
         <span class="ident">pfn</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)<span class="op">&gt;</span>,
         <span class="ident">cxt</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Threads</span>
     <span class="doccomment">///</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_dummy_thread_create</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_THREAD_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_dummy_thread_create</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_THREAD_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_getmicrosecs64_internal</span>() <span class="op">-&gt;</span> <span class="ident">u64</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_getmicrosecs64_internal</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Timers</span>
@@ -16881,7 +16881,7 @@
             <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">context</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>),
         <span class="op">&gt;</span>,
         <span class="ident">context</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_pthreads_timer_set</span>(<span class="ident">timer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_TIMER_T</span>, <span class="ident">delay_ms</span>: <span class="ident">VCOS_UNSIGNED</span>);
@@ -16950,7 +16950,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">VCOS_REENTRANT_MUTEX_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;VCOS_REENTRANT_MUTEX_T {{ mutex: {:?}, owner: {:?}, count: {:?} }}&quot;</span>,
@@ -16962,7 +16962,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_reentrant_mutex_create</span>(
         <span class="ident">m</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_REENTRANT_MUTEX_T</span>,
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_generic_reentrant_mutex_delete</span>(<span class="ident">m</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_REENTRANT_MUTEX_T</span>);
@@ -17019,7 +17019,7 @@
         <span class="ident">sem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_NAMED_SEMAPHORE_T</span>,
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">count</span>: <span class="ident">VCOS_UNSIGNED</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// \brief Delete a semaphore, releasing any resources consumed by it.</span>
@@ -17034,7 +17034,7 @@
     <span class="doccomment">/// @note On platforms/toolchains that support it, gcc&#39;s constructor attribute or</span>
     <span class="doccomment">/// similar is used to invoke this function before main() or equivalent.</span>
     <span class="doccomment">/// @return Status of initialisation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_init</span>() <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_init</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// vcos deinitialization. Call this function when vcos is no longer required,</span>
@@ -17060,11 +17060,11 @@
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Return argc.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_get_argc</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_get_argc</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Return argv.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_get_argv</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_get_argv</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Platform-specific initialisation.</span>
@@ -17075,7 +17075,7 @@
     <span class="doccomment">/// vcos_platform_deinit().</span>
     <span class="doccomment">/// This function is called with vcos_global_lock held.</span>
     <span class="doccomment">/// @return Status of initialisation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_platform_init</span>() <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_platform_init</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Platform-specific de-initialisation.</span>
@@ -17088,7 +17088,7 @@
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Report whether or not we have an RTOS at all, and hence the ability to</span>
     <span class="doccomment">/// create threads.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_have_rtos</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_have_rtos</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Create a thread. It must be cleaned up by calling vcos_thread_join().</span>
@@ -17104,7 +17104,7 @@
         <span class="ident">attrs</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_THREAD_ATTR_T</span>,
         <span class="ident">entry</span>: <span class="ident">VCOS_THREAD_ENTRY_FN_T</span>,
         <span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Exit the thread from within the thread function itself.</span>
@@ -17147,7 +17147,7 @@
         <span class="ident">thread</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_THREAD_T</span>,
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">entry</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span>
-            <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
+            <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
         <span class="op">&gt;</span>,
         <span class="ident">arg</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
         <span class="ident">stack</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
@@ -17155,24 +17155,24 @@
         <span class="ident">priaff</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">timeslice</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">autostart</span>: <span class="ident">VCOS_UNSIGNED</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Return the name of the given thread.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_thread_get_name</span>(<span class="ident">thread</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">VCOS_THREAD_T</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_thread_get_name</span>(<span class="ident">thread</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">VCOS_THREAD_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_kmalloc</span>(
         <span class="ident">size</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">description</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_kcalloc</span>(
         <span class="ident">num</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">size</span>: <span class="ident">VCOS_UNSIGNED</span>,
         <span class="ident">description</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_kfree</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>);
@@ -17222,7 +17222,7 @@
 }
 <span class="kw">impl</span> <span class="ident">VCOS_LOG_CAT_T__bindgen_ty_1</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">want_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">want_prefix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span> {
         <span class="kw">unsafe</span> { ::<span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="self">self</span>.<span class="ident">_bitfield_1</span>.<span class="ident">get</span>(<span class="number">0usize</span>, <span class="number">1u8</span>) <span class="kw">as</span> <span class="ident">u32</span>) }
     }
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -17235,7 +17235,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_bitfield_1</span>(
         <span class="ident">want_prefix</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">__BindgenBitfieldUnit</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">1usize</span>], <span class="ident">u8</span><span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">__BindgenBitfieldUnit</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">1usize</span>], <span class="ident">u8</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">__bindgen_bitfield_unit</span>: <span class="ident">__BindgenBitfieldUnit</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">1usize</span>], <span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span>
             <span class="ident">Default</span>::<span class="ident">default</span>();
         <span class="ident">__bindgen_bitfield_unit</span>.<span class="ident">set</span>(<span class="number">0usize</span>, <span class="number">1u8</span>, {
@@ -17329,7 +17329,7 @@
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert a VCOS_LOG_LEVEL_T into a printable string.</span>
     <span class="doccomment">/// The platform needs to implement this function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_level_to_string</span>(<span class="ident">level</span>: <span class="ident">VCOS_LOG_LEVEL_T</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_level_to_string</span>(<span class="ident">level</span>: <span class="ident">VCOS_LOG_LEVEL_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert a string into a VCOS_LOG_LEVEL_T</span>
@@ -17337,7 +17337,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_string_to_log_level</span>(
         <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">level</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_LOG_LEVEL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Log a message. Basic API. Normal code should not use this.</span>
@@ -17394,7 +17394,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Using the default category will be slow (there&#39;s an extra function</span>
     <span class="doccomment">/// call overhead). Don&#39;t do this in normal code.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_get_default_category</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">VCOS_LOG_CAT_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_get_default_category</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">VCOS_LOG_CAT_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_set_log_options</span>(<span class="ident">opt</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>);
@@ -17536,7 +17536,7 @@
     );
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">VCOS_CMD_FUNC_T</span> <span class="op">=</span>
-    ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span><span class="op">&gt;</span>;
+    ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span><span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VCOS_CMD_S</span> {
@@ -17629,10 +17629,10 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_usage</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_register</span>(<span class="ident">cmd_entry</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_register</span>(<span class="ident">cmd_entry</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_register_multiple</span>(<span class="ident">cmd_entry</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_register_multiple</span>(<span class="ident">cmd_entry</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_execute</span>(
@@ -17640,22 +17640,22 @@
         <span class="ident">argv</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">result_size</span>: <span class="ident">usize</span>,
         <span class="ident">result_buf</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_cmd_shutdown</span>();
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_assert_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_assert_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_set_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_set_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_status_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_status_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_test_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_log_test_cmd</span>(<span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_CMD_PARAM_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_vsnprintf</span>(
@@ -17663,7 +17663,7 @@
         <span class="ident">buflen</span>: <span class="ident">usize</span>,
         <span class="ident">fmt</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">ap</span>: <span class="ident">va_list</span>,
-    ) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_snprintf</span>(
@@ -17671,7 +17671,7 @@
         <span class="ident">buflen</span>: <span class="ident">usize</span>,
         <span class="ident">fmt</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         ...
-    ) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Like vsnprintf, except it places the output at the specified offset.</span>
@@ -17683,7 +17683,7 @@
         <span class="ident">offset</span>: <span class="ident">usize</span>,
         <span class="ident">fmt</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">ap</span>: <span class="ident">va_list</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">usize</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Like snprintf, except it places the output at the specified offset.</span>
@@ -17695,7 +17695,7 @@
         <span class="ident">offset</span>: <span class="ident">usize</span>,
         <span class="ident">fmt</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         ...
-    ) <span class="op">-&gt;</span> <span class="ident">usize</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Copies string src to dst at the specified offset.</span>
@@ -17708,7 +17708,7 @@
         <span class="ident">src</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">dstlen</span>: <span class="ident">usize</span>,
         <span class="ident">offset</span>: <span class="ident">usize</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">usize</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Initialize thread attribute struct. This call does not allocate memory,</span>
@@ -17725,7 +17725,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return VCOS_SUCCESS on success. VCOS_EEXIST if this has already been called</span>
     <span class="doccomment">/// once. VCOS_ENOMEM if resource allocation failed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_timer_init</span>() <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_timer_init</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// \file vcos_once.h</span>
@@ -17741,7 +17741,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vcos_once</span>(
         <span class="ident">once_control</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VCOS_ONCE_T</span>,
         <span class="ident">init_routine</span>: ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>()<span class="op">&gt;</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VCOS_STATUS_T</span>;
 }
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MMAL_BOOL_T</span> <span class="op">=</span> <span class="ident">i32</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
@@ -18292,7 +18292,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_ES_SPECIFIC_FORMAT_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;MMAL_ES_SPECIFIC_FORMAT_T {{ union }}&quot;</span>)
     }
 }
@@ -18421,7 +18421,7 @@
     <span class="doccomment">/// Allocate and initialise a \ref MMAL_ES_FORMAT_T structure.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return a \ref MMAL_ES_FORMAT_T structure</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_format_alloc</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_format_alloc</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Free a \ref MMAL_ES_FORMAT_T structure allocated by \ref mmal_format_alloc.</span>
@@ -18440,7 +18440,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_format_extradata_alloc</span>(
         <span class="ident">format</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>,
         <span class="ident">size</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Shallow copy a format structure.</span>
@@ -18459,7 +18459,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_format_full_copy</span>(
         <span class="ident">format_dest</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>,
         <span class="ident">format_src</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Compare 2 format structures and returns a set of flags describing the differences.</span>
@@ -18472,7 +18472,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_format_compare</span>(
         <span class="ident">format_1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>,
         <span class="ident">format_2</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_ES_FORMAT_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">u32</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
 }
 <span class="doccomment">/// Specific data associated with video frames</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
@@ -18596,7 +18596,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_BUFFER_HEADER_TYPE_SPECIFIC_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;MMAL_BUFFER_HEADER_TYPE_SPECIFIC_T {{ union }}&quot;</span>)
     }
 }
@@ -18825,7 +18825,7 @@
 <span class="doccomment">/// @return TRUE if the buffer should not be released</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MMAL_BH_PRE_RELEASE_CB_T</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span>
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">header</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>, <span class="ident">userdata</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>)
-        <span class="op">-&gt;</span> <span class="ident">MMAL_BOOL_T</span>,
+        <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_BOOL_T</span>,
 <span class="op">&gt;</span>;
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Set a buffer header pre-release callback.</span>
@@ -18853,7 +18853,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_buffer_header_replicate</span>(
         <span class="ident">dest</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
         <span class="ident">src</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Lock the data buffer contained in the buffer header in memory.</span>
@@ -18861,7 +18861,7 @@
     <span class="doccomment">/// buffer in memory before any access to it.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param header buffer header to lock</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_buffer_header_mem_lock</span>(<span class="ident">header</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_buffer_header_mem_lock</span>(<span class="ident">header</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Unlock the data buffer contained in the buffer header.</span>
@@ -22617,7 +22617,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_PARAMETER_CAMERA_ANNOTATE_V2_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;MMAL_PARAMETER_CAMERA_ANNOTATE_V2_T {{ hdr: {:?}, enable: {:?}, show_shutter: {:?}, show_analog_gain: {:?}, show_lens: {:?}, show_caf: {:?}, show_motion: {:?}, show_frame_num: {:?}, black_text_background: {:?}, text: [{}] }}&quot;</span> , <span class="self">self</span> . <span class="ident">hdr</span> , <span class="self">self</span> . <span class="ident">enable</span> , <span class="self">self</span> . <span class="ident">show_shutter</span> , <span class="self">self</span> . <span class="ident">show_analog_gain</span> , <span class="self">self</span> . <span class="ident">show_lens</span> , <span class="self">self</span> . <span class="ident">show_caf</span> , <span class="self">self</span> . <span class="ident">show_motion</span> , <span class="self">self</span> . <span class="ident">show_frame_num</span> , <span class="self">self</span> . <span class="ident">black_text_background</span> , <span class="self">self</span> . <span class="ident">text</span> . <span class="ident">iter</span> ( ) . <span class="ident">enumerate</span> ( ) . <span class="ident">map</span> ( <span class="op">|</span> ( <span class="ident">i</span> , <span class="ident">v</span> ) <span class="op">|</span> <span class="ident">format</span> <span class="op">!</span> ( <span class="string">&quot;{}{:?}&quot;</span> , <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> { <span class="string">&quot;, &quot;</span> } <span class="kw">else</span> { <span class="string">&quot;&quot;</span> } , <span class="ident">v</span> ) ) . <span class="ident">collect</span> :: <span class="op">&lt;</span> <span class="ident">String</span> <span class="op">&gt;</span> ( ) )
     }
 }
@@ -22921,7 +22921,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T {{ hdr: {:?}, enable: {:?}, show_shutter: {:?}, show_analog_gain: {:?}, show_lens: {:?}, show_caf: {:?}, show_motion: {:?}, show_frame_num: {:?}, enable_text_background: {:?}, custom_background_colour: {:?}, custom_background_Y: {:?}, custom_background_U: {:?}, custom_background_V: {:?}, dummy1: {:?}, custom_text_colour: {:?}, custom_text_Y: {:?}, custom_text_U: {:?}, custom_text_V: {:?}, text_size: {:?}, text: [{}] }}&quot;</span> , <span class="self">self</span> . <span class="ident">hdr</span> , <span class="self">self</span> . <span class="ident">enable</span> , <span class="self">self</span> . <span class="ident">show_shutter</span> , <span class="self">self</span> . <span class="ident">show_analog_gain</span> , <span class="self">self</span> . <span class="ident">show_lens</span> , <span class="self">self</span> . <span class="ident">show_caf</span> , <span class="self">self</span> . <span class="ident">show_motion</span> , <span class="self">self</span> . <span class="ident">show_frame_num</span> , <span class="self">self</span> . <span class="ident">enable_text_background</span> , <span class="self">self</span> . <span class="ident">custom_background_colour</span> , <span class="self">self</span> . <span class="ident">custom_background_Y</span> , <span class="self">self</span> . <span class="ident">custom_background_U</span> , <span class="self">self</span> . <span class="ident">custom_background_V</span> , <span class="self">self</span> . <span class="ident">dummy1</span> , <span class="self">self</span> . <span class="ident">custom_text_colour</span> , <span class="self">self</span> . <span class="ident">custom_text_Y</span> , <span class="self">self</span> . <span class="ident">custom_text_U</span> , <span class="self">self</span> . <span class="ident">custom_text_V</span> , <span class="self">self</span> . <span class="ident">text_size</span> , <span class="self">self</span> . <span class="ident">text</span> . <span class="ident">iter</span> ( ) . <span class="ident">enumerate</span> ( ) . <span class="ident">map</span> ( <span class="op">|</span> ( <span class="ident">i</span> , <span class="ident">v</span> ) <span class="op">|</span> <span class="ident">format</span> <span class="op">!</span> ( <span class="string">&quot;{}{:?}&quot;</span> , <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> { <span class="string">&quot;, &quot;</span> } <span class="kw">else</span> { <span class="string">&quot;&quot;</span> } , <span class="ident">v</span> ) ) . <span class="ident">collect</span> :: <span class="op">&lt;</span> <span class="ident">String</span> <span class="op">&gt;</span> ( ) )
     }
 }
@@ -23267,7 +23267,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T {{ hdr: {:?}, enable: {:?}, show_shutter: {:?}, show_analog_gain: {:?}, show_lens: {:?}, show_caf: {:?}, show_motion: {:?}, show_frame_num: {:?}, enable_text_background: {:?}, custom_background_colour: {:?}, custom_background_Y: {:?}, custom_background_U: {:?}, custom_background_V: {:?}, dummy1: {:?}, custom_text_colour: {:?}, custom_text_Y: {:?}, custom_text_U: {:?}, custom_text_V: {:?}, text_size: {:?}, text: [{}], justify: {:?}, x_offset: {:?}, y_offset: {:?} }}&quot;</span> , <span class="self">self</span> . <span class="ident">hdr</span> , <span class="self">self</span> . <span class="ident">enable</span> , <span class="self">self</span> . <span class="ident">show_shutter</span> , <span class="self">self</span> . <span class="ident">show_analog_gain</span> , <span class="self">self</span> . <span class="ident">show_lens</span> , <span class="self">self</span> . <span class="ident">show_caf</span> , <span class="self">self</span> . <span class="ident">show_motion</span> , <span class="self">self</span> . <span class="ident">show_frame_num</span> , <span class="self">self</span> . <span class="ident">enable_text_background</span> , <span class="self">self</span> . <span class="ident">custom_background_colour</span> , <span class="self">self</span> . <span class="ident">custom_background_Y</span> , <span class="self">self</span> . <span class="ident">custom_background_U</span> , <span class="self">self</span> . <span class="ident">custom_background_V</span> , <span class="self">self</span> . <span class="ident">dummy1</span> , <span class="self">self</span> . <span class="ident">custom_text_colour</span> , <span class="self">self</span> . <span class="ident">custom_text_Y</span> , <span class="self">self</span> . <span class="ident">custom_text_U</span> , <span class="self">self</span> . <span class="ident">custom_text_V</span> , <span class="self">self</span> . <span class="ident">text_size</span> , <span class="self">self</span> . <span class="ident">text</span> . <span class="ident">iter</span> ( ) . <span class="ident">enumerate</span> ( ) . <span class="ident">map</span> ( <span class="op">|</span> ( <span class="ident">i</span> , <span class="ident">v</span> ) <span class="op">|</span> <span class="ident">format</span> <span class="op">!</span> ( <span class="string">&quot;{}{:?}&quot;</span> , <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> { <span class="string">&quot;, &quot;</span> } <span class="kw">else</span> { <span class="string">&quot;&quot;</span> } , <span class="ident">v</span> ) ) . <span class="ident">collect</span> :: <span class="op">&lt;</span> <span class="ident">String</span> <span class="op">&gt;</span> ( ) , <span class="self">self</span> . <span class="ident">justify</span> , <span class="self">self</span> . <span class="ident">x_offset</span> , <span class="self">self</span> . <span class="ident">y_offset</span> )
     }
 }
@@ -26381,7 +26381,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_CLOCK_EVENT_T__bindgen_ty_1</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;MMAL_CLOCK_EVENT_T__bindgen_ty_1 {{ union }}&quot;</span>)
     }
 }
@@ -26459,7 +26459,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_CLOCK_EVENT_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">write</span> <span class="op">!</span> ( <span class="ident">f</span> , <span class="string">&quot;MMAL_CLOCK_EVENT_T {{ id: {:?}, magic: {:?}, buffer: {:?}, padding0: {:?}, data: {:?}, padding1: {:?} }}&quot;</span> , <span class="self">self</span> . <span class="ident">id</span> , <span class="self">self</span> . <span class="ident">magic</span> , <span class="self">self</span> . <span class="ident">buffer</span> , <span class="self">self</span> . <span class="ident">padding0</span> , <span class="self">self</span> . <span class="ident">data</span> , <span class="self">self</span> . <span class="ident">padding1</span> )
     }
 }
@@ -27646,7 +27646,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param port The port for which format changes are to be committed.</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_format_commit</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_format_commit</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="doccomment">/// Definition of the callback used by a port to send a \ref MMAL_BUFFER_HEADER_T</span>
 <span class="doccomment">/// back to the user.</span>
@@ -27674,7 +27674,7 @@
     <span class="doccomment">/// @param port port to enable</span>
     <span class="doccomment">/// @param cb callback use by the port to send a \ref MMAL_BUFFER_HEADER_T back</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_enable</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>, <span class="ident">cb</span>: <span class="ident">MMAL_PORT_BH_CB_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_enable</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>, <span class="ident">cb</span>: <span class="ident">MMAL_PORT_BH_CB_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Disable processing on a port</span>
@@ -27687,7 +27687,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param port port to disable</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_disable</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_disable</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Ask a port to release all the buffer headers it currently has.</span>
@@ -27704,7 +27704,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param port The port to flush.</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_flush</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_flush</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Set a parameter on a port.</span>
@@ -27715,7 +27715,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_parameter_set</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">param</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">MMAL_PARAMETER_HEADER_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Get a parameter from a port.</span>
@@ -27734,7 +27734,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_parameter_get</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">param</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PARAMETER_HEADER_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Send a buffer header to a port.</span>
@@ -27745,7 +27745,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_send_buffer</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Connect an output port to an input port.</span>
@@ -27765,7 +27765,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_connect</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">other_port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Disconnect a connected port.</span>
@@ -27776,7 +27776,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param port The ports to disconnect.</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_disconnect</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_disconnect</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Allocate a payload buffer.</span>
@@ -27790,7 +27790,7 @@
     <span class="doccomment">/// @param payload_size Size of the payload buffer which will be allocated.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return Pointer to the allocated memory.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_payload_alloc</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>, <span class="ident">payload_size</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_payload_alloc</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>, <span class="ident">payload_size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Free a payload buffer.</span>
@@ -27813,7 +27813,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
         <span class="ident">event</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
@@ -28024,7 +28024,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_create</span>(
         <span class="ident">name</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Acquire a reference on a component.</span>
@@ -28045,7 +28045,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param component component to release</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_release</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_release</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Destroy a previously created component</span>
@@ -28054,19 +28054,19 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param component component to destroy</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_destroy</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_destroy</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Enable processing on a component</span>
     <span class="doccomment">/// @param component component to enable</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_enable</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_enable</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Disable processing on a component</span>
     <span class="doccomment">/// @param component component to disable</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_disable</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_component_disable</span>(<span class="ident">component</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
@@ -28077,7 +28077,7 @@
     <span class="doccomment">/// Create a queue of MMAL_BUFFER_HEADER_T</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return Pointer to the newly created queue or NULL on failure.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_create</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_create</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Put a MMAL_BUFFER_HEADER_T into a queue</span>
@@ -28101,7 +28101,7 @@
     <span class="doccomment">/// @param queue  Pointer to a queue</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return pointer to the next MMAL_BUFFER_HEADER_T or NULL if the queue is empty.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_get</span>(<span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_get</span>(<span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Wait for a MMAL_BUFFER_HEADER_T from a queue.</span>
@@ -28111,7 +28111,7 @@
     <span class="doccomment">/// @param queue  Pointer to a queue</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return pointer to the next MMAL_BUFFER_HEADER_T.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_wait</span>(<span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_wait</span>(<span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Wait for a MMAL_BUFFER_HEADER_T from a queue, up to a given timeout.</span>
@@ -28125,7 +28125,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_timedwait</span>(
         <span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>,
         <span class="ident">timeout</span>: <span class="ident">VCOS_UNSIGNED</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Get the number of MMAL_BUFFER_HEADER_T currently in a queue.</span>
@@ -28133,7 +28133,7 @@
     <span class="doccomment">/// @param queue  Pointer to a queue</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @return length (in elements) of the queue.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_length</span>(<span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_queue_length</span>(<span class="ident">queue</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_QUEUE_T</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Destroy a queue of MMAL_BUFFER_HEADER_T.</span>
@@ -28202,7 +28202,7 @@
 <span class="doccomment">/// @return The pointer to the newly allocated memory, or NULL on failure.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">mmal_pool_allocator_alloc_t</span> <span class="op">=</span> ::<span class="ident">std</span>::<span class="ident">option</span>::<span class="prelude-ty">Option</span><span class="op">&lt;</span>
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="ident">context</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>, <span class="ident">size</span>: <span class="ident">u32</span>)
-        <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
+        <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
 <span class="op">&gt;</span>;
 <span class="doccomment">/// Allocator free prototype</span>
 <span class="doccomment">///</span>
@@ -28230,7 +28230,7 @@
     <span class="doccomment">/// each of the buffer headers.</span>
     <span class="doccomment">/// @return Pointer to the newly created pool or NULL on failure.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_pool_create</span>(<span class="ident">headers</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>, <span class="ident">payload_size</span>: <span class="ident">u32</span>)
-        <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>;
+        <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Create a pool of MMAL_BUFFER_HEADER_T.</span>
@@ -28255,7 +28255,7 @@
         <span class="ident">allocator_context</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
         <span class="ident">allocator_alloc</span>: <span class="ident">mmal_pool_allocator_alloc_t</span>,
         <span class="ident">allocator_free</span>: <span class="ident">mmal_pool_allocator_free_t</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Destroy a pool of MMAL_BUFFER_HEADER_T.</span>
@@ -28285,7 +28285,7 @@
         <span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>,
         <span class="ident">headers</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
         <span class="ident">payload_size</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="doccomment">/// Definition of the callback used by a pool to signal back to the user that a buffer header</span>
 <span class="doccomment">/// has been released back to the pool.</span>
@@ -28300,7 +28300,7 @@
         <span class="ident">pool</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>,
         <span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
         <span class="ident">userdata</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_void</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_BOOL_T</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_BOOL_T</span>,
 <span class="op">&gt;</span>;
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Set a buffer header release callback to the pool.</span>
@@ -28512,7 +28512,7 @@
     <span class="doccomment">/// @return pointer to a MMAL_EVENT_FORMAT_CHANGED_T structure.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_event_format_changed_get</span>(
         <span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_EVENT_FORMAT_CHANGED_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_EVENT_FORMAT_CHANGED_T</span>;
 }
 <span class="doccomment">/// Definition of the callback used by a connection to signal back to the client</span>
 <span class="doccomment">/// that a buffer header is available either in the pool or in the output queue.</span>
@@ -28704,7 +28704,7 @@
         <span class="ident">out</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">in_</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">flags</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Acquire a reference on a connection.</span>
@@ -28725,7 +28725,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param connection connection to release</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_release</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_release</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Destroy a connection.</span>
@@ -28736,7 +28736,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param connection The connection to be destroyed.</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_destroy</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_destroy</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Enable a connection.</span>
@@ -28750,14 +28750,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param connection The connection to be enabled.</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_enable</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_enable</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Disable a connection.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param connection The connection to be disabled.</span>
     <span class="doccomment">/// @return MMAL_SUCCESS on success.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_disable</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_disable</span>(<span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Apply a format changed event to the connection.</span>
@@ -28772,14 +28772,14 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_connection_event_format_changed</span>(
         <span class="ident">connection</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CONNECTION_T</span>,
         <span class="ident">buffer</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BUFFER_HEADER_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert a status to a statically-allocated string.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param status The MMAL status code.</span>
     <span class="doccomment">/// @return A C string describing the status code.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_status_to_string</span>(<span class="ident">status</span>: <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_status_to_string</span>(<span class="ident">status</span>: <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert stride to pixel width for a given pixel encoding.</span>
@@ -28787,7 +28787,7 @@
     <span class="doccomment">/// @param encoding The pixel encoding (such as one of the \ref MmalEncodings &quot;pre-defined encodings&quot;)</span>
     <span class="doccomment">/// @param stride The stride in bytes.</span>
     <span class="doccomment">/// @return The width in pixels.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_encoding_stride_to_width</span>(<span class="ident">encoding</span>: <span class="ident">u32</span>, <span class="ident">stride</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_encoding_stride_to_width</span>(<span class="ident">encoding</span>: <span class="ident">u32</span>, <span class="ident">stride</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert pixel width to stride for a given pixel encoding</span>
@@ -28795,21 +28795,21 @@
     <span class="doccomment">/// @param encoding The pixel encoding (such as one of the \ref MmalEncodings &quot;pre-defined encodings&quot;)</span>
     <span class="doccomment">/// @param width The width in pixels.</span>
     <span class="doccomment">/// @return The stride in bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_encoding_width_to_stride</span>(<span class="ident">encoding</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_encoding_width_to_stride</span>(<span class="ident">encoding</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Return the 16 line high sliced version of a given pixel encoding</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param encoding The pixel encoding (such as one of the \ref MmalEncodings &quot;pre-defined encodings&quot;)</span>
     <span class="doccomment">/// @return The sliced equivalent, or MMAL_ENCODING_UNKNOWN if not supported.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_encoding_get_slice_variant</span>(<span class="ident">encoding</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">u32</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_encoding_get_slice_variant</span>(<span class="ident">encoding</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert a port type to a string.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// @param type The MMAL port type.</span>
     <span class="doccomment">/// @return A NULL-terminated string describing the port type.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_type_to_string</span>(<span class="ident">type_</span>: <span class="ident">MMAL_PORT_TYPE_T</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_port_type_to_string</span>(<span class="ident">type_</span>: <span class="ident">MMAL_PORT_TYPE_T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Get a parameter from a port allocating the required amount of memory</span>
@@ -28829,7 +28829,7 @@
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">size</span>: <span class="ident">u32</span>,
         <span class="ident">status</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PARAMETER_HEADER_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PARAMETER_HEADER_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Free a parameter structure previously allocated via</span>
@@ -28868,7 +28868,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">headers</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
         <span class="ident">payload_size</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_POOL_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Destroy a pool of MMAL_BUFFER_HEADER_T associated with a specific port.</span>
@@ -28903,7 +28903,7 @@
         <span class="ident">comp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_COMPONENT_T</span>,
         <span class="ident">type_</span>: <span class="ident">MMAL_PORT_TYPE_T</span>,
         <span class="ident">index</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Convert a 4cc into a string.</span>
@@ -28917,7 +28917,7 @@
         <span class="ident">buf</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
         <span class="ident">len</span>: <span class="ident">usize</span>,
         <span class="ident">fourcc</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// On FW prior to June 2016, camera and video_splitter</span>
@@ -28928,7 +28928,7 @@
     <span class="doccomment">/// @param port   MMAL port to check (on camera or video_splitter)</span>
     <span class="doccomment">/// @return 0 if old firmware, 1 if new.</span>
     <span class="doccomment">///</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_util_rgb_order_fixed</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_util_rgb_order_fixed</span>(<span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a boolean parameter.</span>
@@ -28941,7 +28941,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="ident">MMAL_BOOL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to get the value of a boolean parameter.</span>
@@ -28954,7 +28954,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_BOOL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a 64 bits unsigned integer parameter.</span>
@@ -28967,7 +28967,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="ident">u64</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to get the value of a 64 bits unsigned integer parameter.</span>
@@ -28980,7 +28980,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u64</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a 64 bits signed integer parameter.</span>
@@ -28993,7 +28993,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="ident">i64</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to get the value of a 64 bits signed integer parameter.</span>
@@ -29006,7 +29006,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i64</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a 32 bits unsigned integer parameter.</span>
@@ -29019,7 +29019,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to get the value of a 32 bits unsigned integer parameter.</span>
@@ -29032,7 +29032,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a 32 bits signed integer parameter.</span>
@@ -29045,7 +29045,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="ident">i32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to get the value of a 32 bits signed integer parameter.</span>
@@ -29058,7 +29058,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">i32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a rational parameter.</span>
@@ -29071,7 +29071,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="ident">MMAL_RATIONAL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to get the value of a rational parameter.</span>
@@ -29084,7 +29084,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_RATIONAL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of a string parameter.</span>
@@ -29097,7 +29097,7 @@
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">value</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set the value of an array of bytes parameter.</span>
@@ -29112,7 +29112,7 @@
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">data</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>,
         <span class="ident">size</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Helper function to set a MMAL_PARAMETER_URI_T parameter on a port.</span>
@@ -29123,7 +29123,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_util_port_set_uri</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">uri</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Set the display region.</span>
@@ -29134,7 +29134,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_util_set_display_region</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">region</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_DISPLAYREGION_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Tell the camera to use the STC for timestamps rather than the clock.</span>
@@ -29145,7 +29145,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_util_camera_use_stc_timestamp</span>(
         <span class="ident">port</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_PORT_T</span>,
         <span class="ident">mode</span>: <span class="ident">MMAL_CAMERA_STC_MODE_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Get the MMAL core statistics for a given port.</span>
@@ -29160,7 +29160,7 @@
         <span class="ident">dir</span>: <span class="ident">MMAL_CORE_STATS_DIR</span>,
         <span class="ident">reset</span>: <span class="ident">MMAL_BOOL_T</span>,
         <span class="ident">stats</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_CORE_STATISTICS_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_init</span>();
@@ -29169,13 +29169,13 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_deinit</span>();
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_get_peripheral_address</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_get_peripheral_address</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_get_peripheral_size</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_get_peripheral_size</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_get_sdram_address</span>() <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bcm_host_get_sdram_address</span>() <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>;
 }
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_IDLE</span>: <span class="ident">MMAL_STATS_COMP_STATE_T</span> <span class="op">=</span> <span class="number">0</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_CREATED</span>: <span class="ident">MMAL_STATS_COMP_STATE_T</span> <span class="op">=</span> <span class="number">1</span>;
@@ -29938,7 +29938,7 @@
     );
 }
 <span class="kw">impl</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">MMAL_VC_HOST_LOG_T</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;MMAL_VC_HOST_LOG_T {{ buffer: [{}], magic: {:?}, offset: {:?}, count: {:?} }}&quot;</span>,
@@ -29960,32 +29960,32 @@
 <span class="doccomment">/// Status from querying MMAL core statistics.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">MMAL_STATS_RESULT_T</span> <span class="op">=</span> <span class="ident">u32</span>;
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_init</span>() <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_init</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_init_fd</span>(<span class="ident">dev_vchiq_fd</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_init_fd</span>(<span class="ident">dev_vchiq_fd</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_deinit</span>();
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_use</span>() <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_use</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_release</span>() <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_release</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_get_version</span>(
         <span class="ident">major</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>,
         <span class="ident">minor</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>,
         <span class="ident">minimum</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_get_stats</span>(
         <span class="ident">stats</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">MMAL_VC_STATS_T</span>,
         <span class="ident">reset</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_int</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Return the MMAL core statistics for a given component/port.</span>
@@ -30008,7 +30008,7 @@
         <span class="ident">port</span>: ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_uint</span>,
         <span class="ident">dir</span>: <span class="ident">MMAL_CORE_STATS_DIR</span>,
         <span class="ident">reset</span>: <span class="ident">MMAL_BOOL_T</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Stores an arbitrary text message in a circular buffer inside the MMAL VC server.</span>
@@ -30019,7 +30019,7 @@
     <span class="doccomment">/// @param   msg  The message text.</span>
     <span class="doccomment">/// @return  MMAL_SUCCESS if the message was logged or MMAL_ENOSYS if the API</span>
     <span class="doccomment">/// if not supported.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_host_log</span>(<span class="ident">msg</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_host_log</span>(<span class="ident">msg</span>: <span class="kw-2">*</span><span class="kw">const</span> ::<span class="ident">std</span>::<span class="ident">os</span>::<span class="ident">raw</span>::<span class="ident">c_char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Consumes memory in the relocatable heap.</span>
@@ -30037,7 +30037,7 @@
     <span class="doccomment">/// MMAL_ENOSPC if the allocation failed or MMAL_ENOSYS if the</span>
     <span class="doccomment">/// API is not supported e.g in release mode VC images.</span>
     <span class="doccomment">/// @internal</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_consume_mem</span>(<span class="ident">size</span>: <span class="ident">usize</span>, <span class="ident">handle</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_consume_mem</span>(<span class="ident">size</span>: <span class="ident">usize</span>, <span class="ident">handle</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_NONE</span>: <span class="ident">MMAL_VC_COMPACT_MODE_T</span> <span class="op">=</span> <span class="number">0</span>;
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_NORMAL</span>: <span class="ident">MMAL_VC_COMPACT_MODE_T</span> <span class="op">=</span> <span class="number">1</span>;
@@ -30050,12 +30050,12 @@
     <span class="doccomment">/// Trigger relocatable heap compaction.</span>
     <span class="doccomment">/// @internal</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_compact</span>(<span class="ident">mode</span>: <span class="ident">MMAL_VC_COMPACT_MODE_T</span>, <span class="ident">duration</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u32</span>)
-        <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+        <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="doccomment">/// Trigger LMK action from VC, for diagnostics.</span>
     <span class="doccomment">/// @internal</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_lmk</span>(<span class="ident">alloc_size</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mmal_vc_lmk</span>(<span class="ident">alloc_size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MMAL_STATUS_T</span>::<span class="ident">Type</span>;
 }
 <span class="doccomment">/// &lt; There are &#39;n&#39; named semaphores per 1 actual semaphore</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>

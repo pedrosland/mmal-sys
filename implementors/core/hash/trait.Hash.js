@@ -6,5 +6,4 @@ implementors["mmal_sys"] = [{text:"impl&lt;Storage:&nbsp;<a class=\"trait\" href
             } else {
                 window.pending_implementors = implementors;
             }
-        
-})()
+        })()
