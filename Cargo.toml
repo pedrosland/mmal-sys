@@ -25,3 +25,6 @@ default = []
 # Enable this feature to automatically generate bindings for the mmal headers.
 # The default is to use the bindings already included in the src directory.
 generate_bindings = ["bindgen"]
+
+[package.metadata.docs.rs]
+default-target = "armv7-unknown-linux-gnueabihf"
