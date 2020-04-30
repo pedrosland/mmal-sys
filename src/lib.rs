@@ -299,20 +299,46 @@ impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_T {
         write!(f, "Found {} camera(s)", self.num_cameras).unwrap();
 
         // We can't iterate over all cameras because we will always have 4.
-        // Alternatively, we could iterate and break early. Not sure if that is more rust-y
         for index in 0..self.num_cameras {
             let camera = self.cameras[index as usize];
             write!(f, "\n  {}", camera).unwrap();
         }
 
-        // TODO: flashes?
-
         Ok(())
     }
 }
+
+
+// If/when this PR is finished and merged, we can implement something like this as a fmt::Debug.
+// https://github.com/rust-lang/rust-bindgen/pull/1190
+// fn print_port(port_ptr: *mut MMAL_PORT_T) {
+//     unsafe {
+//         let port = *port_ptr;
+//         println!("\nPort: {{");
+//         println!("  name: {}", CStr::from_ptr(port.name).to_str().unwrap());
+//         println!("  is_enabled: {}", port.is_enabled);
+//         println!("  buffer_num: {}", port.buffer_num);
+//         println!("  buffer_size: {}", port.buffer_size);
+//         println!("  format: {{");
+//         println!("    encoding: {}", (*port.format).encoding);
+//         println!("    encoding_variant: {}", (*port.format).encoding_variant);
+//         println!("    bitrate: {}", (*port.format).bitrate);
+//         println!("    es.video: {{");
+//         println!("      width: {}", (*(*port.format).es).video.width);
+//         println!("      height: {}", (*(*port.format).es).video.height);
+//         println!("      frame_rate.num: {}", (*(*port.format).es).video.frame_rate.num);
+//         println!("      frame_rate.den: {}", (*(*port.format).es).video.frame_rate.den);
+//         println!("    }}");
+//         println!("  }}");
+//         println!("}}");
+//     }
+// }
+
 
 #[cfg(feature = "generate_bindings")]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
 #[cfg(not(feature = "generate_bindings"))]
 include!("bindings.rs");
+
+pub use MMAL_VIDEO_PROFILE_T as MMAL_VIDEO_PROFILE;

@@ -8,7 +8,7 @@ pub struct __BindgenBitfieldUnit<Storage, Align> {
 }
 impl<Storage, Align> __BindgenBitfieldUnit<Storage, Align> {
     #[inline]
-    pub fn new(storage: Storage) -> Self {
+    pub const fn new(storage: Storage) -> Self {
         Self { storage, align: [] }
     }
 }
@@ -176,6 +176,13 @@ pub const MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS: u32 = 8;
 pub const MMAL_CONNECTION_FLAG_DIRECT: u32 = 16;
 pub const MMAL_CONNECTION_FLAG_KEEP_PORT_FORMATS: u32 = 32;
 pub const MMAL_DEV_VCHIQ_PATH: &'static [u8; 11usize] = b"/dev/vchiq\0";
+pub type size_t = ::std::os::raw::c_uint;
+pub type __uint8_t = ::std::os::raw::c_uchar;
+pub type __uint16_t = ::std::os::raw::c_ushort;
+pub type __int32_t = ::std::os::raw::c_int;
+pub type __uint32_t = ::std::os::raw::c_uint;
+pub type __int64_t = ::std::os::raw::c_longlong;
+pub type __uint64_t = ::std::os::raw::c_ulonglong;
 pub type __time_t = ::std::os::raw::c_long;
 pub type __syscall_slong_t = ::std::os::raw::c_long;
 #[repr(C)]
@@ -217,7 +224,6 @@ fn bindgen_test_layout_timespec() {
         )
     );
 }
-pub type pthread_t = ::std::os::raw::c_ulong;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct __pthread_internal_slist {
@@ -249,167 +255,421 @@ fn bindgen_test_layout___pthread_internal_slist() {
 pub type __pthread_slist_t = __pthread_internal_slist;
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub union pthread_mutex_t {
-    pub __data: pthread_mutex_t___pthread_mutex_s,
-    pub __size: [::std::os::raw::c_char; 24usize],
-    pub __align: ::std::os::raw::c_long,
-    _bindgen_union_align: [u32; 6usize],
-}
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct pthread_mutex_t___pthread_mutex_s {
+pub struct __pthread_mutex_s {
     pub __lock: ::std::os::raw::c_int,
     pub __count: ::std::os::raw::c_uint,
     pub __owner: ::std::os::raw::c_int,
     pub __kind: ::std::os::raw::c_int,
     pub __nusers: ::std::os::raw::c_uint,
-    pub __bindgen_anon_1: pthread_mutex_t___pthread_mutex_s__bindgen_ty_1,
+    pub __bindgen_anon_1: __pthread_mutex_s__bindgen_ty_1,
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub union pthread_mutex_t___pthread_mutex_s__bindgen_ty_1 {
+pub union __pthread_mutex_s__bindgen_ty_1 {
     pub __spins: ::std::os::raw::c_int,
     pub __list: __pthread_slist_t,
     _bindgen_union_align: u32,
 }
 #[test]
-fn bindgen_test_layout_pthread_mutex_t___pthread_mutex_s__bindgen_ty_1() {
+fn bindgen_test_layout___pthread_mutex_s__bindgen_ty_1() {
     assert_eq!(
-        ::std::mem::size_of::<pthread_mutex_t___pthread_mutex_s__bindgen_ty_1>(),
+        ::std::mem::size_of::<__pthread_mutex_s__bindgen_ty_1>(),
         4usize,
-        concat!(
-            "Size of: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s__bindgen_ty_1)
-        )
+        concat!("Size of: ", stringify!(__pthread_mutex_s__bindgen_ty_1))
     );
     assert_eq!(
-        ::std::mem::align_of::<pthread_mutex_t___pthread_mutex_s__bindgen_ty_1>(),
+        ::std::mem::align_of::<__pthread_mutex_s__bindgen_ty_1>(),
         4usize,
-        concat!(
-            "Alignment of ",
-            stringify!(pthread_mutex_t___pthread_mutex_s__bindgen_ty_1)
-        )
+        concat!("Alignment of ", stringify!(__pthread_mutex_s__bindgen_ty_1))
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s__bindgen_ty_1>())).__spins
-                as *const _ as usize
+            &(*(::std::ptr::null::<__pthread_mutex_s__bindgen_ty_1>())).__spins as *const _ as usize
         },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s__bindgen_ty_1),
+            stringify!(__pthread_mutex_s__bindgen_ty_1),
             "::",
             stringify!(__spins)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s__bindgen_ty_1>())).__list
-                as *const _ as usize
+            &(*(::std::ptr::null::<__pthread_mutex_s__bindgen_ty_1>())).__list as *const _ as usize
         },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s__bindgen_ty_1),
+            stringify!(__pthread_mutex_s__bindgen_ty_1),
             "::",
             stringify!(__list)
         )
     );
 }
-impl ::std::fmt::Debug for pthread_mutex_t___pthread_mutex_s__bindgen_ty_1 {
+impl ::std::fmt::Debug for __pthread_mutex_s__bindgen_ty_1 {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        write!(
-            f,
-            "pthread_mutex_t___pthread_mutex_s__bindgen_ty_1 {{ union }}"
-        )
+        write!(f, "__pthread_mutex_s__bindgen_ty_1 {{ union }}")
     }
 }
 #[test]
-fn bindgen_test_layout_pthread_mutex_t___pthread_mutex_s() {
+fn bindgen_test_layout___pthread_mutex_s() {
     assert_eq!(
-        ::std::mem::size_of::<pthread_mutex_t___pthread_mutex_s>(),
+        ::std::mem::size_of::<__pthread_mutex_s>(),
         24usize,
-        concat!("Size of: ", stringify!(pthread_mutex_t___pthread_mutex_s))
+        concat!("Size of: ", stringify!(__pthread_mutex_s))
     );
     assert_eq!(
-        ::std::mem::align_of::<pthread_mutex_t___pthread_mutex_s>(),
+        ::std::mem::align_of::<__pthread_mutex_s>(),
         4usize,
-        concat!(
-            "Alignment of ",
-            stringify!(pthread_mutex_t___pthread_mutex_s)
-        )
+        concat!("Alignment of ", stringify!(__pthread_mutex_s))
     );
     assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s>())).__lock as *const _
-                as usize
-        },
+        unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__lock as *const _ as usize },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s),
+            stringify!(__pthread_mutex_s),
             "::",
             stringify!(__lock)
         )
     );
     assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s>())).__count as *const _
-                as usize
-        },
+        unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__count as *const _ as usize },
         4usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s),
+            stringify!(__pthread_mutex_s),
             "::",
             stringify!(__count)
         )
     );
     assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s>())).__owner as *const _
-                as usize
-        },
+        unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__owner as *const _ as usize },
         8usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s),
+            stringify!(__pthread_mutex_s),
             "::",
             stringify!(__owner)
         )
     );
     assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s>())).__kind as *const _
-                as usize
-        },
+        unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__kind as *const _ as usize },
         12usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s),
+            stringify!(__pthread_mutex_s),
             "::",
             stringify!(__kind)
         )
     );
     assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_mutex_t___pthread_mutex_s>())).__nusers as *const _
-                as usize
-        },
+        unsafe { &(*(::std::ptr::null::<__pthread_mutex_s>())).__nusers as *const _ as usize },
         16usize,
         concat!(
             "Offset of field: ",
-            stringify!(pthread_mutex_t___pthread_mutex_s),
+            stringify!(__pthread_mutex_s),
             "::",
             stringify!(__nusers)
         )
     );
 }
-impl ::std::fmt::Debug for pthread_mutex_t___pthread_mutex_s {
+impl ::std::fmt::Debug for __pthread_mutex_s {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-        write ! ( f , "pthread_mutex_t___pthread_mutex_s {{ __lock: {:?}, __count: {:?}, __owner: {:?}, __kind: {:?}, __nusers: {:?}, __bindgen_anon_1: {:?} }}" , self . __lock , self . __count , self . __owner , self . __kind , self . __nusers , self . __bindgen_anon_1 )
+        write ! ( f , "__pthread_mutex_s {{ __lock: {:?}, __count: {:?}, __owner: {:?}, __kind: {:?}, __nusers: {:?}, __bindgen_anon_1: {:?} }}" , self . __lock , self . __count , self . __owner , self . __kind , self . __nusers , self . __bindgen_anon_1 )
     }
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct __pthread_cond_s {
+    pub __bindgen_anon_1: __pthread_cond_s__bindgen_ty_1,
+    pub __bindgen_anon_2: __pthread_cond_s__bindgen_ty_2,
+    pub __g_refs: [::std::os::raw::c_uint; 2usize],
+    pub __g_size: [::std::os::raw::c_uint; 2usize],
+    pub __g1_orig_size: ::std::os::raw::c_uint,
+    pub __wrefs: ::std::os::raw::c_uint,
+    pub __g_signals: [::std::os::raw::c_uint; 2usize],
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union __pthread_cond_s__bindgen_ty_1 {
+    pub __wseq: ::std::os::raw::c_ulonglong,
+    pub __wseq32: __pthread_cond_s__bindgen_ty_1__bindgen_ty_1,
+    _bindgen_union_align: u64,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __pthread_cond_s__bindgen_ty_1__bindgen_ty_1 {
+    pub __low: ::std::os::raw::c_uint,
+    pub __high: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_1__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>(),
+        8usize,
+        concat!(
+            "Size of: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>())).__low
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1),
+            "::",
+            stringify!(__low)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1__bindgen_ty_1>())).__high
+                as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1__bindgen_ty_1),
+            "::",
+            stringify!(__high)
+        )
+    );
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_1>(),
+        8usize,
+        concat!("Size of: ", stringify!(__pthread_cond_s__bindgen_ty_1))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_1>(),
+        8usize,
+        concat!("Alignment of ", stringify!(__pthread_cond_s__bindgen_ty_1))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1>())).__wseq as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1),
+            "::",
+            stringify!(__wseq)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_1>())).__wseq32 as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_1),
+            "::",
+            stringify!(__wseq32)
+        )
+    );
+}
+impl ::std::fmt::Debug for __pthread_cond_s__bindgen_ty_1 {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(f, "__pthread_cond_s__bindgen_ty_1 {{ union }}")
+    }
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union __pthread_cond_s__bindgen_ty_2 {
+    pub __g1_start: ::std::os::raw::c_ulonglong,
+    pub __g1_start32: __pthread_cond_s__bindgen_ty_2__bindgen_ty_1,
+    _bindgen_union_align: u64,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct __pthread_cond_s__bindgen_ty_2__bindgen_ty_1 {
+    pub __low: ::std::os::raw::c_uint,
+    pub __high: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_2__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>(),
+        8usize,
+        concat!(
+            "Size of: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>())).__low
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1),
+            "::",
+            stringify!(__low)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2__bindgen_ty_1>())).__high
+                as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2__bindgen_ty_1),
+            "::",
+            stringify!(__high)
+        )
+    );
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s__bindgen_ty_2() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s__bindgen_ty_2>(),
+        8usize,
+        concat!("Size of: ", stringify!(__pthread_cond_s__bindgen_ty_2))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s__bindgen_ty_2>(),
+        8usize,
+        concat!("Alignment of ", stringify!(__pthread_cond_s__bindgen_ty_2))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2>())).__g1_start as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2),
+            "::",
+            stringify!(__g1_start)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<__pthread_cond_s__bindgen_ty_2>())).__g1_start32 as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s__bindgen_ty_2),
+            "::",
+            stringify!(__g1_start32)
+        )
+    );
+}
+impl ::std::fmt::Debug for __pthread_cond_s__bindgen_ty_2 {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(f, "__pthread_cond_s__bindgen_ty_2 {{ union }}")
+    }
+}
+#[test]
+fn bindgen_test_layout___pthread_cond_s() {
+    assert_eq!(
+        ::std::mem::size_of::<__pthread_cond_s>(),
+        48usize,
+        concat!("Size of: ", stringify!(__pthread_cond_s))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__pthread_cond_s>(),
+        8usize,
+        concat!("Alignment of ", stringify!(__pthread_cond_s))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__g_refs as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s),
+            "::",
+            stringify!(__g_refs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__g_size as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s),
+            "::",
+            stringify!(__g_size)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__g1_orig_size as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s),
+            "::",
+            stringify!(__g1_orig_size)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__wrefs as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s),
+            "::",
+            stringify!(__wrefs)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<__pthread_cond_s>())).__g_signals as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(__pthread_cond_s),
+            "::",
+            stringify!(__g_signals)
+        )
+    );
+}
+impl ::std::fmt::Debug for __pthread_cond_s {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write ! ( f , "__pthread_cond_s {{ __bindgen_anon_1: {:?}, __bindgen_anon_2: {:?}, __g_refs: {:?}, __g_size: {:?}, __g1_orig_size: {:?}, __wrefs: {:?}, __g_signals: {:?} }}" , self . __bindgen_anon_1 , self . __bindgen_anon_2 , self . __g_refs , self . __g_size , self . __g1_orig_size , self . __wrefs , self . __g_signals )
+    }
+}
+pub type pthread_t = ::std::os::raw::c_ulong;
+pub type pthread_once_t = ::std::os::raw::c_int;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union pthread_mutex_t {
+    pub __data: __pthread_mutex_s,
+    pub __size: [::std::os::raw::c_char; 24usize],
+    pub __align: ::std::os::raw::c_long,
+    _bindgen_union_align: [u32; 6usize],
 }
 #[test]
 fn bindgen_test_layout_pthread_mutex_t() {
@@ -462,135 +722,10 @@ impl ::std::fmt::Debug for pthread_mutex_t {
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union pthread_cond_t {
-    pub __data: pthread_cond_t__bindgen_ty_1,
+    pub __data: __pthread_cond_s,
     pub __size: [::std::os::raw::c_char; 48usize],
     pub __align: ::std::os::raw::c_longlong,
     _bindgen_union_align: [u64; 6usize],
-}
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct pthread_cond_t__bindgen_ty_1 {
-    pub __lock: ::std::os::raw::c_int,
-    pub __futex: ::std::os::raw::c_uint,
-    pub __total_seq: ::std::os::raw::c_ulonglong,
-    pub __wakeup_seq: ::std::os::raw::c_ulonglong,
-    pub __woken_seq: ::std::os::raw::c_ulonglong,
-    pub __mutex: *mut ::std::os::raw::c_void,
-    pub __nwaiters: ::std::os::raw::c_uint,
-    pub __broadcast_seq: ::std::os::raw::c_uint,
-}
-#[test]
-fn bindgen_test_layout_pthread_cond_t__bindgen_ty_1() {
-    assert_eq!(
-        ::std::mem::size_of::<pthread_cond_t__bindgen_ty_1>(),
-        48usize,
-        concat!("Size of: ", stringify!(pthread_cond_t__bindgen_ty_1))
-    );
-    assert_eq!(
-        ::std::mem::align_of::<pthread_cond_t__bindgen_ty_1>(),
-        8usize,
-        concat!("Alignment of ", stringify!(pthread_cond_t__bindgen_ty_1))
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__lock as *const _ as usize
-        },
-        0usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__lock)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__futex as *const _ as usize
-        },
-        4usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__futex)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__total_seq as *const _
-                as usize
-        },
-        8usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__total_seq)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__wakeup_seq as *const _
-                as usize
-        },
-        16usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__wakeup_seq)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__woken_seq as *const _
-                as usize
-        },
-        24usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__woken_seq)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__mutex as *const _ as usize
-        },
-        32usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__mutex)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__nwaiters as *const _ as usize
-        },
-        36usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__nwaiters)
-        )
-    );
-    assert_eq!(
-        unsafe {
-            &(*(::std::ptr::null::<pthread_cond_t__bindgen_ty_1>())).__broadcast_seq as *const _
-                as usize
-        },
-        40usize,
-        concat!(
-            "Offset of field: ",
-            stringify!(pthread_cond_t__bindgen_ty_1),
-            "::",
-            stringify!(__broadcast_seq)
-        )
-    );
 }
 #[test]
 fn bindgen_test_layout_pthread_cond_t() {
@@ -640,7 +775,6 @@ impl ::std::fmt::Debug for pthread_cond_t {
         write!(f, "pthread_cond_t {{ union }}")
     }
 }
-pub type pthread_once_t = ::std::os::raw::c_int;
 extern "C" {
     pub fn vcos_pthreads_logging_assert(
         file: *const ::std::os::raw::c_char,
@@ -655,17 +789,17 @@ extern "C" {
 pub type VCOS_THREAD_ENTRY_FN_T = ::std::option::Option<
     unsafe extern "C" fn(arg1: *mut ::std::os::raw::c_void) -> *mut ::std::os::raw::c_void,
 >;
-pub const VCOS_STATUS_T_VCOS_SUCCESS: VCOS_STATUS_T = 0;
-pub const VCOS_STATUS_T_VCOS_EAGAIN: VCOS_STATUS_T = 1;
-pub const VCOS_STATUS_T_VCOS_ENOENT: VCOS_STATUS_T = 2;
-pub const VCOS_STATUS_T_VCOS_ENOSPC: VCOS_STATUS_T = 3;
-pub const VCOS_STATUS_T_VCOS_EINVAL: VCOS_STATUS_T = 4;
-pub const VCOS_STATUS_T_VCOS_EACCESS: VCOS_STATUS_T = 5;
-pub const VCOS_STATUS_T_VCOS_ENOMEM: VCOS_STATUS_T = 6;
-pub const VCOS_STATUS_T_VCOS_ENOSYS: VCOS_STATUS_T = 7;
-pub const VCOS_STATUS_T_VCOS_EEXIST: VCOS_STATUS_T = 8;
-pub const VCOS_STATUS_T_VCOS_ENXIO: VCOS_STATUS_T = 9;
-pub const VCOS_STATUS_T_VCOS_EINTR: VCOS_STATUS_T = 10;
+pub const VCOS_SUCCESS: VCOS_STATUS_T = 0;
+pub const VCOS_EAGAIN: VCOS_STATUS_T = 1;
+pub const VCOS_ENOENT: VCOS_STATUS_T = 2;
+pub const VCOS_ENOSPC: VCOS_STATUS_T = 3;
+pub const VCOS_EINVAL: VCOS_STATUS_T = 4;
+pub const VCOS_EACCESS: VCOS_STATUS_T = 5;
+pub const VCOS_ENOMEM: VCOS_STATUS_T = 6;
+pub const VCOS_ENOSYS: VCOS_STATUS_T = 7;
+pub const VCOS_EEXIST: VCOS_STATUS_T = 8;
+pub const VCOS_ENXIO: VCOS_STATUS_T = 9;
+pub const VCOS_EINTR: VCOS_STATUS_T = 10;
 pub type VCOS_STATUS_T = u32;
 extern "C" {
     pub fn vcos_verify_bkpts_enabled() -> ::std::os::raw::c_int;
@@ -1531,9 +1665,9 @@ pub struct VCOS_BLOCKPOOL_TAG {
     #[doc = " Flags for future use e.g. cache options"]
     pub flags: VCOS_UNSIGNED,
     #[doc = " The size of the block data"]
-    pub block_data_size: usize,
+    pub block_data_size: size_t,
     #[doc = " Block size inc overheads"]
-    pub block_size: usize,
+    pub block_size: size_t,
     #[doc = " Name for debugging"]
     pub name: *const ::std::os::raw::c_char,
     pub num_subpools: VCOS_UNSIGNED,
@@ -2093,14 +2227,13 @@ extern "C" {
 extern "C" {
     pub fn vcos_kfree(ptr: *mut ::std::os::raw::c_void);
 }
-pub type __gnuc_va_list = __builtin_va_list;
-pub type va_list = __gnuc_va_list;
-pub const VCOS_LOG_LEVEL_T_VCOS_LOG_UNINITIALIZED: VCOS_LOG_LEVEL_T = 0;
-pub const VCOS_LOG_LEVEL_T_VCOS_LOG_NEVER: VCOS_LOG_LEVEL_T = 1;
-pub const VCOS_LOG_LEVEL_T_VCOS_LOG_ERROR: VCOS_LOG_LEVEL_T = 2;
-pub const VCOS_LOG_LEVEL_T_VCOS_LOG_WARN: VCOS_LOG_LEVEL_T = 3;
-pub const VCOS_LOG_LEVEL_T_VCOS_LOG_INFO: VCOS_LOG_LEVEL_T = 4;
-pub const VCOS_LOG_LEVEL_T_VCOS_LOG_TRACE: VCOS_LOG_LEVEL_T = 5;
+pub type va_list = __builtin_va_list;
+pub const VCOS_LOG_UNINITIALIZED: VCOS_LOG_LEVEL_T = 0;
+pub const VCOS_LOG_NEVER: VCOS_LOG_LEVEL_T = 1;
+pub const VCOS_LOG_ERROR: VCOS_LOG_LEVEL_T = 2;
+pub const VCOS_LOG_WARN: VCOS_LOG_LEVEL_T = 3;
+pub const VCOS_LOG_INFO: VCOS_LOG_LEVEL_T = 4;
+pub const VCOS_LOG_TRACE: VCOS_LOG_LEVEL_T = 5;
 #[doc = " Logging levels"]
 pub type VCOS_LOG_LEVEL_T = u32;
 #[doc = " A registered logging category."]
@@ -2330,7 +2463,7 @@ extern "C" {
         label: *const ::std::os::raw::c_char,
         addr: u32,
         voidMem: *const ::std::os::raw::c_void,
-        numBytes: usize,
+        numBytes: size_t,
     );
 }
 pub type VCOS_CMD_T = VCOS_CMD_S;
@@ -2343,7 +2476,7 @@ pub struct VCOS_CMD_PARAM_T {
     pub cmd_entry: *mut VCOS_CMD_T,
     pub cmd_parent_entry: *mut VCOS_CMD_T,
     pub use_log: ::std::os::raw::c_int,
-    pub result_size: usize,
+    pub result_size: size_t,
     pub result_ptr: *mut ::std::os::raw::c_char,
     pub result_buf: *mut ::std::os::raw::c_char,
 }
@@ -2555,7 +2688,7 @@ extern "C" {
     pub fn vcos_cmd_execute(
         argc: ::std::os::raw::c_int,
         argv: *mut *mut ::std::os::raw::c_char,
-        result_size: usize,
+        result_size: size_t,
         result_buf: *mut ::std::os::raw::c_char,
     ) -> VCOS_STATUS_T;
 }
@@ -2577,7 +2710,7 @@ extern "C" {
 extern "C" {
     pub fn vcos_vsnprintf(
         buf: *mut ::std::os::raw::c_char,
-        buflen: usize,
+        buflen: size_t,
         fmt: *const ::std::os::raw::c_char,
         ap: va_list,
     ) -> ::std::os::raw::c_int;
@@ -2585,7 +2718,7 @@ extern "C" {
 extern "C" {
     pub fn vcos_snprintf(
         buf: *mut ::std::os::raw::c_char,
-        buflen: usize,
+        buflen: size_t,
         fmt: *const ::std::os::raw::c_char,
         ...
     ) -> ::std::os::raw::c_int;
@@ -2596,11 +2729,11 @@ extern "C" {
     #[doc = " Returns the string length before/without truncation."]
     pub fn vcos_safe_vsprintf(
         buf: *mut ::std::os::raw::c_char,
-        buflen: usize,
-        offset: usize,
+        buflen: size_t,
+        offset: size_t,
         fmt: *const ::std::os::raw::c_char,
         ap: va_list,
-    ) -> usize;
+    ) -> size_t;
 }
 extern "C" {
     #[doc = " Like snprintf, except it places the output at the specified offset."]
@@ -2608,11 +2741,11 @@ extern "C" {
     #[doc = " Returns the string length before/without truncation."]
     pub fn vcos_safe_sprintf(
         buf: *mut ::std::os::raw::c_char,
-        buflen: usize,
-        offset: usize,
+        buflen: size_t,
+        offset: size_t,
         fmt: *const ::std::os::raw::c_char,
         ...
-    ) -> usize;
+    ) -> size_t;
 }
 extern "C" {
     #[doc = " Copies string src to dst at the specified offset."]
@@ -2623,9 +2756,9 @@ extern "C" {
     pub fn vcos_safe_strcpy(
         dst: *mut ::std::os::raw::c_char,
         src: *const ::std::os::raw::c_char,
-        dstlen: usize,
-        offset: usize,
-    ) -> usize;
+        dstlen: size_t,
+        offset: size_t,
+    ) -> size_t;
 }
 extern "C" {
     #[doc = " Initialize thread attribute struct. This call does not allocate memory,"]
@@ -2929,15 +3062,15 @@ fn bindgen_test_layout_MMAL_RATIONAL_T() {
 #[doc = " Four Character Code type"]
 pub type MMAL_FOURCC_T = u32;
 #[doc = "< Unknown elementary stream type"]
-pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_UNKNOWN: MMAL_ES_TYPE_T = 0;
+pub const MMAL_ES_TYPE_UNKNOWN: MMAL_ES_TYPE_T = 0;
 #[doc = "< Elementary stream of control commands"]
-pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_CONTROL: MMAL_ES_TYPE_T = 1;
+pub const MMAL_ES_TYPE_CONTROL: MMAL_ES_TYPE_T = 1;
 #[doc = "< Audio elementary stream"]
-pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_AUDIO: MMAL_ES_TYPE_T = 2;
+pub const MMAL_ES_TYPE_AUDIO: MMAL_ES_TYPE_T = 2;
 #[doc = "< Video elementary stream"]
-pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_VIDEO: MMAL_ES_TYPE_T = 3;
+pub const MMAL_ES_TYPE_VIDEO: MMAL_ES_TYPE_T = 3;
 #[doc = "< Sub-picture elementary stream (e.g. subtitles, overlays)"]
-pub const MMAL_ES_TYPE_T_MMAL_ES_TYPE_SUBPICTURE: MMAL_ES_TYPE_T = 4;
+pub const MMAL_ES_TYPE_SUBPICTURE: MMAL_ES_TYPE_T = 4;
 #[doc = " Enumeration of the different types of elementary streams."]
 #[doc = " This divides elementary streams into 4 big categories, plus an invalid type."]
 pub type MMAL_ES_TYPE_T = u32;
@@ -3791,39 +3924,39 @@ extern "C" {
     pub fn mmal_buffer_header_mem_unlock(header: *mut MMAL_BUFFER_HEADER_T);
 }
 #[doc = "< Never a valid parameter ID"]
-pub const MMAL_PARAMETER_UNUSED: _bindgen_ty_25 = 0;
+pub const MMAL_PARAMETER_UNUSED: _bindgen_ty_24 = 0;
 #[doc = "< Takes a MMAL_PARAMETER_ENCODING_T"]
-pub const MMAL_PARAMETER_SUPPORTED_ENCODINGS: _bindgen_ty_25 = 1;
+pub const MMAL_PARAMETER_SUPPORTED_ENCODINGS: _bindgen_ty_24 = 1;
 #[doc = "< Takes a MMAL_PARAMETER_URI_T"]
-pub const MMAL_PARAMETER_URI: _bindgen_ty_25 = 2;
+pub const MMAL_PARAMETER_URI: _bindgen_ty_24 = 2;
 #[doc = "< Takes a MMAL_PARAMETER_CHANGE_EVENT_REQUEST_T"]
-pub const MMAL_PARAMETER_CHANGE_EVENT_REQUEST: _bindgen_ty_25 = 3;
+pub const MMAL_PARAMETER_CHANGE_EVENT_REQUEST: _bindgen_ty_24 = 3;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_ZERO_COPY: _bindgen_ty_25 = 4;
+pub const MMAL_PARAMETER_ZERO_COPY: _bindgen_ty_24 = 4;
 #[doc = "< Takes a MMAL_PARAMETER_BUFFER_REQUIREMENTS_T"]
-pub const MMAL_PARAMETER_BUFFER_REQUIREMENTS: _bindgen_ty_25 = 5;
+pub const MMAL_PARAMETER_BUFFER_REQUIREMENTS: _bindgen_ty_24 = 5;
 #[doc = "< Takes a MMAL_PARAMETER_STATISTICS_T"]
-pub const MMAL_PARAMETER_STATISTICS: _bindgen_ty_25 = 6;
+pub const MMAL_PARAMETER_STATISTICS: _bindgen_ty_24 = 6;
 #[doc = "< Takes a MMAL_PARAMETER_CORE_STATISTICS_T"]
-pub const MMAL_PARAMETER_CORE_STATISTICS: _bindgen_ty_25 = 7;
+pub const MMAL_PARAMETER_CORE_STATISTICS: _bindgen_ty_24 = 7;
 #[doc = "< Takes a MMAL_PARAMETER_MEM_USAGE_T"]
-pub const MMAL_PARAMETER_MEM_USAGE: _bindgen_ty_25 = 8;
+pub const MMAL_PARAMETER_MEM_USAGE: _bindgen_ty_24 = 8;
 #[doc = "< Takes a MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_BUFFER_FLAG_FILTER: _bindgen_ty_25 = 9;
+pub const MMAL_PARAMETER_BUFFER_FLAG_FILTER: _bindgen_ty_24 = 9;
 #[doc = "< Takes a MMAL_PARAMETER_SEEK_T"]
-pub const MMAL_PARAMETER_SEEK: _bindgen_ty_25 = 10;
+pub const MMAL_PARAMETER_SEEK: _bindgen_ty_24 = 10;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_POWERMON_ENABLE: _bindgen_ty_25 = 11;
+pub const MMAL_PARAMETER_POWERMON_ENABLE: _bindgen_ty_24 = 11;
 #[doc = "< Takes a MMAL_PARAMETER_LOGGING_T"]
-pub const MMAL_PARAMETER_LOGGING: _bindgen_ty_25 = 12;
+pub const MMAL_PARAMETER_LOGGING: _bindgen_ty_24 = 12;
 #[doc = "< Takes a MMAL_PARAMETER_UINT64_T"]
-pub const MMAL_PARAMETER_SYSTEM_TIME: _bindgen_ty_25 = 13;
+pub const MMAL_PARAMETER_SYSTEM_TIME: _bindgen_ty_24 = 13;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_NO_IMAGE_PADDING: _bindgen_ty_25 = 14;
+pub const MMAL_PARAMETER_NO_IMAGE_PADDING: _bindgen_ty_24 = 14;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_LOCKSTEP_ENABLE: _bindgen_ty_25 = 15;
+pub const MMAL_PARAMETER_LOCKSTEP_ENABLE: _bindgen_ty_24 = 15;
 #[doc = " Common MMAL parameter IDs."]
-pub type _bindgen_ty_25 = u32;
+pub type _bindgen_ty_24 = u32;
 #[doc = " Parameter header type. All parameter structures need to begin with this type."]
 #[doc = " The \\ref id field must be set to a parameter ID, such as one of those listed on"]
 #[doc = " the \\ref MMAL_PARAMETER_IDS \"Pre-defined MMAL parameter IDs\" page."]
@@ -4257,9 +4390,9 @@ fn bindgen_test_layout_MMAL_PARAMETER_STATISTICS_T() {
         )
     );
 }
-pub const MMAL_CORE_STATS_DIR_MMAL_CORE_STATS_RX: MMAL_CORE_STATS_DIR = 0;
-pub const MMAL_CORE_STATS_DIR_MMAL_CORE_STATS_TX: MMAL_CORE_STATS_DIR = 1;
-pub const MMAL_CORE_STATS_DIR_MMAL_CORE_STATS_MAX: MMAL_CORE_STATS_DIR = 2147483647;
+pub const MMAL_CORE_STATS_RX: MMAL_CORE_STATS_DIR = 0;
+pub const MMAL_CORE_STATS_TX: MMAL_CORE_STATS_DIR = 1;
+pub const MMAL_CORE_STATS_MAX: MMAL_CORE_STATS_DIR = 2147483647;
 pub type MMAL_CORE_STATS_DIR = u32;
 #[doc = " MMAL core statistics. These are collected by the core itself."]
 #[repr(C)]
@@ -4433,190 +4566,190 @@ fn bindgen_test_layout_MMAL_PARAMETER_LOGGING_T() {
     );
 }
 #[doc = "< Takes a @ref MMAL_PARAMETER_THUMBNAIL_CONFIG_T"]
-pub const MMAL_PARAMETER_THUMBNAIL_CONFIGURATION: _bindgen_ty_26 = 65536;
+pub const MMAL_PARAMETER_THUMBNAIL_CONFIGURATION: _bindgen_ty_25 = 65536;
 #[doc = "< Unused?"]
-pub const MMAL_PARAMETER_CAPTURE_QUALITY: _bindgen_ty_26 = 65537;
+pub const MMAL_PARAMETER_CAPTURE_QUALITY: _bindgen_ty_25 = 65537;
 #[doc = "< Takes a @ref MMAL_PARAMETER_INT32_T"]
-pub const MMAL_PARAMETER_ROTATION: _bindgen_ty_26 = 65538;
+pub const MMAL_PARAMETER_ROTATION: _bindgen_ty_25 = 65538;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_EXIF_DISABLE: _bindgen_ty_26 = 65539;
+pub const MMAL_PARAMETER_EXIF_DISABLE: _bindgen_ty_25 = 65539;
 #[doc = "< Takes a @ref MMAL_PARAMETER_EXIF_T"]
-pub const MMAL_PARAMETER_EXIF: _bindgen_ty_26 = 65540;
+pub const MMAL_PARAMETER_EXIF: _bindgen_ty_25 = 65540;
 #[doc = "< Takes a @ref MMAL_PARAM_AWBMODE_T"]
-pub const MMAL_PARAMETER_AWB_MODE: _bindgen_ty_26 = 65541;
+pub const MMAL_PARAMETER_AWB_MODE: _bindgen_ty_25 = 65541;
 #[doc = "< Takes a @ref MMAL_PARAMETER_IMAGEFX_T"]
-pub const MMAL_PARAMETER_IMAGE_EFFECT: _bindgen_ty_26 = 65542;
+pub const MMAL_PARAMETER_IMAGE_EFFECT: _bindgen_ty_25 = 65542;
 #[doc = "< Takes a @ref MMAL_PARAMETER_COLOURFX_T"]
-pub const MMAL_PARAMETER_COLOUR_EFFECT: _bindgen_ty_26 = 65543;
+pub const MMAL_PARAMETER_COLOUR_EFFECT: _bindgen_ty_25 = 65543;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FLICKERAVOID_T"]
-pub const MMAL_PARAMETER_FLICKER_AVOID: _bindgen_ty_26 = 65544;
+pub const MMAL_PARAMETER_FLICKER_AVOID: _bindgen_ty_25 = 65544;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FLASH_T"]
-pub const MMAL_PARAMETER_FLASH: _bindgen_ty_26 = 65545;
+pub const MMAL_PARAMETER_FLASH: _bindgen_ty_25 = 65545;
 #[doc = "< Takes a @ref MMAL_PARAMETER_REDEYE_T"]
-pub const MMAL_PARAMETER_REDEYE: _bindgen_ty_26 = 65546;
+pub const MMAL_PARAMETER_REDEYE: _bindgen_ty_25 = 65546;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FOCUS_T"]
-pub const MMAL_PARAMETER_FOCUS: _bindgen_ty_26 = 65547;
+pub const MMAL_PARAMETER_FOCUS: _bindgen_ty_25 = 65547;
 #[doc = "< Unused?"]
-pub const MMAL_PARAMETER_FOCAL_LENGTHS: _bindgen_ty_26 = 65548;
+pub const MMAL_PARAMETER_FOCAL_LENGTHS: _bindgen_ty_25 = 65548;
 #[doc = "< Takes a @ref MMAL_PARAMETER_INT32_T or MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_EXPOSURE_COMP: _bindgen_ty_26 = 65549;
+pub const MMAL_PARAMETER_EXPOSURE_COMP: _bindgen_ty_25 = 65549;
 #[doc = "< Takes a @ref MMAL_PARAMETER_SCALEFACTOR_T"]
-pub const MMAL_PARAMETER_ZOOM: _bindgen_ty_26 = 65550;
+pub const MMAL_PARAMETER_ZOOM: _bindgen_ty_25 = 65550;
 #[doc = "< Takes a @ref MMAL_PARAMETER_MIRROR_T"]
-pub const MMAL_PARAMETER_MIRROR: _bindgen_ty_26 = 65551;
+pub const MMAL_PARAMETER_MIRROR: _bindgen_ty_25 = 65551;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_CAMERA_NUM: _bindgen_ty_26 = 65552;
+pub const MMAL_PARAMETER_CAMERA_NUM: _bindgen_ty_25 = 65552;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_CAPTURE: _bindgen_ty_26 = 65553;
+pub const MMAL_PARAMETER_CAPTURE: _bindgen_ty_25 = 65553;
 #[doc = "< Takes a @ref MMAL_PARAMETER_EXPOSUREMODE_T"]
-pub const MMAL_PARAMETER_EXPOSURE_MODE: _bindgen_ty_26 = 65554;
+pub const MMAL_PARAMETER_EXPOSURE_MODE: _bindgen_ty_25 = 65554;
 #[doc = "< Takes a @ref MMAL_PARAMETER_EXPOSUREMETERINGMODE_T"]
-pub const MMAL_PARAMETER_EXP_METERING_MODE: _bindgen_ty_26 = 65555;
+pub const MMAL_PARAMETER_EXP_METERING_MODE: _bindgen_ty_25 = 65555;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FOCUS_STATUS_T"]
-pub const MMAL_PARAMETER_FOCUS_STATUS: _bindgen_ty_26 = 65556;
+pub const MMAL_PARAMETER_FOCUS_STATUS: _bindgen_ty_25 = 65556;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_CONFIG_T"]
-pub const MMAL_PARAMETER_CAMERA_CONFIG: _bindgen_ty_26 = 65557;
+pub const MMAL_PARAMETER_CAMERA_CONFIG: _bindgen_ty_25 = 65557;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAPTURE_STATUS_T"]
-pub const MMAL_PARAMETER_CAPTURE_STATUS: _bindgen_ty_26 = 65558;
+pub const MMAL_PARAMETER_CAPTURE_STATUS: _bindgen_ty_25 = 65558;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FACE_TRACK_T"]
-pub const MMAL_PARAMETER_FACE_TRACK: _bindgen_ty_26 = 65559;
+pub const MMAL_PARAMETER_FACE_TRACK: _bindgen_ty_25 = 65559;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_DRAW_BOX_FACES_AND_FOCUS: _bindgen_ty_26 = 65560;
+pub const MMAL_PARAMETER_DRAW_BOX_FACES_AND_FOCUS: _bindgen_ty_25 = 65560;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_JPEG_Q_FACTOR: _bindgen_ty_26 = 65561;
+pub const MMAL_PARAMETER_JPEG_Q_FACTOR: _bindgen_ty_25 = 65561;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FRAME_RATE_T"]
-pub const MMAL_PARAMETER_FRAME_RATE: _bindgen_ty_26 = 65562;
+pub const MMAL_PARAMETER_FRAME_RATE: _bindgen_ty_25 = 65562;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_STC_MODE_T"]
-pub const MMAL_PARAMETER_USE_STC: _bindgen_ty_26 = 65563;
+pub const MMAL_PARAMETER_USE_STC: _bindgen_ty_25 = 65563;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_INFO_T"]
-pub const MMAL_PARAMETER_CAMERA_INFO: _bindgen_ty_26 = 65564;
+pub const MMAL_PARAMETER_CAMERA_INFO: _bindgen_ty_25 = 65564;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_STABILISATION: _bindgen_ty_26 = 65565;
+pub const MMAL_PARAMETER_VIDEO_STABILISATION: _bindgen_ty_25 = 65565;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FACE_TRACK_RESULTS_T"]
-pub const MMAL_PARAMETER_FACE_TRACK_RESULTS: _bindgen_ty_26 = 65566;
+pub const MMAL_PARAMETER_FACE_TRACK_RESULTS: _bindgen_ty_25 = 65566;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_ENABLE_RAW_CAPTURE: _bindgen_ty_26 = 65567;
+pub const MMAL_PARAMETER_ENABLE_RAW_CAPTURE: _bindgen_ty_25 = 65567;
 #[doc = "< Takes a @ref MMAL_PARAMETER_URI_T"]
-pub const MMAL_PARAMETER_DPF_FILE: _bindgen_ty_26 = 65568;
+pub const MMAL_PARAMETER_DPF_FILE: _bindgen_ty_25 = 65568;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_ENABLE_DPF_FILE: _bindgen_ty_26 = 65569;
+pub const MMAL_PARAMETER_ENABLE_DPF_FILE: _bindgen_ty_25 = 65569;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_DPF_FAIL_IS_FATAL: _bindgen_ty_26 = 65570;
+pub const MMAL_PARAMETER_DPF_FAIL_IS_FATAL: _bindgen_ty_25 = 65570;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAPTUREMODE_T"]
-pub const MMAL_PARAMETER_CAPTURE_MODE: _bindgen_ty_26 = 65571;
+pub const MMAL_PARAMETER_CAPTURE_MODE: _bindgen_ty_25 = 65571;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FOCUS_REGIONS_T"]
-pub const MMAL_PARAMETER_FOCUS_REGIONS: _bindgen_ty_26 = 65572;
+pub const MMAL_PARAMETER_FOCUS_REGIONS: _bindgen_ty_25 = 65572;
 #[doc = "< Takes a @ref MMAL_PARAMETER_INPUT_CROP_T"]
-pub const MMAL_PARAMETER_INPUT_CROP: _bindgen_ty_26 = 65573;
+pub const MMAL_PARAMETER_INPUT_CROP: _bindgen_ty_25 = 65573;
 #[doc = "< Takes a @ref MMAL_PARAMETER_SENSOR_INFORMATION_T"]
-pub const MMAL_PARAMETER_SENSOR_INFORMATION: _bindgen_ty_26 = 65574;
+pub const MMAL_PARAMETER_SENSOR_INFORMATION: _bindgen_ty_25 = 65574;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FLASH_SELECT_T"]
-pub const MMAL_PARAMETER_FLASH_SELECT: _bindgen_ty_26 = 65575;
+pub const MMAL_PARAMETER_FLASH_SELECT: _bindgen_ty_25 = 65575;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FIELD_OF_VIEW_T"]
-pub const MMAL_PARAMETER_FIELD_OF_VIEW: _bindgen_ty_26 = 65576;
+pub const MMAL_PARAMETER_FIELD_OF_VIEW: _bindgen_ty_25 = 65576;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_HIGH_DYNAMIC_RANGE: _bindgen_ty_26 = 65577;
+pub const MMAL_PARAMETER_HIGH_DYNAMIC_RANGE: _bindgen_ty_25 = 65577;
 #[doc = "< Takes a @ref MMAL_PARAMETER_DRC_T"]
-pub const MMAL_PARAMETER_DYNAMIC_RANGE_COMPRESSION: _bindgen_ty_26 = 65578;
+pub const MMAL_PARAMETER_DYNAMIC_RANGE_COMPRESSION: _bindgen_ty_25 = 65578;
 #[doc = "< Takes a @ref MMAL_PARAMETER_ALGORITHM_CONTROL_T"]
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL: _bindgen_ty_26 = 65579;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL: _bindgen_ty_25 = 65579;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_SHARPNESS: _bindgen_ty_26 = 65580;
+pub const MMAL_PARAMETER_SHARPNESS: _bindgen_ty_25 = 65580;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_CONTRAST: _bindgen_ty_26 = 65581;
+pub const MMAL_PARAMETER_CONTRAST: _bindgen_ty_25 = 65581;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_BRIGHTNESS: _bindgen_ty_26 = 65582;
+pub const MMAL_PARAMETER_BRIGHTNESS: _bindgen_ty_25 = 65582;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_SATURATION: _bindgen_ty_26 = 65583;
+pub const MMAL_PARAMETER_SATURATION: _bindgen_ty_25 = 65583;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_ISO: _bindgen_ty_26 = 65584;
+pub const MMAL_PARAMETER_ISO: _bindgen_ty_25 = 65584;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_ANTISHAKE: _bindgen_ty_26 = 65585;
+pub const MMAL_PARAMETER_ANTISHAKE: _bindgen_ty_25 = 65585;
 #[doc = "< Takes a @ref MMAL_PARAMETER_IMAGEFX_PARAMETERS_T"]
-pub const MMAL_PARAMETER_IMAGE_EFFECT_PARAMETERS: _bindgen_ty_26 = 65586;
+pub const MMAL_PARAMETER_IMAGE_EFFECT_PARAMETERS: _bindgen_ty_25 = 65586;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_CAMERA_BURST_CAPTURE: _bindgen_ty_26 = 65587;
+pub const MMAL_PARAMETER_CAMERA_BURST_CAPTURE: _bindgen_ty_25 = 65587;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_CAMERA_MIN_ISO: _bindgen_ty_26 = 65588;
+pub const MMAL_PARAMETER_CAMERA_MIN_ISO: _bindgen_ty_25 = 65588;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_USE_CASE_T"]
-pub const MMAL_PARAMETER_CAMERA_USE_CASE: _bindgen_ty_26 = 65589;
+pub const MMAL_PARAMETER_CAMERA_USE_CASE: _bindgen_ty_25 = 65589;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_CAPTURE_STATS_PASS: _bindgen_ty_26 = 65590;
+pub const MMAL_PARAMETER_CAPTURE_STATS_PASS: _bindgen_ty_25 = 65590;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG: _bindgen_ty_26 = 65591;
+pub const MMAL_PARAMETER_CAMERA_CUSTOM_SENSOR_CONFIG: _bindgen_ty_25 = 65591;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_ENABLE_REGISTER_FILE: _bindgen_ty_26 = 65592;
+pub const MMAL_PARAMETER_ENABLE_REGISTER_FILE: _bindgen_ty_25 = 65592;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_REGISTER_FAIL_IS_FATAL: _bindgen_ty_26 = 65593;
+pub const MMAL_PARAMETER_REGISTER_FAIL_IS_FATAL: _bindgen_ty_25 = 65593;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CONFIGFILE_T"]
-pub const MMAL_PARAMETER_CONFIGFILE_REGISTERS: _bindgen_ty_26 = 65594;
+pub const MMAL_PARAMETER_CONFIGFILE_REGISTERS: _bindgen_ty_25 = 65594;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CONFIGFILE_CHUNK_T"]
-pub const MMAL_PARAMETER_CONFIGFILE_CHUNK_REGISTERS: _bindgen_ty_26 = 65595;
+pub const MMAL_PARAMETER_CONFIGFILE_CHUNK_REGISTERS: _bindgen_ty_25 = 65595;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_JPEG_ATTACH_LOG: _bindgen_ty_26 = 65596;
+pub const MMAL_PARAMETER_JPEG_ATTACH_LOG: _bindgen_ty_25 = 65596;
 #[doc = "< Takes a @ref MMAL_PARAMETER_ZEROSHUTTERLAG_T"]
-pub const MMAL_PARAMETER_ZERO_SHUTTER_LAG: _bindgen_ty_26 = 65597;
+pub const MMAL_PARAMETER_ZERO_SHUTTER_LAG: _bindgen_ty_25 = 65597;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FPS_RANGE_T"]
-pub const MMAL_PARAMETER_FPS_RANGE: _bindgen_ty_26 = 65598;
+pub const MMAL_PARAMETER_FPS_RANGE: _bindgen_ty_25 = 65598;
 #[doc = "< Takes a @ref MMAL_PARAMETER_INT32_T"]
-pub const MMAL_PARAMETER_CAPTURE_EXPOSURE_COMP: _bindgen_ty_26 = 65599;
+pub const MMAL_PARAMETER_CAPTURE_EXPOSURE_COMP: _bindgen_ty_25 = 65599;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_SW_SHARPEN_DISABLE: _bindgen_ty_26 = 65600;
+pub const MMAL_PARAMETER_SW_SHARPEN_DISABLE: _bindgen_ty_25 = 65600;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_FLASH_REQUIRED: _bindgen_ty_26 = 65601;
+pub const MMAL_PARAMETER_FLASH_REQUIRED: _bindgen_ty_25 = 65601;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_SW_SATURATION_DISABLE: _bindgen_ty_26 = 65602;
+pub const MMAL_PARAMETER_SW_SATURATION_DISABLE: _bindgen_ty_25 = 65602;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_SHUTTER_SPEED: _bindgen_ty_26 = 65603;
+pub const MMAL_PARAMETER_SHUTTER_SPEED: _bindgen_ty_25 = 65603;
 #[doc = "< Takes a @ref MMAL_PARAMETER_AWB_GAINS_T"]
-pub const MMAL_PARAMETER_CUSTOM_AWB_GAINS: _bindgen_ty_26 = 65604;
+pub const MMAL_PARAMETER_CUSTOM_AWB_GAINS: _bindgen_ty_25 = 65604;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_SETTINGS_T"]
-pub const MMAL_PARAMETER_CAMERA_SETTINGS: _bindgen_ty_26 = 65605;
+pub const MMAL_PARAMETER_CAMERA_SETTINGS: _bindgen_ty_25 = 65605;
 #[doc = "< Takes a @ref MMAL_PARAMETER_PRIVACY_INDICATOR_T"]
-pub const MMAL_PARAMETER_PRIVACY_INDICATOR: _bindgen_ty_26 = 65606;
+pub const MMAL_PARAMETER_PRIVACY_INDICATOR: _bindgen_ty_25 = 65606;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_DENOISE: _bindgen_ty_26 = 65607;
+pub const MMAL_PARAMETER_VIDEO_DENOISE: _bindgen_ty_25 = 65607;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_STILLS_DENOISE: _bindgen_ty_26 = 65608;
+pub const MMAL_PARAMETER_STILLS_DENOISE: _bindgen_ty_25 = 65608;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_ANNOTATE_T"]
-pub const MMAL_PARAMETER_ANNOTATE: _bindgen_ty_26 = 65609;
+pub const MMAL_PARAMETER_ANNOTATE: _bindgen_ty_25 = 65609;
 #[doc = "< Takes a @ref MMAL_PARAMETER_STEREOSCOPIC_MODE_T"]
-pub const MMAL_PARAMETER_STEREOSCOPIC_MODE: _bindgen_ty_26 = 65610;
+pub const MMAL_PARAMETER_STEREOSCOPIC_MODE: _bindgen_ty_25 = 65610;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_INTERFACE_T"]
-pub const MMAL_PARAMETER_CAMERA_INTERFACE: _bindgen_ty_26 = 65611;
+pub const MMAL_PARAMETER_CAMERA_INTERFACE: _bindgen_ty_25 = 65611;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_CLOCKING_MODE_T"]
-pub const MMAL_PARAMETER_CAMERA_CLOCKING_MODE: _bindgen_ty_26 = 65612;
+pub const MMAL_PARAMETER_CAMERA_CLOCKING_MODE: _bindgen_ty_25 = 65612;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_RX_CONFIG_T"]
-pub const MMAL_PARAMETER_CAMERA_RX_CONFIG: _bindgen_ty_26 = 65613;
+pub const MMAL_PARAMETER_CAMERA_RX_CONFIG: _bindgen_ty_25 = 65613;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CAMERA_RX_TIMING_T"]
-pub const MMAL_PARAMETER_CAMERA_RX_TIMING: _bindgen_ty_26 = 65614;
+pub const MMAL_PARAMETER_CAMERA_RX_TIMING: _bindgen_ty_25 = 65614;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_DPF_CONFIG: _bindgen_ty_26 = 65615;
+pub const MMAL_PARAMETER_DPF_CONFIG: _bindgen_ty_25 = 65615;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_JPEG_RESTART_INTERVAL: _bindgen_ty_26 = 65616;
+pub const MMAL_PARAMETER_JPEG_RESTART_INTERVAL: _bindgen_ty_25 = 65616;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE: _bindgen_ty_26 = 65617;
+pub const MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE: _bindgen_ty_25 = 65617;
 #[doc = "< Takes a @ref MMAL_PARAMETER_LENS_SHADING_T"]
-pub const MMAL_PARAMETER_LENS_SHADING_OVERRIDE: _bindgen_ty_26 = 65618;
+pub const MMAL_PARAMETER_LENS_SHADING_OVERRIDE: _bindgen_ty_25 = 65618;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_BLACK_LEVEL: _bindgen_ty_26 = 65619;
+pub const MMAL_PARAMETER_BLACK_LEVEL: _bindgen_ty_25 = 65619;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RESIZE_T"]
-pub const MMAL_PARAMETER_RESIZE_PARAMS: _bindgen_ty_26 = 65620;
+pub const MMAL_PARAMETER_RESIZE_PARAMS: _bindgen_ty_25 = 65620;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CROP_T"]
-pub const MMAL_PARAMETER_CROP: _bindgen_ty_26 = 65621;
+pub const MMAL_PARAMETER_CROP: _bindgen_ty_25 = 65621;
 #[doc = "< Takes a @ref MMAL_PARAMETER_INT32_T"]
-pub const MMAL_PARAMETER_OUTPUT_SHIFT: _bindgen_ty_26 = 65622;
+pub const MMAL_PARAMETER_OUTPUT_SHIFT: _bindgen_ty_25 = 65622;
 #[doc = "< Takes a @ref MMAL_PARAMETER_INT32_T"]
-pub const MMAL_PARAMETER_CCM_SHIFT: _bindgen_ty_26 = 65623;
+pub const MMAL_PARAMETER_CCM_SHIFT: _bindgen_ty_25 = 65623;
 #[doc = "< Takes a @ref MMAL_PARAMETER_CUSTOM_CCM_T"]
-pub const MMAL_PARAMETER_CUSTOM_CCM: _bindgen_ty_26 = 65624;
+pub const MMAL_PARAMETER_CUSTOM_CCM: _bindgen_ty_25 = 65624;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_ANALOG_GAIN: _bindgen_ty_26 = 65625;
+pub const MMAL_PARAMETER_ANALOG_GAIN: _bindgen_ty_25 = 65625;
 #[doc = "< Takes a @ref MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_DIGITAL_GAIN: _bindgen_ty_26 = 65626;
+pub const MMAL_PARAMETER_DIGITAL_GAIN: _bindgen_ty_25 = 65626;
 #[doc = " Camera-specific MMAL parameter IDs."]
 #[doc = " @ingroup MMAL_PARAMETER_IDS"]
-pub type _bindgen_ty_26 = u32;
+pub type _bindgen_ty_25 = u32;
 #[doc = " Thumbnail configuration parameter type"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4789,27 +4922,20 @@ fn bindgen_test_layout_MMAL_PARAMETER_EXIF_T() {
         )
     );
 }
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_OFF: MMAL_PARAM_EXPOSUREMODE_T = 0;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_AUTO: MMAL_PARAM_EXPOSUREMODE_T = 1;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_NIGHT: MMAL_PARAM_EXPOSUREMODE_T = 2;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_NIGHTPREVIEW:
-    MMAL_PARAM_EXPOSUREMODE_T = 3;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_BACKLIGHT: MMAL_PARAM_EXPOSUREMODE_T =
-    4;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_SPOTLIGHT: MMAL_PARAM_EXPOSUREMODE_T =
-    5;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_SPORTS: MMAL_PARAM_EXPOSUREMODE_T = 6;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_SNOW: MMAL_PARAM_EXPOSUREMODE_T = 7;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_BEACH: MMAL_PARAM_EXPOSUREMODE_T = 8;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_VERYLONG: MMAL_PARAM_EXPOSUREMODE_T = 9;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_FIXEDFPS: MMAL_PARAM_EXPOSUREMODE_T =
-    10;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_ANTISHAKE: MMAL_PARAM_EXPOSUREMODE_T =
-    11;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_FIREWORKS: MMAL_PARAM_EXPOSUREMODE_T =
-    12;
-pub const MMAL_PARAM_EXPOSUREMODE_T_MMAL_PARAM_EXPOSUREMODE_MAX: MMAL_PARAM_EXPOSUREMODE_T =
-    2147483647;
+pub const MMAL_PARAM_EXPOSUREMODE_OFF: MMAL_PARAM_EXPOSUREMODE_T = 0;
+pub const MMAL_PARAM_EXPOSUREMODE_AUTO: MMAL_PARAM_EXPOSUREMODE_T = 1;
+pub const MMAL_PARAM_EXPOSUREMODE_NIGHT: MMAL_PARAM_EXPOSUREMODE_T = 2;
+pub const MMAL_PARAM_EXPOSUREMODE_NIGHTPREVIEW: MMAL_PARAM_EXPOSUREMODE_T = 3;
+pub const MMAL_PARAM_EXPOSUREMODE_BACKLIGHT: MMAL_PARAM_EXPOSUREMODE_T = 4;
+pub const MMAL_PARAM_EXPOSUREMODE_SPOTLIGHT: MMAL_PARAM_EXPOSUREMODE_T = 5;
+pub const MMAL_PARAM_EXPOSUREMODE_SPORTS: MMAL_PARAM_EXPOSUREMODE_T = 6;
+pub const MMAL_PARAM_EXPOSUREMODE_SNOW: MMAL_PARAM_EXPOSUREMODE_T = 7;
+pub const MMAL_PARAM_EXPOSUREMODE_BEACH: MMAL_PARAM_EXPOSUREMODE_T = 8;
+pub const MMAL_PARAM_EXPOSUREMODE_VERYLONG: MMAL_PARAM_EXPOSUREMODE_T = 9;
+pub const MMAL_PARAM_EXPOSUREMODE_FIXEDFPS: MMAL_PARAM_EXPOSUREMODE_T = 10;
+pub const MMAL_PARAM_EXPOSUREMODE_ANTISHAKE: MMAL_PARAM_EXPOSUREMODE_T = 11;
+pub const MMAL_PARAM_EXPOSUREMODE_FIREWORKS: MMAL_PARAM_EXPOSUREMODE_T = 12;
+pub const MMAL_PARAM_EXPOSUREMODE_MAX: MMAL_PARAM_EXPOSUREMODE_T = 2147483647;
 #[doc = " Exposure modes."]
 pub type MMAL_PARAM_EXPOSUREMODE_T = u32;
 #[repr(C)]
@@ -4856,16 +4982,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_EXPOSUREMODE_T() {
         )
     );
 }
-pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_AVERAGE:
-    MMAL_PARAM_EXPOSUREMETERINGMODE_T = 0;
-pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_SPOT:
-    MMAL_PARAM_EXPOSUREMETERINGMODE_T = 1;
-pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_BACKLIT:
-    MMAL_PARAM_EXPOSUREMETERINGMODE_T = 2;
-pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_MATRIX:
-    MMAL_PARAM_EXPOSUREMETERINGMODE_T = 3;
-pub const MMAL_PARAM_EXPOSUREMETERINGMODE_T_MMAL_PARAM_EXPOSUREMETERINGMODE_MAX:
-    MMAL_PARAM_EXPOSUREMETERINGMODE_T = 2147483647;
+pub const MMAL_PARAM_EXPOSUREMETERINGMODE_AVERAGE: MMAL_PARAM_EXPOSUREMETERINGMODE_T = 0;
+pub const MMAL_PARAM_EXPOSUREMETERINGMODE_SPOT: MMAL_PARAM_EXPOSUREMETERINGMODE_T = 1;
+pub const MMAL_PARAM_EXPOSUREMETERINGMODE_BACKLIT: MMAL_PARAM_EXPOSUREMETERINGMODE_T = 2;
+pub const MMAL_PARAM_EXPOSUREMETERINGMODE_MATRIX: MMAL_PARAM_EXPOSUREMETERINGMODE_T = 3;
+pub const MMAL_PARAM_EXPOSUREMETERINGMODE_MAX: MMAL_PARAM_EXPOSUREMETERINGMODE_T = 2147483647;
 pub type MMAL_PARAM_EXPOSUREMETERINGMODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -4919,18 +5040,18 @@ fn bindgen_test_layout_MMAL_PARAMETER_EXPOSUREMETERINGMODE_T() {
         )
     );
 }
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_OFF: MMAL_PARAM_AWBMODE_T = 0;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_AUTO: MMAL_PARAM_AWBMODE_T = 1;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_SUNLIGHT: MMAL_PARAM_AWBMODE_T = 2;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_CLOUDY: MMAL_PARAM_AWBMODE_T = 3;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_SHADE: MMAL_PARAM_AWBMODE_T = 4;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_TUNGSTEN: MMAL_PARAM_AWBMODE_T = 5;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_FLUORESCENT: MMAL_PARAM_AWBMODE_T = 6;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_INCANDESCENT: MMAL_PARAM_AWBMODE_T = 7;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_FLASH: MMAL_PARAM_AWBMODE_T = 8;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_HORIZON: MMAL_PARAM_AWBMODE_T = 9;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_GREYWORLD: MMAL_PARAM_AWBMODE_T = 10;
-pub const MMAL_PARAM_AWBMODE_T_MMAL_PARAM_AWBMODE_MAX: MMAL_PARAM_AWBMODE_T = 2147483647;
+pub const MMAL_PARAM_AWBMODE_OFF: MMAL_PARAM_AWBMODE_T = 0;
+pub const MMAL_PARAM_AWBMODE_AUTO: MMAL_PARAM_AWBMODE_T = 1;
+pub const MMAL_PARAM_AWBMODE_SUNLIGHT: MMAL_PARAM_AWBMODE_T = 2;
+pub const MMAL_PARAM_AWBMODE_CLOUDY: MMAL_PARAM_AWBMODE_T = 3;
+pub const MMAL_PARAM_AWBMODE_SHADE: MMAL_PARAM_AWBMODE_T = 4;
+pub const MMAL_PARAM_AWBMODE_TUNGSTEN: MMAL_PARAM_AWBMODE_T = 5;
+pub const MMAL_PARAM_AWBMODE_FLUORESCENT: MMAL_PARAM_AWBMODE_T = 6;
+pub const MMAL_PARAM_AWBMODE_INCANDESCENT: MMAL_PARAM_AWBMODE_T = 7;
+pub const MMAL_PARAM_AWBMODE_FLASH: MMAL_PARAM_AWBMODE_T = 8;
+pub const MMAL_PARAM_AWBMODE_HORIZON: MMAL_PARAM_AWBMODE_T = 9;
+pub const MMAL_PARAM_AWBMODE_GREYWORLD: MMAL_PARAM_AWBMODE_T = 10;
+pub const MMAL_PARAM_AWBMODE_MAX: MMAL_PARAM_AWBMODE_T = 2147483647;
 #[doc = " AWB parameter modes."]
 pub type MMAL_PARAM_AWBMODE_T = u32;
 #[doc = " AWB parameter type."]
@@ -4974,33 +5095,33 @@ fn bindgen_test_layout_MMAL_PARAMETER_AWBMODE_T() {
         )
     );
 }
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_NONE: MMAL_PARAM_IMAGEFX_T = 0;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_NEGATIVE: MMAL_PARAM_IMAGEFX_T = 1;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_SOLARIZE: MMAL_PARAM_IMAGEFX_T = 2;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_POSTERIZE: MMAL_PARAM_IMAGEFX_T = 3;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_WHITEBOARD: MMAL_PARAM_IMAGEFX_T = 4;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_BLACKBOARD: MMAL_PARAM_IMAGEFX_T = 5;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_SKETCH: MMAL_PARAM_IMAGEFX_T = 6;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DENOISE: MMAL_PARAM_IMAGEFX_T = 7;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_EMBOSS: MMAL_PARAM_IMAGEFX_T = 8;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_OILPAINT: MMAL_PARAM_IMAGEFX_T = 9;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_HATCH: MMAL_PARAM_IMAGEFX_T = 10;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_GPEN: MMAL_PARAM_IMAGEFX_T = 11;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_PASTEL: MMAL_PARAM_IMAGEFX_T = 12;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_WATERCOLOUR: MMAL_PARAM_IMAGEFX_T = 13;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_FILM: MMAL_PARAM_IMAGEFX_T = 14;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_BLUR: MMAL_PARAM_IMAGEFX_T = 15;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_SATURATION: MMAL_PARAM_IMAGEFX_T = 16;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_COLOURSWAP: MMAL_PARAM_IMAGEFX_T = 17;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_WASHEDOUT: MMAL_PARAM_IMAGEFX_T = 18;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_POSTERISE: MMAL_PARAM_IMAGEFX_T = 19;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_COLOURPOINT: MMAL_PARAM_IMAGEFX_T = 20;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_COLOURBALANCE: MMAL_PARAM_IMAGEFX_T = 21;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_CARTOON: MMAL_PARAM_IMAGEFX_T = 22;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DEINTERLACE_DOUBLE: MMAL_PARAM_IMAGEFX_T = 23;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DEINTERLACE_ADV: MMAL_PARAM_IMAGEFX_T = 24;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_DEINTERLACE_FAST: MMAL_PARAM_IMAGEFX_T = 25;
-pub const MMAL_PARAM_IMAGEFX_T_MMAL_PARAM_IMAGEFX_MAX: MMAL_PARAM_IMAGEFX_T = 2147483647;
+pub const MMAL_PARAM_IMAGEFX_NONE: MMAL_PARAM_IMAGEFX_T = 0;
+pub const MMAL_PARAM_IMAGEFX_NEGATIVE: MMAL_PARAM_IMAGEFX_T = 1;
+pub const MMAL_PARAM_IMAGEFX_SOLARIZE: MMAL_PARAM_IMAGEFX_T = 2;
+pub const MMAL_PARAM_IMAGEFX_POSTERIZE: MMAL_PARAM_IMAGEFX_T = 3;
+pub const MMAL_PARAM_IMAGEFX_WHITEBOARD: MMAL_PARAM_IMAGEFX_T = 4;
+pub const MMAL_PARAM_IMAGEFX_BLACKBOARD: MMAL_PARAM_IMAGEFX_T = 5;
+pub const MMAL_PARAM_IMAGEFX_SKETCH: MMAL_PARAM_IMAGEFX_T = 6;
+pub const MMAL_PARAM_IMAGEFX_DENOISE: MMAL_PARAM_IMAGEFX_T = 7;
+pub const MMAL_PARAM_IMAGEFX_EMBOSS: MMAL_PARAM_IMAGEFX_T = 8;
+pub const MMAL_PARAM_IMAGEFX_OILPAINT: MMAL_PARAM_IMAGEFX_T = 9;
+pub const MMAL_PARAM_IMAGEFX_HATCH: MMAL_PARAM_IMAGEFX_T = 10;
+pub const MMAL_PARAM_IMAGEFX_GPEN: MMAL_PARAM_IMAGEFX_T = 11;
+pub const MMAL_PARAM_IMAGEFX_PASTEL: MMAL_PARAM_IMAGEFX_T = 12;
+pub const MMAL_PARAM_IMAGEFX_WATERCOLOUR: MMAL_PARAM_IMAGEFX_T = 13;
+pub const MMAL_PARAM_IMAGEFX_FILM: MMAL_PARAM_IMAGEFX_T = 14;
+pub const MMAL_PARAM_IMAGEFX_BLUR: MMAL_PARAM_IMAGEFX_T = 15;
+pub const MMAL_PARAM_IMAGEFX_SATURATION: MMAL_PARAM_IMAGEFX_T = 16;
+pub const MMAL_PARAM_IMAGEFX_COLOURSWAP: MMAL_PARAM_IMAGEFX_T = 17;
+pub const MMAL_PARAM_IMAGEFX_WASHEDOUT: MMAL_PARAM_IMAGEFX_T = 18;
+pub const MMAL_PARAM_IMAGEFX_POSTERISE: MMAL_PARAM_IMAGEFX_T = 19;
+pub const MMAL_PARAM_IMAGEFX_COLOURPOINT: MMAL_PARAM_IMAGEFX_T = 20;
+pub const MMAL_PARAM_IMAGEFX_COLOURBALANCE: MMAL_PARAM_IMAGEFX_T = 21;
+pub const MMAL_PARAM_IMAGEFX_CARTOON: MMAL_PARAM_IMAGEFX_T = 22;
+pub const MMAL_PARAM_IMAGEFX_DEINTERLACE_DOUBLE: MMAL_PARAM_IMAGEFX_T = 23;
+pub const MMAL_PARAM_IMAGEFX_DEINTERLACE_ADV: MMAL_PARAM_IMAGEFX_T = 24;
+pub const MMAL_PARAM_IMAGEFX_DEINTERLACE_FAST: MMAL_PARAM_IMAGEFX_T = 25;
+pub const MMAL_PARAM_IMAGEFX_MAX: MMAL_PARAM_IMAGEFX_T = 2147483647;
 #[doc = " Image effect"]
 pub type MMAL_PARAM_IMAGEFX_T = u32;
 #[repr(C)]
@@ -5186,12 +5307,12 @@ fn bindgen_test_layout_MMAL_PARAMETER_COLOURFX_T() {
     );
 }
 #[doc = "< Frames do not have STCs, as needed in OpenMAX/IL"]
-pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_OFF: MMAL_CAMERA_STC_MODE_T = 0;
+pub const MMAL_PARAM_STC_MODE_OFF: MMAL_CAMERA_STC_MODE_T = 0;
 #[doc = "< Use raw clock STC, needed for true pause/resume support"]
-pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_RAW: MMAL_CAMERA_STC_MODE_T = 1;
+pub const MMAL_PARAM_STC_MODE_RAW: MMAL_CAMERA_STC_MODE_T = 1;
 #[doc = "< Start the STC from the start of capture, only for quick demo code"]
-pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_COOKED: MMAL_CAMERA_STC_MODE_T = 2;
-pub const MMAL_CAMERA_STC_MODE_T_MMAL_PARAM_STC_MODE_MAX: MMAL_CAMERA_STC_MODE_T = 2147483647;
+pub const MMAL_PARAM_STC_MODE_COOKED: MMAL_CAMERA_STC_MODE_T = 2;
+pub const MMAL_PARAM_STC_MODE_MAX: MMAL_CAMERA_STC_MODE_T = 2147483647;
 pub type MMAL_CAMERA_STC_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5239,12 +5360,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_STC_MODE_T() {
         )
     );
 }
-pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_OFF: MMAL_PARAM_FLICKERAVOID_T = 0;
-pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_AUTO: MMAL_PARAM_FLICKERAVOID_T = 1;
-pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_50HZ: MMAL_PARAM_FLICKERAVOID_T = 2;
-pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_60HZ: MMAL_PARAM_FLICKERAVOID_T = 3;
-pub const MMAL_PARAM_FLICKERAVOID_T_MMAL_PARAM_FLICKERAVOID_MAX: MMAL_PARAM_FLICKERAVOID_T =
-    2147483647;
+pub const MMAL_PARAM_FLICKERAVOID_OFF: MMAL_PARAM_FLICKERAVOID_T = 0;
+pub const MMAL_PARAM_FLICKERAVOID_AUTO: MMAL_PARAM_FLICKERAVOID_T = 1;
+pub const MMAL_PARAM_FLICKERAVOID_50HZ: MMAL_PARAM_FLICKERAVOID_T = 2;
+pub const MMAL_PARAM_FLICKERAVOID_60HZ: MMAL_PARAM_FLICKERAVOID_T = 3;
+pub const MMAL_PARAM_FLICKERAVOID_MAX: MMAL_PARAM_FLICKERAVOID_T = 2147483647;
 pub type MMAL_PARAM_FLICKERAVOID_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5290,13 +5410,13 @@ fn bindgen_test_layout_MMAL_PARAMETER_FLICKERAVOID_T() {
         )
     );
 }
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_OFF: MMAL_PARAM_FLASH_T = 0;
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_AUTO: MMAL_PARAM_FLASH_T = 1;
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_ON: MMAL_PARAM_FLASH_T = 2;
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_REDEYE: MMAL_PARAM_FLASH_T = 3;
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_FILLIN: MMAL_PARAM_FLASH_T = 4;
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_TORCH: MMAL_PARAM_FLASH_T = 5;
-pub const MMAL_PARAM_FLASH_T_MMAL_PARAM_FLASH_MAX: MMAL_PARAM_FLASH_T = 2147483647;
+pub const MMAL_PARAM_FLASH_OFF: MMAL_PARAM_FLASH_T = 0;
+pub const MMAL_PARAM_FLASH_AUTO: MMAL_PARAM_FLASH_T = 1;
+pub const MMAL_PARAM_FLASH_ON: MMAL_PARAM_FLASH_T = 2;
+pub const MMAL_PARAM_FLASH_REDEYE: MMAL_PARAM_FLASH_T = 3;
+pub const MMAL_PARAM_FLASH_FILLIN: MMAL_PARAM_FLASH_T = 4;
+pub const MMAL_PARAM_FLASH_TORCH: MMAL_PARAM_FLASH_T = 5;
+pub const MMAL_PARAM_FLASH_MAX: MMAL_PARAM_FLASH_T = 2147483647;
 pub type MMAL_PARAM_FLASH_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5338,10 +5458,10 @@ fn bindgen_test_layout_MMAL_PARAMETER_FLASH_T() {
         )
     );
 }
-pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_OFF: MMAL_PARAM_REDEYE_T = 0;
-pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_ON: MMAL_PARAM_REDEYE_T = 1;
-pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_SIMPLE: MMAL_PARAM_REDEYE_T = 2;
-pub const MMAL_PARAM_REDEYE_T_MMAL_PARAM_REDEYE_MAX: MMAL_PARAM_REDEYE_T = 2147483647;
+pub const MMAL_PARAM_REDEYE_OFF: MMAL_PARAM_REDEYE_T = 0;
+pub const MMAL_PARAM_REDEYE_ON: MMAL_PARAM_REDEYE_T = 1;
+pub const MMAL_PARAM_REDEYE_SIMPLE: MMAL_PARAM_REDEYE_T = 2;
+pub const MMAL_PARAM_REDEYE_MAX: MMAL_PARAM_REDEYE_T = 2147483647;
 pub type MMAL_PARAM_REDEYE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5383,22 +5503,22 @@ fn bindgen_test_layout_MMAL_PARAMETER_REDEYE_T() {
         )
     );
 }
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_AUTO: MMAL_PARAM_FOCUS_T = 0;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_AUTO_NEAR: MMAL_PARAM_FOCUS_T = 1;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_AUTO_MACRO: MMAL_PARAM_FOCUS_T = 2;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF: MMAL_PARAM_FOCUS_T = 3;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_NEAR: MMAL_PARAM_FOCUS_T = 4;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_FIXED_INFINITY: MMAL_PARAM_FOCUS_T = 5;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_FIXED_HYPERFOCAL: MMAL_PARAM_FOCUS_T = 6;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_FIXED_NEAR: MMAL_PARAM_FOCUS_T = 7;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_FIXED_MACRO: MMAL_PARAM_FOCUS_T = 8;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_EDOF: MMAL_PARAM_FOCUS_T = 9;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_MACRO: MMAL_PARAM_FOCUS_T = 10;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_FAST: MMAL_PARAM_FOCUS_T = 11;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_NEAR_FAST: MMAL_PARAM_FOCUS_T = 12;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_CAF_MACRO_FAST: MMAL_PARAM_FOCUS_T = 13;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_FIXED_CURRENT: MMAL_PARAM_FOCUS_T = 14;
-pub const MMAL_PARAM_FOCUS_T_MMAL_PARAM_FOCUS_MAX: MMAL_PARAM_FOCUS_T = 2147483647;
+pub const MMAL_PARAM_FOCUS_AUTO: MMAL_PARAM_FOCUS_T = 0;
+pub const MMAL_PARAM_FOCUS_AUTO_NEAR: MMAL_PARAM_FOCUS_T = 1;
+pub const MMAL_PARAM_FOCUS_AUTO_MACRO: MMAL_PARAM_FOCUS_T = 2;
+pub const MMAL_PARAM_FOCUS_CAF: MMAL_PARAM_FOCUS_T = 3;
+pub const MMAL_PARAM_FOCUS_CAF_NEAR: MMAL_PARAM_FOCUS_T = 4;
+pub const MMAL_PARAM_FOCUS_FIXED_INFINITY: MMAL_PARAM_FOCUS_T = 5;
+pub const MMAL_PARAM_FOCUS_FIXED_HYPERFOCAL: MMAL_PARAM_FOCUS_T = 6;
+pub const MMAL_PARAM_FOCUS_FIXED_NEAR: MMAL_PARAM_FOCUS_T = 7;
+pub const MMAL_PARAM_FOCUS_FIXED_MACRO: MMAL_PARAM_FOCUS_T = 8;
+pub const MMAL_PARAM_FOCUS_EDOF: MMAL_PARAM_FOCUS_T = 9;
+pub const MMAL_PARAM_FOCUS_CAF_MACRO: MMAL_PARAM_FOCUS_T = 10;
+pub const MMAL_PARAM_FOCUS_CAF_FAST: MMAL_PARAM_FOCUS_T = 11;
+pub const MMAL_PARAM_FOCUS_CAF_NEAR_FAST: MMAL_PARAM_FOCUS_T = 12;
+pub const MMAL_PARAM_FOCUS_CAF_MACRO_FAST: MMAL_PARAM_FOCUS_T = 13;
+pub const MMAL_PARAM_FOCUS_FIXED_CURRENT: MMAL_PARAM_FOCUS_T = 14;
+pub const MMAL_PARAM_FOCUS_MAX: MMAL_PARAM_FOCUS_T = 2147483647;
 pub type MMAL_PARAM_FOCUS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5440,14 +5560,10 @@ fn bindgen_test_layout_MMAL_PARAMETER_FOCUS_T() {
         )
     );
 }
-pub const MMAL_PARAM_CAPTURE_STATUS_T_MMAL_PARAM_CAPTURE_STATUS_NOT_CAPTURING:
-    MMAL_PARAM_CAPTURE_STATUS_T = 0;
-pub const MMAL_PARAM_CAPTURE_STATUS_T_MMAL_PARAM_CAPTURE_STATUS_CAPTURE_STARTED:
-    MMAL_PARAM_CAPTURE_STATUS_T = 1;
-pub const MMAL_PARAM_CAPTURE_STATUS_T_MMAL_PARAM_CAPTURE_STATUS_CAPTURE_ENDED:
-    MMAL_PARAM_CAPTURE_STATUS_T = 2;
-pub const MMAL_PARAM_CAPTURE_STATUS_T_MMAL_PARAM_CAPTURE_STATUS_MAX: MMAL_PARAM_CAPTURE_STATUS_T =
-    2147483647;
+pub const MMAL_PARAM_CAPTURE_STATUS_NOT_CAPTURING: MMAL_PARAM_CAPTURE_STATUS_T = 0;
+pub const MMAL_PARAM_CAPTURE_STATUS_CAPTURE_STARTED: MMAL_PARAM_CAPTURE_STATUS_T = 1;
+pub const MMAL_PARAM_CAPTURE_STATUS_CAPTURE_ENDED: MMAL_PARAM_CAPTURE_STATUS_T = 2;
+pub const MMAL_PARAM_CAPTURE_STATUS_MAX: MMAL_PARAM_CAPTURE_STATUS_T = 2147483647;
 pub type MMAL_PARAM_CAPTURE_STATUS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5493,28 +5609,19 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAPTURE_STATUS_T() {
         )
     );
 }
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_OFF: MMAL_PARAM_FOCUS_STATUS_T = 0;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_REQUEST: MMAL_PARAM_FOCUS_STATUS_T = 1;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_REACHED: MMAL_PARAM_FOCUS_STATUS_T = 2;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_UNABLE_TO_REACH:
-    MMAL_PARAM_FOCUS_STATUS_T = 3;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_LOST: MMAL_PARAM_FOCUS_STATUS_T = 4;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_CAF_MOVING: MMAL_PARAM_FOCUS_STATUS_T =
-    5;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_CAF_SUCCESS: MMAL_PARAM_FOCUS_STATUS_T =
-    6;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_CAF_FAILED: MMAL_PARAM_FOCUS_STATUS_T =
-    7;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_MANUAL_MOVING:
-    MMAL_PARAM_FOCUS_STATUS_T = 8;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_MANUAL_REACHED:
-    MMAL_PARAM_FOCUS_STATUS_T = 9;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_CAF_WATCHING:
-    MMAL_PARAM_FOCUS_STATUS_T = 10;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_CAF_SCENE_CHANGED:
-    MMAL_PARAM_FOCUS_STATUS_T = 11;
-pub const MMAL_PARAM_FOCUS_STATUS_T_MMAL_PARAM_FOCUS_STATUS_MAX: MMAL_PARAM_FOCUS_STATUS_T =
-    2147483647;
+pub const MMAL_PARAM_FOCUS_STATUS_OFF: MMAL_PARAM_FOCUS_STATUS_T = 0;
+pub const MMAL_PARAM_FOCUS_STATUS_REQUEST: MMAL_PARAM_FOCUS_STATUS_T = 1;
+pub const MMAL_PARAM_FOCUS_STATUS_REACHED: MMAL_PARAM_FOCUS_STATUS_T = 2;
+pub const MMAL_PARAM_FOCUS_STATUS_UNABLE_TO_REACH: MMAL_PARAM_FOCUS_STATUS_T = 3;
+pub const MMAL_PARAM_FOCUS_STATUS_LOST: MMAL_PARAM_FOCUS_STATUS_T = 4;
+pub const MMAL_PARAM_FOCUS_STATUS_CAF_MOVING: MMAL_PARAM_FOCUS_STATUS_T = 5;
+pub const MMAL_PARAM_FOCUS_STATUS_CAF_SUCCESS: MMAL_PARAM_FOCUS_STATUS_T = 6;
+pub const MMAL_PARAM_FOCUS_STATUS_CAF_FAILED: MMAL_PARAM_FOCUS_STATUS_T = 7;
+pub const MMAL_PARAM_FOCUS_STATUS_MANUAL_MOVING: MMAL_PARAM_FOCUS_STATUS_T = 8;
+pub const MMAL_PARAM_FOCUS_STATUS_MANUAL_REACHED: MMAL_PARAM_FOCUS_STATUS_T = 9;
+pub const MMAL_PARAM_FOCUS_STATUS_CAF_WATCHING: MMAL_PARAM_FOCUS_STATUS_T = 10;
+pub const MMAL_PARAM_FOCUS_STATUS_CAF_SCENE_CHANGED: MMAL_PARAM_FOCUS_STATUS_T = 11;
+pub const MMAL_PARAM_FOCUS_STATUS_MAX: MMAL_PARAM_FOCUS_STATUS_T = 2147483647;
 pub type MMAL_PARAM_FOCUS_STATUS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5561,12 +5668,10 @@ fn bindgen_test_layout_MMAL_PARAMETER_FOCUS_STATUS_T() {
     );
 }
 #[doc = "< Disables face detection"]
-pub const MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_NONE: MMAL_PARAM_FACE_TRACK_MODE_T =
-    0;
+pub const MMAL_PARAM_FACE_DETECT_NONE: MMAL_PARAM_FACE_TRACK_MODE_T = 0;
 #[doc = "< Enables face detection"]
-pub const MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_ON: MMAL_PARAM_FACE_TRACK_MODE_T = 1;
-pub const MMAL_PARAM_FACE_TRACK_MODE_T_MMAL_PARAM_FACE_DETECT_MAX: MMAL_PARAM_FACE_TRACK_MODE_T =
-    2147483647;
+pub const MMAL_PARAM_FACE_DETECT_ON: MMAL_PARAM_FACE_TRACK_MODE_T = 1;
+pub const MMAL_PARAM_FACE_DETECT_MAX: MMAL_PARAM_FACE_TRACK_MODE_T = 2147483647;
 pub type MMAL_PARAM_FACE_TRACK_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6115,14 +6220,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_INFO_CAMERA_T() {
         )
     );
 }
-pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T_MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_XENON:
-    MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 0;
-pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T_MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_LED:
-    MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 1;
-pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T_MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_OTHER:
-    MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 2;
-pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T_MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_MAX:
-    MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 2147483647;
+pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_XENON: MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 0;
+pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_LED: MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 1;
+pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_OTHER: MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = 2;
+pub const MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_MAX: MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T =
+    2147483647;
 pub type MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6243,15 +6345,12 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_INFO_T() {
     );
 }
 #[doc = "< Resumes preview once capture is completed."]
-pub const MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END:
-    MMAL_PARAMETER_CAPTUREMODE_MODE_T = 0;
+pub const MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END: MMAL_PARAMETER_CAPTUREMODE_MODE_T = 0;
 #[doc = "< Resumes preview once capture is completed, and hold the image for subsequent reprocessing."]
-pub const MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END_AND_HOLD:
-    MMAL_PARAMETER_CAPTUREMODE_MODE_T = 1;
+pub const MMAL_PARAM_CAPTUREMODE_WAIT_FOR_END_AND_HOLD: MMAL_PARAMETER_CAPTUREMODE_MODE_T = 1;
 #[doc = "< Resumes preview as soon as possible once capture frame is received from the sensor."]
 #[doc = "   Requires fast_preview_resume to be set via MMAL_PARAMETER_CAMERA_CONFIG."]
-pub const MMAL_PARAMETER_CAPTUREMODE_MODE_T_MMAL_PARAM_CAPTUREMODE_RESUME_VF_IMMEDIATELY:
-    MMAL_PARAMETER_CAPTUREMODE_MODE_T = 2;
+pub const MMAL_PARAM_CAPTUREMODE_RESUME_VF_IMMEDIATELY: MMAL_PARAMETER_CAPTUREMODE_MODE_T = 2;
 pub type MMAL_PARAMETER_CAPTUREMODE_MODE_T = u32;
 #[doc = " Stills capture mode control."]
 #[repr(C)]
@@ -6298,13 +6397,10 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAPTUREMODE_T() {
     );
 }
 #[doc = "< Region defines a generic region"]
-pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_NORMAL:
-    MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 0;
+pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_NORMAL: MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 0;
 #[doc = "< Region defines a face"]
-pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_FACE:
-    MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 1;
-pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_T_MMAL_PARAMETER_FOCUS_REGION_TYPE_MAX:
-    MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 2;
+pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_FACE: MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 1;
+pub const MMAL_PARAMETER_FOCUS_REGION_TYPE_MAX: MMAL_PARAMETER_FOCUS_REGION_TYPE_T = 2;
 pub type MMAL_PARAMETER_FOCUS_REGION_TYPE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6706,16 +6802,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_FIELD_OF_VIEW_T() {
         )
     );
 }
-pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_OFF:
-    MMAL_PARAMETER_DRC_STRENGTH_T = 0;
-pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_LOW:
-    MMAL_PARAMETER_DRC_STRENGTH_T = 1;
-pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_MEDIUM:
-    MMAL_PARAMETER_DRC_STRENGTH_T = 2;
-pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_HIGH:
-    MMAL_PARAMETER_DRC_STRENGTH_T = 3;
-pub const MMAL_PARAMETER_DRC_STRENGTH_T_MMAL_PARAMETER_DRC_STRENGTH_MAX:
-    MMAL_PARAMETER_DRC_STRENGTH_T = 2147483647;
+pub const MMAL_PARAMETER_DRC_STRENGTH_OFF: MMAL_PARAMETER_DRC_STRENGTH_T = 0;
+pub const MMAL_PARAMETER_DRC_STRENGTH_LOW: MMAL_PARAMETER_DRC_STRENGTH_T = 1;
+pub const MMAL_PARAMETER_DRC_STRENGTH_MEDIUM: MMAL_PARAMETER_DRC_STRENGTH_T = 2;
+pub const MMAL_PARAMETER_DRC_STRENGTH_HIGH: MMAL_PARAMETER_DRC_STRENGTH_T = 3;
+pub const MMAL_PARAMETER_DRC_STRENGTH_MAX: MMAL_PARAMETER_DRC_STRENGTH_T = 2147483647;
 pub type MMAL_PARAMETER_DRC_STRENGTH_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6757,21 +6848,36 @@ fn bindgen_test_layout_MMAL_PARAMETER_DRC_T() {
         )
     );
 }
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_FACETRACKING : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 0 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_REDEYE_REDUCTION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 1 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_VIDEO_STABILISATION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 2 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_WRITE_RAW : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 3 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_VIDEO_DENOISE : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 4 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_STILLS_DENOISE : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 5 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_TEMPORAL_DENOISE : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 6 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_ANTISHAKE : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 7 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_IMAGE_EFFECTS : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 8 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_DYNAMIC_RANGE_COMPRESSION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 9 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_FACE_RECOGNITION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 10 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_FACE_BEAUTIFICATION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 11 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_SCENE_DETECTION : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 12 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_HIGH_DYNAMIC_RANGE : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 13 ;
-pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T_MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_MAX : MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 2147483647 ;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_FACETRACKING:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 0;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_REDEYE_REDUCTION:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 1;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_VIDEO_STABILISATION:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 2;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_WRITE_RAW:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 3;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_VIDEO_DENOISE:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 4;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_STILLS_DENOISE:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 5;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_TEMPORAL_DENOISE:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 6;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_ANTISHAKE:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 7;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_IMAGE_EFFECTS:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 8;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_DYNAMIC_RANGE_COMPRESSION:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 9;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_FACE_RECOGNITION:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 10;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_FACE_BEAUTIFICATION:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 11;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_SCENE_DETECTION:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 12;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_HIGH_DYNAMIC_RANGE:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 13;
+pub const MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_MAX:
+    MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = 2147483647;
 pub type MMAL_PARAMETER_ALGORITHM_CONTROL_ALGORITHMS_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6835,16 +6941,12 @@ fn bindgen_test_layout_MMAL_PARAMETER_ALGORITHM_CONTROL_T() {
     );
 }
 #[doc = "< Compromise on behaviour as use case totally unknown"]
-pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_UNKNOWN:
-    MMAL_PARAM_CAMERA_USE_CASE_T = 0;
+pub const MMAL_PARAM_CAMERA_USE_CASE_UNKNOWN: MMAL_PARAM_CAMERA_USE_CASE_T = 0;
 #[doc = "< Stills capture use case"]
-pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_STILLS_CAPTURE:
-    MMAL_PARAM_CAMERA_USE_CASE_T = 1;
+pub const MMAL_PARAM_CAMERA_USE_CASE_STILLS_CAPTURE: MMAL_PARAM_CAMERA_USE_CASE_T = 1;
 #[doc = "< Video encode (camcorder) use case"]
-pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_VIDEO_CAPTURE:
-    MMAL_PARAM_CAMERA_USE_CASE_T = 2;
-pub const MMAL_PARAM_CAMERA_USE_CASE_T_MMAL_PARAM_CAMERA_USE_CASE_MAX:
-    MMAL_PARAM_CAMERA_USE_CASE_T = 2147483647;
+pub const MMAL_PARAM_CAMERA_USE_CASE_VIDEO_CAPTURE: MMAL_PARAM_CAMERA_USE_CASE_T = 2;
+pub const MMAL_PARAM_CAMERA_USE_CASE_MAX: MMAL_PARAM_CAMERA_USE_CASE_T = 2147483647;
 pub type MMAL_PARAM_CAMERA_USE_CASE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -7185,20 +7287,16 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_SETTINGS_T() {
     );
 }
 #[doc = "< Indicator will be off."]
-pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_OFF:
-    MMAL_PARAM_PRIVACY_INDICATOR_T = 0;
+pub const MMAL_PARAMETER_PRIVACY_INDICATOR_OFF: MMAL_PARAM_PRIVACY_INDICATOR_T = 0;
 #[doc = "< Indicator will come on just after a stills capture and"]
 #[doc = "   and remain on for 2seconds, or will be on whilst output[1]"]
 #[doc = "   is actively producing images."]
-pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_ON:
-    MMAL_PARAM_PRIVACY_INDICATOR_T = 1;
+pub const MMAL_PARAMETER_PRIVACY_INDICATOR_ON: MMAL_PARAM_PRIVACY_INDICATOR_T = 1;
 #[doc = "< Turns indicator of for 2s independent of capture status."]
 #[doc = "   Set this mode repeatedly to keep the indicator on for a"]
 #[doc = "   longer period."]
-pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON:
-    MMAL_PARAM_PRIVACY_INDICATOR_T = 2;
-pub const MMAL_PARAM_PRIVACY_INDICATOR_T_MMAL_PARAMETER_PRIVACY_INDICATOR_MAX:
-    MMAL_PARAM_PRIVACY_INDICATOR_T = 2147483647;
+pub const MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON: MMAL_PARAM_PRIVACY_INDICATOR_T = 2;
+pub const MMAL_PARAMETER_PRIVACY_INDICATOR_MAX: MMAL_PARAM_PRIVACY_INDICATOR_T = 2147483647;
 pub type MMAL_PARAM_PRIVACY_INDICATOR_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -8189,12 +8287,10 @@ impl ::std::fmt::Debug for MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T {
         write ! ( f , "MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T {{ hdr: {:?}, enable: {:?}, show_shutter: {:?}, show_analog_gain: {:?}, show_lens: {:?}, show_caf: {:?}, show_motion: {:?}, show_frame_num: {:?}, enable_text_background: {:?}, custom_background_colour: {:?}, custom_background_Y: {:?}, custom_background_U: {:?}, custom_background_V: {:?}, dummy1: {:?}, custom_text_colour: {:?}, custom_text_Y: {:?}, custom_text_U: {:?}, custom_text_V: {:?}, text_size: {:?}, text: [{}], justify: {:?}, x_offset: {:?}, y_offset: {:?} }}" , self . hdr , self . enable , self . show_shutter , self . show_analog_gain , self . show_lens , self . show_caf , self . show_motion , self . show_frame_num , self . enable_text_background , self . custom_background_colour , self . custom_background_Y , self . custom_background_U , self . custom_background_V , self . dummy1 , self . custom_text_colour , self . custom_text_Y , self . custom_text_U , self . custom_text_V , self . text_size , self . text . iter ( ) . enumerate ( ) . map ( | ( i , v ) | format ! ( "{}{:?}" , if i > 0 { ", " } else { "" } , v ) ) . collect :: < String > ( ) , self . justify , self . x_offset , self . y_offset )
     }
 }
-pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_NONE: MMAL_STEREOSCOPIC_MODE_T = 0;
-pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_SIDE_BY_SIDE: MMAL_STEREOSCOPIC_MODE_T =
-    1;
-pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_TOP_BOTTOM: MMAL_STEREOSCOPIC_MODE_T = 2;
-pub const MMAL_STEREOSCOPIC_MODE_T_MMAL_STEREOSCOPIC_MODE_MAX: MMAL_STEREOSCOPIC_MODE_T =
-    2147483647;
+pub const MMAL_STEREOSCOPIC_MODE_NONE: MMAL_STEREOSCOPIC_MODE_T = 0;
+pub const MMAL_STEREOSCOPIC_MODE_SIDE_BY_SIDE: MMAL_STEREOSCOPIC_MODE_T = 1;
+pub const MMAL_STEREOSCOPIC_MODE_TOP_BOTTOM: MMAL_STEREOSCOPIC_MODE_T = 2;
+pub const MMAL_STEREOSCOPIC_MODE_MAX: MMAL_STEREOSCOPIC_MODE_T = 2147483647;
 pub type MMAL_STEREOSCOPIC_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -8270,10 +8366,10 @@ fn bindgen_test_layout_MMAL_PARAMETER_STEREOSCOPIC_MODE_T() {
         )
     );
 }
-pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_CSI2: MMAL_CAMERA_INTERFACE_T = 0;
-pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_CCP2: MMAL_CAMERA_INTERFACE_T = 1;
-pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_CPI: MMAL_CAMERA_INTERFACE_T = 2;
-pub const MMAL_CAMERA_INTERFACE_T_MMAL_CAMERA_INTERFACE_MAX: MMAL_CAMERA_INTERFACE_T = 2147483647;
+pub const MMAL_CAMERA_INTERFACE_CSI2: MMAL_CAMERA_INTERFACE_T = 0;
+pub const MMAL_CAMERA_INTERFACE_CCP2: MMAL_CAMERA_INTERFACE_T = 1;
+pub const MMAL_CAMERA_INTERFACE_CPI: MMAL_CAMERA_INTERFACE_T = 2;
+pub const MMAL_CAMERA_INTERFACE_MAX: MMAL_CAMERA_INTERFACE_T = 2147483647;
 pub type MMAL_CAMERA_INTERFACE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -8321,12 +8417,9 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_INTERFACE_T() {
         )
     );
 }
-pub const MMAL_CAMERA_CLOCKING_MODE_T_MMAL_CAMERA_CLOCKING_MODE_STROBE:
-    MMAL_CAMERA_CLOCKING_MODE_T = 0;
-pub const MMAL_CAMERA_CLOCKING_MODE_T_MMAL_CAMERA_CLOCKING_MODE_CLOCK: MMAL_CAMERA_CLOCKING_MODE_T =
-    1;
-pub const MMAL_CAMERA_CLOCKING_MODE_T_MMAL_CAMERA_CLOCKING_MODE_MAX: MMAL_CAMERA_CLOCKING_MODE_T =
-    2147483647;
+pub const MMAL_CAMERA_CLOCKING_MODE_STROBE: MMAL_CAMERA_CLOCKING_MODE_T = 0;
+pub const MMAL_CAMERA_CLOCKING_MODE_CLOCK: MMAL_CAMERA_CLOCKING_MODE_T = 1;
+pub const MMAL_CAMERA_CLOCKING_MODE_MAX: MMAL_CAMERA_CLOCKING_MODE_T = 2147483647;
 pub type MMAL_CAMERA_CLOCKING_MODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -8379,76 +8472,45 @@ fn bindgen_test_layout_MMAL_PARAMETER_CAMERA_CLOCKING_MODE_T() {
         )
     );
 }
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_NONE:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 0;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO10:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 1;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM7TO10:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 2;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM6TO10:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 3;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO12:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 4;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM7TO12:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 5;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM6TO12:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 6;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM10TO14:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 7;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO14:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 8;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM12TO16:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 9;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM10TO16:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 10;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO16:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 11;
-pub const MMAL_CAMERA_RX_CONFIG_DECODE_MMAL_CAMERA_RX_CONFIG_DECODE_MAX:
-    MMAL_CAMERA_RX_CONFIG_DECODE = 2147483647;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_NONE: MMAL_CAMERA_RX_CONFIG_DECODE = 0;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO10: MMAL_CAMERA_RX_CONFIG_DECODE = 1;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM7TO10: MMAL_CAMERA_RX_CONFIG_DECODE = 2;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM6TO10: MMAL_CAMERA_RX_CONFIG_DECODE = 3;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO12: MMAL_CAMERA_RX_CONFIG_DECODE = 4;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM7TO12: MMAL_CAMERA_RX_CONFIG_DECODE = 5;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM6TO12: MMAL_CAMERA_RX_CONFIG_DECODE = 6;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM10TO14: MMAL_CAMERA_RX_CONFIG_DECODE = 7;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO14: MMAL_CAMERA_RX_CONFIG_DECODE = 8;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM12TO16: MMAL_CAMERA_RX_CONFIG_DECODE = 9;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM10TO16: MMAL_CAMERA_RX_CONFIG_DECODE = 10;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_DPCM8TO16: MMAL_CAMERA_RX_CONFIG_DECODE = 11;
+pub const MMAL_CAMERA_RX_CONFIG_DECODE_MAX: MMAL_CAMERA_RX_CONFIG_DECODE = 2147483647;
 pub type MMAL_CAMERA_RX_CONFIG_DECODE = u32;
-pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_NONE:
-    MMAL_CAMERA_RX_CONFIG_ENCODE = 0;
-pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM10TO8:
-    MMAL_CAMERA_RX_CONFIG_ENCODE = 1;
-pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM12TO8:
-    MMAL_CAMERA_RX_CONFIG_ENCODE = 2;
-pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM14TO8:
-    MMAL_CAMERA_RX_CONFIG_ENCODE = 3;
-pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MMAL_CAMERA_RX_CONFIG_ENCODE_MAX:
-    MMAL_CAMERA_RX_CONFIG_ENCODE = 2147483647;
+pub const MMAL_CAMERA_RX_CONFIG_ENCODE_NONE: MMAL_CAMERA_RX_CONFIG_ENCODE = 0;
+pub const MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM10TO8: MMAL_CAMERA_RX_CONFIG_ENCODE = 1;
+pub const MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM12TO8: MMAL_CAMERA_RX_CONFIG_ENCODE = 2;
+pub const MMAL_CAMERA_RX_CONFIG_ENCODE_DPCM14TO8: MMAL_CAMERA_RX_CONFIG_ENCODE = 3;
+pub const MMAL_CAMERA_RX_CONFIG_ENCODE_MAX: MMAL_CAMERA_RX_CONFIG_ENCODE = 2147483647;
 pub type MMAL_CAMERA_RX_CONFIG_ENCODE = u32;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_NONE:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 0;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_6:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 1;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_7:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 2;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_8:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 3;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_10:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 4;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_12:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 5;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_14:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 6;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_16:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 7;
-pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MMAL_CAMERA_RX_CONFIG_UNPACK_MAX:
-    MMAL_CAMERA_RX_CONFIG_UNPACK = 2147483647;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_NONE: MMAL_CAMERA_RX_CONFIG_UNPACK = 0;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_6: MMAL_CAMERA_RX_CONFIG_UNPACK = 1;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_7: MMAL_CAMERA_RX_CONFIG_UNPACK = 2;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_8: MMAL_CAMERA_RX_CONFIG_UNPACK = 3;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_10: MMAL_CAMERA_RX_CONFIG_UNPACK = 4;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_12: MMAL_CAMERA_RX_CONFIG_UNPACK = 5;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_14: MMAL_CAMERA_RX_CONFIG_UNPACK = 6;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_16: MMAL_CAMERA_RX_CONFIG_UNPACK = 7;
+pub const MMAL_CAMERA_RX_CONFIG_UNPACK_MAX: MMAL_CAMERA_RX_CONFIG_UNPACK = 2147483647;
 pub type MMAL_CAMERA_RX_CONFIG_UNPACK = u32;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_NONE: MMAL_CAMERA_RX_CONFIG_PACK =
-    0;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_8: MMAL_CAMERA_RX_CONFIG_PACK = 1;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_10: MMAL_CAMERA_RX_CONFIG_PACK = 2;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_12: MMAL_CAMERA_RX_CONFIG_PACK = 3;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_14: MMAL_CAMERA_RX_CONFIG_PACK = 4;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_16: MMAL_CAMERA_RX_CONFIG_PACK = 5;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_RAW10: MMAL_CAMERA_RX_CONFIG_PACK =
-    6;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_RAW12: MMAL_CAMERA_RX_CONFIG_PACK =
-    7;
-pub const MMAL_CAMERA_RX_CONFIG_PACK_MMAL_CAMERA_RX_CONFIG_PACK_MAX: MMAL_CAMERA_RX_CONFIG_PACK =
-    2147483647;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_NONE: MMAL_CAMERA_RX_CONFIG_PACK = 0;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_8: MMAL_CAMERA_RX_CONFIG_PACK = 1;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_10: MMAL_CAMERA_RX_CONFIG_PACK = 2;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_12: MMAL_CAMERA_RX_CONFIG_PACK = 3;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_14: MMAL_CAMERA_RX_CONFIG_PACK = 4;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_16: MMAL_CAMERA_RX_CONFIG_PACK = 5;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_RAW10: MMAL_CAMERA_RX_CONFIG_PACK = 6;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_RAW12: MMAL_CAMERA_RX_CONFIG_PACK = 7;
+pub const MMAL_CAMERA_RX_CONFIG_PACK_MAX: MMAL_CAMERA_RX_CONFIG_PACK = 2147483647;
 pub type MMAL_CAMERA_RX_CONFIG_PACK = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -8878,11 +8940,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_LENS_SHADING_T() {
         )
     );
 }
-pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_NONE: MMAL_RESIZEMODE_T = 0;
-pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_CROP: MMAL_RESIZEMODE_T = 1;
-pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_BOX: MMAL_RESIZEMODE_T = 2;
-pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_BYTES: MMAL_RESIZEMODE_T = 3;
-pub const MMAL_RESIZEMODE_T_MMAL_RESIZE_DUMMY: MMAL_RESIZEMODE_T = 2147483647;
+pub const MMAL_RESIZE_NONE: MMAL_RESIZEMODE_T = 0;
+pub const MMAL_RESIZE_CROP: MMAL_RESIZEMODE_T = 1;
+pub const MMAL_RESIZE_BOX: MMAL_RESIZEMODE_T = 2;
+pub const MMAL_RESIZE_BYTES: MMAL_RESIZEMODE_T = 3;
+pub const MMAL_RESIZE_DUMMY: MMAL_RESIZEMODE_T = 2147483647;
 pub type MMAL_RESIZEMODE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -9122,168 +9184,165 @@ fn bindgen_test_layout_MMAL_PARAMETER_CUSTOM_CCM_T() {
     );
 }
 #[doc = "< Takes a @ref MMAL_DISPLAYREGION_T"]
-pub const MMAL_PARAMETER_DISPLAYREGION: _bindgen_ty_27 = 131072;
+pub const MMAL_PARAMETER_DISPLAYREGION: _bindgen_ty_26 = 131072;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_PROFILE_T"]
-pub const MMAL_PARAMETER_SUPPORTED_PROFILES: _bindgen_ty_27 = 131073;
+pub const MMAL_PARAMETER_SUPPORTED_PROFILES: _bindgen_ty_26 = 131073;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_PROFILE_T"]
-pub const MMAL_PARAMETER_PROFILE: _bindgen_ty_27 = 131074;
+pub const MMAL_PARAMETER_PROFILE: _bindgen_ty_26 = 131074;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_INTRAPERIOD: _bindgen_ty_27 = 131075;
+pub const MMAL_PARAMETER_INTRAPERIOD: _bindgen_ty_26 = 131075;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_RATECONTROL_T"]
-pub const MMAL_PARAMETER_RATECONTROL: _bindgen_ty_27 = 131076;
+pub const MMAL_PARAMETER_RATECONTROL: _bindgen_ty_26 = 131076;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_NALUNITFORMAT_T"]
-pub const MMAL_PARAMETER_NALUNITFORMAT: _bindgen_ty_27 = 131077;
+pub const MMAL_PARAMETER_NALUNITFORMAT: _bindgen_ty_26 = 131077;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_MINIMISE_FRAGMENTATION: _bindgen_ty_27 = 131078;
+pub const MMAL_PARAMETER_MINIMISE_FRAGMENTATION: _bindgen_ty_26 = 131078;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
 #[doc = " Setting the value to zero resets to the default (one slice per frame)."]
-pub const MMAL_PARAMETER_MB_ROWS_PER_SLICE: _bindgen_ty_27 = 131079;
+pub const MMAL_PARAMETER_MB_ROWS_PER_SLICE: _bindgen_ty_26 = 131079;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION_T"]
-pub const MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION: _bindgen_ty_27 = 131080;
+pub const MMAL_PARAMETER_VIDEO_LEVEL_EXTENSION: _bindgen_ty_26 = 131080;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_EEDE_ENABLE_T"]
-pub const MMAL_PARAMETER_VIDEO_EEDE_ENABLE: _bindgen_ty_27 = 131081;
+pub const MMAL_PARAMETER_VIDEO_EEDE_ENABLE: _bindgen_ty_26 = 131081;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE_T"]
-pub const MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE: _bindgen_ty_27 = 131082;
+pub const MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE: _bindgen_ty_26 = 131082;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T."]
 #[doc = " Request an I-frame."]
-pub const MMAL_PARAMETER_VIDEO_REQUEST_I_FRAME: _bindgen_ty_27 = 131083;
+pub const MMAL_PARAMETER_VIDEO_REQUEST_I_FRAME: _bindgen_ty_26 = 131083;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_INTRA_REFRESH_T"]
-pub const MMAL_PARAMETER_VIDEO_INTRA_REFRESH: _bindgen_ty_27 = 131084;
+pub const MMAL_PARAMETER_VIDEO_INTRA_REFRESH: _bindgen_ty_26 = 131084;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_IMMUTABLE_INPUT: _bindgen_ty_27 = 131085;
+pub const MMAL_PARAMETER_VIDEO_IMMUTABLE_INPUT: _bindgen_ty_26 = 131085;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
 #[doc = " Run-time bit rate control"]
-pub const MMAL_PARAMETER_VIDEO_BIT_RATE: _bindgen_ty_27 = 131086;
+pub const MMAL_PARAMETER_VIDEO_BIT_RATE: _bindgen_ty_26 = 131086;
 #[doc = "< Takes a @ref MMAL_PARAMETER_FRAME_RATE_T"]
-pub const MMAL_PARAMETER_VIDEO_FRAME_RATE: _bindgen_ty_27 = 131087;
+pub const MMAL_PARAMETER_VIDEO_FRAME_RATE: _bindgen_ty_26 = 131087;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_MIN_QUANT: _bindgen_ty_27 = 131088;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_MIN_QUANT: _bindgen_ty_26 = 131088;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_MAX_QUANT: _bindgen_ty_27 = 131089;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_MAX_QUANT: _bindgen_ty_26 = 131089;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL: _bindgen_ty_27 = 131090;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_RC_MODEL: _bindgen_ty_26 = 131090;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_EXTRA_BUFFERS: _bindgen_ty_27 = 131091;
-#[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-#[doc = "Changing this paramater from the default can reduce frame rate"]
-#[doc = "because image buffers need to be re-pitched."]
-pub const MMAL_PARAMETER_VIDEO_ALIGN_HORIZ: _bindgen_ty_27 = 131092;
+pub const MMAL_PARAMETER_EXTRA_BUFFERS: _bindgen_ty_26 = 131091;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
 #[doc = "Changing this paramater from the default can reduce frame rate"]
 #[doc = "because image buffers need to be re-pitched."]
-pub const MMAL_PARAMETER_VIDEO_ALIGN_VERT: _bindgen_ty_27 = 131093;
+pub const MMAL_PARAMETER_VIDEO_ALIGN_HORIZ: _bindgen_ty_26 = 131092;
+#[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
+#[doc = "Changing this paramater from the default can reduce frame rate"]
+#[doc = "because image buffers need to be re-pitched."]
+pub const MMAL_PARAMETER_VIDEO_ALIGN_VERT: _bindgen_ty_26 = 131093;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAMES: _bindgen_ty_27 = 131094;
+pub const MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAMES: _bindgen_ty_26 = 131094;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_INITIAL_QUANT: _bindgen_ty_27 = 131095;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_INITIAL_QUANT: _bindgen_ty_26 = 131095;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_QP_P: _bindgen_ty_27 = 131096;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_QP_P: _bindgen_ty_26 = 131096;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_RC_SLICE_DQUANT: _bindgen_ty_27 = 131097;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_RC_SLICE_DQUANT: _bindgen_ty_26 = 131097;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_FRAME_LIMIT_BITS: _bindgen_ty_27 = 131098;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_FRAME_LIMIT_BITS: _bindgen_ty_26 = 131098;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_PEAK_RATE: _bindgen_ty_27 = 131099;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_PEAK_RATE: _bindgen_ty_26 = 131099;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_DISABLE_CABAC: _bindgen_ty_27 = 131100;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_DISABLE_CABAC: _bindgen_ty_26 = 131100;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_LATENCY: _bindgen_ty_27 = 131101;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_LATENCY: _bindgen_ty_26 = 131101;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_AU_DELIMITERS: _bindgen_ty_27 = 131102;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_AU_DELIMITERS: _bindgen_ty_26 = 131102;
 #[doc = "< Takes a @ref MMAL_PARAMETER_UINT32_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_DEBLOCK_IDC: _bindgen_ty_27 = 131103;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_DEBLOCK_IDC: _bindgen_ty_26 = 131103;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_ENCODER_H264_MB_INTRA_MODES_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_MB_INTRA_MODE: _bindgen_ty_27 = 131104;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_MB_INTRA_MODE: _bindgen_ty_26 = 131104;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_HEADER_ON_OPEN: _bindgen_ty_27 = 131105;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_HEADER_ON_OPEN: _bindgen_ty_26 = 131105;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_PRECODE_FOR_QP: _bindgen_ty_27 = 131106;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_PRECODE_FOR_QP: _bindgen_ty_26 = 131106;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_DRM_INIT_INFO_T."]
-pub const MMAL_PARAMETER_VIDEO_DRM_INIT_INFO: _bindgen_ty_27 = 131107;
+pub const MMAL_PARAMETER_VIDEO_DRM_INIT_INFO: _bindgen_ty_26 = 131107;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_TIMESTAMP_FIFO: _bindgen_ty_27 = 131108;
+pub const MMAL_PARAMETER_VIDEO_TIMESTAMP_FIFO: _bindgen_ty_26 = 131108;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_DECODE_ERROR_CONCEALMENT: _bindgen_ty_27 = 131109;
+pub const MMAL_PARAMETER_VIDEO_DECODE_ERROR_CONCEALMENT: _bindgen_ty_26 = 131109;
 #[doc = "< Takes a @ref MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T."]
-pub const MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER: _bindgen_ty_27 = 131110;
+pub const MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER: _bindgen_ty_26 = 131110;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BYTES_T"]
-pub const MMAL_PARAMETER_VIDEO_DECODE_CONFIG_VD3: _bindgen_ty_27 = 131111;
+pub const MMAL_PARAMETER_VIDEO_DECODE_CONFIG_VD3: _bindgen_ty_26 = 131111;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_VCL_HRD_PARAMETERS: _bindgen_ty_27 = 131112;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_VCL_HRD_PARAMETERS: _bindgen_ty_26 = 131112;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG: _bindgen_ty_27 = 131113;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_H264_LOW_DELAY_HRD_FLAG: _bindgen_ty_26 = 131113;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER: _bindgen_ty_27 = 131114;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER: _bindgen_ty_26 = 131114;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE: _bindgen_ty_27 = 131115;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE: _bindgen_ty_26 = 131115;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T."]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS: _bindgen_ty_27 = 131116;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS: _bindgen_ty_26 = 131116;
 #[doc = "< Take a @ref MMAL_PARAMETER_VIDEO_RENDER_STATS_T."]
-pub const MMAL_PARAMETER_VIDEO_RENDER_STATS: _bindgen_ty_27 = 131117;
+pub const MMAL_PARAMETER_VIDEO_RENDER_STATS: _bindgen_ty_26 = 131117;
 #[doc = "< Take a @ref MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T."]
-pub const MMAL_PARAMETER_VIDEO_INTERLACE_TYPE: _bindgen_ty_27 = 131118;
+pub const MMAL_PARAMETER_VIDEO_INTERLACE_TYPE: _bindgen_ty_26 = 131118;
 #[doc = "< Takes a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_INTERPOLATE_TIMESTAMPS: _bindgen_ty_27 = 131119;
+pub const MMAL_PARAMETER_VIDEO_INTERPOLATE_TIMESTAMPS: _bindgen_ty_26 = 131119;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_SPS_TIMING: _bindgen_ty_27 = 131120;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_SPS_TIMING: _bindgen_ty_26 = 131120;
 #[doc = "< Take a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS: _bindgen_ty_27 = 131121;
+pub const MMAL_PARAMETER_VIDEO_MAX_NUM_CALLBACKS: _bindgen_ty_26 = 131121;
 #[doc = "< Take a @ref MMAL_PARAMETER_SOURCE_PATTERN_T"]
-pub const MMAL_PARAMETER_VIDEO_SOURCE_PATTERN: _bindgen_ty_27 = 131122;
+pub const MMAL_PARAMETER_VIDEO_SOURCE_PATTERN: _bindgen_ty_26 = 131122;
 #[doc = "< Take a @ref MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS: _bindgen_ty_27 = 131123;
+pub const MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS: _bindgen_ty_26 = 131123;
 #[doc = "< Take a @ref MMAL_PARAMETER_UINT32_T"]
-pub const MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH: _bindgen_ty_27 = 131124;
+pub const MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH: _bindgen_ty_26 = 131124;
 #[doc = " Video-specific MMAL parameter IDs."]
 #[doc = " @ingroup MMAL_PARAMETER_IDS"]
-pub type _bindgen_ty_27 = u32;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT0: MMAL_DISPLAYTRANSFORM_T = 0;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT0: MMAL_DISPLAYTRANSFORM_T = 1;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT180: MMAL_DISPLAYTRANSFORM_T = 2;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT180: MMAL_DISPLAYTRANSFORM_T = 3;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT90: MMAL_DISPLAYTRANSFORM_T = 4;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT270: MMAL_DISPLAYTRANSFORM_T = 5;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_ROT90: MMAL_DISPLAYTRANSFORM_T = 6;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_MIRROR_ROT270: MMAL_DISPLAYTRANSFORM_T = 7;
-pub const MMAL_DISPLAYTRANSFORM_T_MMAL_DISPLAY_DUMMY: MMAL_DISPLAYTRANSFORM_T = 2147483647;
+pub type _bindgen_ty_26 = u32;
+pub const MMAL_DISPLAY_ROT0: MMAL_DISPLAYTRANSFORM_T = 0;
+pub const MMAL_DISPLAY_MIRROR_ROT0: MMAL_DISPLAYTRANSFORM_T = 1;
+pub const MMAL_DISPLAY_MIRROR_ROT180: MMAL_DISPLAYTRANSFORM_T = 2;
+pub const MMAL_DISPLAY_ROT180: MMAL_DISPLAYTRANSFORM_T = 3;
+pub const MMAL_DISPLAY_MIRROR_ROT90: MMAL_DISPLAYTRANSFORM_T = 4;
+pub const MMAL_DISPLAY_ROT270: MMAL_DISPLAYTRANSFORM_T = 5;
+pub const MMAL_DISPLAY_ROT90: MMAL_DISPLAYTRANSFORM_T = 6;
+pub const MMAL_DISPLAY_MIRROR_ROT270: MMAL_DISPLAYTRANSFORM_T = 7;
+pub const MMAL_DISPLAY_DUMMY: MMAL_DISPLAYTRANSFORM_T = 2147483647;
 #[doc = " Display transformations."]
 #[doc = " Although an enumeration, the values correspond to combinations of:"]
 #[doc = " \\li 1 Reflect in a vertical axis"]
 #[doc = " \\li 2 180 degree rotation"]
 #[doc = " \\li 4 Reflect in the leading diagonal"]
 pub type MMAL_DISPLAYTRANSFORM_T = u32;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_FILL: MMAL_DISPLAYMODE_T = 0;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_LETTERBOX: MMAL_DISPLAYMODE_T = 1;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_LEFT_TO_LEFT: MMAL_DISPLAYMODE_T = 2;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_TOP_TO_TOP: MMAL_DISPLAYMODE_T = 3;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_LEFT_TO_TOP: MMAL_DISPLAYMODE_T = 4;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_STEREO_TOP_TO_LEFT: MMAL_DISPLAYMODE_T = 5;
-pub const MMAL_DISPLAYMODE_T_MMAL_DISPLAY_MODE_DUMMY: MMAL_DISPLAYMODE_T = 2147483647;
+pub const MMAL_DISPLAY_MODE_FILL: MMAL_DISPLAYMODE_T = 0;
+pub const MMAL_DISPLAY_MODE_LETTERBOX: MMAL_DISPLAYMODE_T = 1;
+pub const MMAL_DISPLAY_MODE_STEREO_LEFT_TO_LEFT: MMAL_DISPLAYMODE_T = 2;
+pub const MMAL_DISPLAY_MODE_STEREO_TOP_TO_TOP: MMAL_DISPLAYMODE_T = 3;
+pub const MMAL_DISPLAY_MODE_STEREO_LEFT_TO_TOP: MMAL_DISPLAYMODE_T = 4;
+pub const MMAL_DISPLAY_MODE_STEREO_TOP_TO_LEFT: MMAL_DISPLAYMODE_T = 5;
+pub const MMAL_DISPLAY_MODE_DUMMY: MMAL_DISPLAYMODE_T = 2147483647;
 #[doc = " Display modes."]
 pub type MMAL_DISPLAYMODE_T = u32;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_NONE: MMAL_DISPLAYSET_T = 0;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_NUM: MMAL_DISPLAYSET_T = 1;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_FULLSCREEN: MMAL_DISPLAYSET_T = 2;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_TRANSFORM: MMAL_DISPLAYSET_T = 4;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_DEST_RECT: MMAL_DISPLAYSET_T = 8;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_SRC_RECT: MMAL_DISPLAYSET_T = 16;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_MODE: MMAL_DISPLAYSET_T = 32;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_PIXEL: MMAL_DISPLAYSET_T = 64;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_NOASPECT: MMAL_DISPLAYSET_T = 128;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_LAYER: MMAL_DISPLAYSET_T = 256;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_COPYPROTECT: MMAL_DISPLAYSET_T = 512;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_ALPHA: MMAL_DISPLAYSET_T = 1024;
-pub const MMAL_DISPLAYSET_T_MMAL_DISPLAY_SET_DUMMY: MMAL_DISPLAYSET_T = 2147483647;
+pub const MMAL_DISPLAY_SET_NONE: MMAL_DISPLAYSET_T = 0;
+pub const MMAL_DISPLAY_SET_NUM: MMAL_DISPLAYSET_T = 1;
+pub const MMAL_DISPLAY_SET_FULLSCREEN: MMAL_DISPLAYSET_T = 2;
+pub const MMAL_DISPLAY_SET_TRANSFORM: MMAL_DISPLAYSET_T = 4;
+pub const MMAL_DISPLAY_SET_DEST_RECT: MMAL_DISPLAYSET_T = 8;
+pub const MMAL_DISPLAY_SET_SRC_RECT: MMAL_DISPLAYSET_T = 16;
+pub const MMAL_DISPLAY_SET_MODE: MMAL_DISPLAYSET_T = 32;
+pub const MMAL_DISPLAY_SET_PIXEL: MMAL_DISPLAYSET_T = 64;
+pub const MMAL_DISPLAY_SET_NOASPECT: MMAL_DISPLAYSET_T = 128;
+pub const MMAL_DISPLAY_SET_LAYER: MMAL_DISPLAYSET_T = 256;
+pub const MMAL_DISPLAY_SET_COPYPROTECT: MMAL_DISPLAYSET_T = 512;
+pub const MMAL_DISPLAY_SET_ALPHA: MMAL_DISPLAYSET_T = 1024;
+pub const MMAL_DISPLAY_SET_DUMMY: MMAL_DISPLAYSET_T = 2147483647;
 #[doc = " Values used to indicate which fields are used when setting the"]
 #[doc = " display configuration"]
 pub type MMAL_DISPLAYSET_T = u32;
-pub const MMAL_DISPLAYALPHAFLAGS_T_MMAL_DISPLAY_ALPHA_FLAGS_NONE: MMAL_DISPLAYALPHAFLAGS_T = 0;
-pub const MMAL_DISPLAYALPHAFLAGS_T_MMAL_DISPLAY_ALPHA_FLAGS_DISCARD_LOWER_LAYERS:
-    MMAL_DISPLAYALPHAFLAGS_T = 536870912;
-pub const MMAL_DISPLAYALPHAFLAGS_T_MMAL_DISPLAY_ALPHA_FLAGS_PREMULT: MMAL_DISPLAYALPHAFLAGS_T =
-    1073741824;
-pub const MMAL_DISPLAYALPHAFLAGS_T_MMAL_DISPLAY_ALPHA_FLAGS_MIX: MMAL_DISPLAYALPHAFLAGS_T =
-    -2147483648;
+pub const MMAL_DISPLAY_ALPHA_FLAGS_NONE: MMAL_DISPLAYALPHAFLAGS_T = 0;
+pub const MMAL_DISPLAY_ALPHA_FLAGS_DISCARD_LOWER_LAYERS: MMAL_DISPLAYALPHAFLAGS_T = 536870912;
+pub const MMAL_DISPLAY_ALPHA_FLAGS_PREMULT: MMAL_DISPLAYALPHAFLAGS_T = 1073741824;
+pub const MMAL_DISPLAY_ALPHA_FLAGS_MIX: MMAL_DISPLAYALPHAFLAGS_T = -2147483648;
 pub type MMAL_DISPLAYALPHAFLAGS_T = i32;
 #[doc = "This config sets the output display device, as well as the region used"]
 #[doc = "on the output display, any display transformation, and some flags to"]
@@ -9495,79 +9554,78 @@ fn bindgen_test_layout_MMAL_DISPLAYREGION_T() {
         )
     );
 }
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_BASELINE: MMAL_VIDEO_PROFILE_T = 0;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_H320CODING: MMAL_VIDEO_PROFILE_T = 1;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_BACKWARDCOMPATIBLE: MMAL_VIDEO_PROFILE_T = 2;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_ISWV2: MMAL_VIDEO_PROFILE_T = 3;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_ISWV3: MMAL_VIDEO_PROFILE_T = 4;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_HIGHCOMPRESSION: MMAL_VIDEO_PROFILE_T = 5;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_INTERNET: MMAL_VIDEO_PROFILE_T = 6;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_INTERLACE: MMAL_VIDEO_PROFILE_T = 7;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H263_HIGHLATENCY: MMAL_VIDEO_PROFILE_T = 8;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_SIMPLE: MMAL_VIDEO_PROFILE_T = 9;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_SIMPLESCALABLE: MMAL_VIDEO_PROFILE_T = 10;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_CORE: MMAL_VIDEO_PROFILE_T = 11;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_MAIN: MMAL_VIDEO_PROFILE_T = 12;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_NBIT: MMAL_VIDEO_PROFILE_T = 13;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_SCALABLETEXTURE: MMAL_VIDEO_PROFILE_T = 14;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_SIMPLEFACE: MMAL_VIDEO_PROFILE_T = 15;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_SIMPLEFBA: MMAL_VIDEO_PROFILE_T = 16;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_BASICANIMATED: MMAL_VIDEO_PROFILE_T = 17;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_HYBRID: MMAL_VIDEO_PROFILE_T = 18;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_ADVANCEDREALTIME: MMAL_VIDEO_PROFILE_T = 19;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_CORESCALABLE: MMAL_VIDEO_PROFILE_T = 20;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_ADVANCEDCODING: MMAL_VIDEO_PROFILE_T = 21;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_ADVANCEDCORE: MMAL_VIDEO_PROFILE_T = 22;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_ADVANCEDSCALABLE: MMAL_VIDEO_PROFILE_T = 23;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_MP4V_ADVANCEDSIMPLE: MMAL_VIDEO_PROFILE_T = 24;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_BASELINE: MMAL_VIDEO_PROFILE_T = 25;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_MAIN: MMAL_VIDEO_PROFILE_T = 26;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_EXTENDED: MMAL_VIDEO_PROFILE_T = 27;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH: MMAL_VIDEO_PROFILE_T = 28;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH10: MMAL_VIDEO_PROFILE_T = 29;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH422: MMAL_VIDEO_PROFILE_T = 30;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_HIGH444: MMAL_VIDEO_PROFILE_T = 31;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_H264_CONSTRAINED_BASELINE: MMAL_VIDEO_PROFILE_T =
-    32;
-pub const MMAL_VIDEO_PROFILE_T_MMAL_VIDEO_PROFILE_DUMMY: MMAL_VIDEO_PROFILE_T = 2147483647;
+pub const MMAL_VIDEO_PROFILE_H263_BASELINE: MMAL_VIDEO_PROFILE_T = 0;
+pub const MMAL_VIDEO_PROFILE_H263_H320CODING: MMAL_VIDEO_PROFILE_T = 1;
+pub const MMAL_VIDEO_PROFILE_H263_BACKWARDCOMPATIBLE: MMAL_VIDEO_PROFILE_T = 2;
+pub const MMAL_VIDEO_PROFILE_H263_ISWV2: MMAL_VIDEO_PROFILE_T = 3;
+pub const MMAL_VIDEO_PROFILE_H263_ISWV3: MMAL_VIDEO_PROFILE_T = 4;
+pub const MMAL_VIDEO_PROFILE_H263_HIGHCOMPRESSION: MMAL_VIDEO_PROFILE_T = 5;
+pub const MMAL_VIDEO_PROFILE_H263_INTERNET: MMAL_VIDEO_PROFILE_T = 6;
+pub const MMAL_VIDEO_PROFILE_H263_INTERLACE: MMAL_VIDEO_PROFILE_T = 7;
+pub const MMAL_VIDEO_PROFILE_H263_HIGHLATENCY: MMAL_VIDEO_PROFILE_T = 8;
+pub const MMAL_VIDEO_PROFILE_MP4V_SIMPLE: MMAL_VIDEO_PROFILE_T = 9;
+pub const MMAL_VIDEO_PROFILE_MP4V_SIMPLESCALABLE: MMAL_VIDEO_PROFILE_T = 10;
+pub const MMAL_VIDEO_PROFILE_MP4V_CORE: MMAL_VIDEO_PROFILE_T = 11;
+pub const MMAL_VIDEO_PROFILE_MP4V_MAIN: MMAL_VIDEO_PROFILE_T = 12;
+pub const MMAL_VIDEO_PROFILE_MP4V_NBIT: MMAL_VIDEO_PROFILE_T = 13;
+pub const MMAL_VIDEO_PROFILE_MP4V_SCALABLETEXTURE: MMAL_VIDEO_PROFILE_T = 14;
+pub const MMAL_VIDEO_PROFILE_MP4V_SIMPLEFACE: MMAL_VIDEO_PROFILE_T = 15;
+pub const MMAL_VIDEO_PROFILE_MP4V_SIMPLEFBA: MMAL_VIDEO_PROFILE_T = 16;
+pub const MMAL_VIDEO_PROFILE_MP4V_BASICANIMATED: MMAL_VIDEO_PROFILE_T = 17;
+pub const MMAL_VIDEO_PROFILE_MP4V_HYBRID: MMAL_VIDEO_PROFILE_T = 18;
+pub const MMAL_VIDEO_PROFILE_MP4V_ADVANCEDREALTIME: MMAL_VIDEO_PROFILE_T = 19;
+pub const MMAL_VIDEO_PROFILE_MP4V_CORESCALABLE: MMAL_VIDEO_PROFILE_T = 20;
+pub const MMAL_VIDEO_PROFILE_MP4V_ADVANCEDCODING: MMAL_VIDEO_PROFILE_T = 21;
+pub const MMAL_VIDEO_PROFILE_MP4V_ADVANCEDCORE: MMAL_VIDEO_PROFILE_T = 22;
+pub const MMAL_VIDEO_PROFILE_MP4V_ADVANCEDSCALABLE: MMAL_VIDEO_PROFILE_T = 23;
+pub const MMAL_VIDEO_PROFILE_MP4V_ADVANCEDSIMPLE: MMAL_VIDEO_PROFILE_T = 24;
+pub const MMAL_VIDEO_PROFILE_H264_BASELINE: MMAL_VIDEO_PROFILE_T = 25;
+pub const MMAL_VIDEO_PROFILE_H264_MAIN: MMAL_VIDEO_PROFILE_T = 26;
+pub const MMAL_VIDEO_PROFILE_H264_EXTENDED: MMAL_VIDEO_PROFILE_T = 27;
+pub const MMAL_VIDEO_PROFILE_H264_HIGH: MMAL_VIDEO_PROFILE_T = 28;
+pub const MMAL_VIDEO_PROFILE_H264_HIGH10: MMAL_VIDEO_PROFILE_T = 29;
+pub const MMAL_VIDEO_PROFILE_H264_HIGH422: MMAL_VIDEO_PROFILE_T = 30;
+pub const MMAL_VIDEO_PROFILE_H264_HIGH444: MMAL_VIDEO_PROFILE_T = 31;
+pub const MMAL_VIDEO_PROFILE_H264_CONSTRAINED_BASELINE: MMAL_VIDEO_PROFILE_T = 32;
+pub const MMAL_VIDEO_PROFILE_DUMMY: MMAL_VIDEO_PROFILE_T = 2147483647;
 #[doc = " Video profiles."]
 #[doc = " Only certain combinations of profile and level will be valid."]
 #[doc = " @ref MMAL_VIDEO_LEVEL_T"]
 pub type MMAL_VIDEO_PROFILE_T = u32;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_10: MMAL_VIDEO_LEVEL_T = 0;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_20: MMAL_VIDEO_LEVEL_T = 1;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_30: MMAL_VIDEO_LEVEL_T = 2;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_40: MMAL_VIDEO_LEVEL_T = 3;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_45: MMAL_VIDEO_LEVEL_T = 4;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_50: MMAL_VIDEO_LEVEL_T = 5;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_60: MMAL_VIDEO_LEVEL_T = 6;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H263_70: MMAL_VIDEO_LEVEL_T = 7;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_0: MMAL_VIDEO_LEVEL_T = 8;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_0b: MMAL_VIDEO_LEVEL_T = 9;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_1: MMAL_VIDEO_LEVEL_T = 10;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_2: MMAL_VIDEO_LEVEL_T = 11;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_3: MMAL_VIDEO_LEVEL_T = 12;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_4: MMAL_VIDEO_LEVEL_T = 13;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_4a: MMAL_VIDEO_LEVEL_T = 14;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_5: MMAL_VIDEO_LEVEL_T = 15;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_MP4V_6: MMAL_VIDEO_LEVEL_T = 16;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_1: MMAL_VIDEO_LEVEL_T = 17;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_1b: MMAL_VIDEO_LEVEL_T = 18;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_11: MMAL_VIDEO_LEVEL_T = 19;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_12: MMAL_VIDEO_LEVEL_T = 20;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_13: MMAL_VIDEO_LEVEL_T = 21;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_2: MMAL_VIDEO_LEVEL_T = 22;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_21: MMAL_VIDEO_LEVEL_T = 23;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_22: MMAL_VIDEO_LEVEL_T = 24;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_3: MMAL_VIDEO_LEVEL_T = 25;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_31: MMAL_VIDEO_LEVEL_T = 26;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_32: MMAL_VIDEO_LEVEL_T = 27;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_4: MMAL_VIDEO_LEVEL_T = 28;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_41: MMAL_VIDEO_LEVEL_T = 29;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_42: MMAL_VIDEO_LEVEL_T = 30;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_5: MMAL_VIDEO_LEVEL_T = 31;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_H264_51: MMAL_VIDEO_LEVEL_T = 32;
-pub const MMAL_VIDEO_LEVEL_T_MMAL_VIDEO_LEVEL_DUMMY: MMAL_VIDEO_LEVEL_T = 2147483647;
+pub const MMAL_VIDEO_LEVEL_H263_10: MMAL_VIDEO_LEVEL_T = 0;
+pub const MMAL_VIDEO_LEVEL_H263_20: MMAL_VIDEO_LEVEL_T = 1;
+pub const MMAL_VIDEO_LEVEL_H263_30: MMAL_VIDEO_LEVEL_T = 2;
+pub const MMAL_VIDEO_LEVEL_H263_40: MMAL_VIDEO_LEVEL_T = 3;
+pub const MMAL_VIDEO_LEVEL_H263_45: MMAL_VIDEO_LEVEL_T = 4;
+pub const MMAL_VIDEO_LEVEL_H263_50: MMAL_VIDEO_LEVEL_T = 5;
+pub const MMAL_VIDEO_LEVEL_H263_60: MMAL_VIDEO_LEVEL_T = 6;
+pub const MMAL_VIDEO_LEVEL_H263_70: MMAL_VIDEO_LEVEL_T = 7;
+pub const MMAL_VIDEO_LEVEL_MP4V_0: MMAL_VIDEO_LEVEL_T = 8;
+pub const MMAL_VIDEO_LEVEL_MP4V_0b: MMAL_VIDEO_LEVEL_T = 9;
+pub const MMAL_VIDEO_LEVEL_MP4V_1: MMAL_VIDEO_LEVEL_T = 10;
+pub const MMAL_VIDEO_LEVEL_MP4V_2: MMAL_VIDEO_LEVEL_T = 11;
+pub const MMAL_VIDEO_LEVEL_MP4V_3: MMAL_VIDEO_LEVEL_T = 12;
+pub const MMAL_VIDEO_LEVEL_MP4V_4: MMAL_VIDEO_LEVEL_T = 13;
+pub const MMAL_VIDEO_LEVEL_MP4V_4a: MMAL_VIDEO_LEVEL_T = 14;
+pub const MMAL_VIDEO_LEVEL_MP4V_5: MMAL_VIDEO_LEVEL_T = 15;
+pub const MMAL_VIDEO_LEVEL_MP4V_6: MMAL_VIDEO_LEVEL_T = 16;
+pub const MMAL_VIDEO_LEVEL_H264_1: MMAL_VIDEO_LEVEL_T = 17;
+pub const MMAL_VIDEO_LEVEL_H264_1b: MMAL_VIDEO_LEVEL_T = 18;
+pub const MMAL_VIDEO_LEVEL_H264_11: MMAL_VIDEO_LEVEL_T = 19;
+pub const MMAL_VIDEO_LEVEL_H264_12: MMAL_VIDEO_LEVEL_T = 20;
+pub const MMAL_VIDEO_LEVEL_H264_13: MMAL_VIDEO_LEVEL_T = 21;
+pub const MMAL_VIDEO_LEVEL_H264_2: MMAL_VIDEO_LEVEL_T = 22;
+pub const MMAL_VIDEO_LEVEL_H264_21: MMAL_VIDEO_LEVEL_T = 23;
+pub const MMAL_VIDEO_LEVEL_H264_22: MMAL_VIDEO_LEVEL_T = 24;
+pub const MMAL_VIDEO_LEVEL_H264_3: MMAL_VIDEO_LEVEL_T = 25;
+pub const MMAL_VIDEO_LEVEL_H264_31: MMAL_VIDEO_LEVEL_T = 26;
+pub const MMAL_VIDEO_LEVEL_H264_32: MMAL_VIDEO_LEVEL_T = 27;
+pub const MMAL_VIDEO_LEVEL_H264_4: MMAL_VIDEO_LEVEL_T = 28;
+pub const MMAL_VIDEO_LEVEL_H264_41: MMAL_VIDEO_LEVEL_T = 29;
+pub const MMAL_VIDEO_LEVEL_H264_42: MMAL_VIDEO_LEVEL_T = 30;
+pub const MMAL_VIDEO_LEVEL_H264_5: MMAL_VIDEO_LEVEL_T = 31;
+pub const MMAL_VIDEO_LEVEL_H264_51: MMAL_VIDEO_LEVEL_T = 32;
+pub const MMAL_VIDEO_LEVEL_DUMMY: MMAL_VIDEO_LEVEL_T = 2147483647;
 #[doc = " Video levels."]
 #[doc = " Only certain combinations of profile and level will be valid."]
 #[doc = " @ref MMAL_VIDEO_PROFILE_T"]
@@ -9669,48 +9727,31 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_PROFILE_T() {
         )
     );
 }
-pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_DEFAULT: MMAL_VIDEO_RATECONTROL_T = 0;
-pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_VARIABLE: MMAL_VIDEO_RATECONTROL_T = 1;
-pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_CONSTANT: MMAL_VIDEO_RATECONTROL_T = 2;
-pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_VARIABLE_SKIP_FRAMES:
-    MMAL_VIDEO_RATECONTROL_T = 3;
-pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_CONSTANT_SKIP_FRAMES:
-    MMAL_VIDEO_RATECONTROL_T = 4;
-pub const MMAL_VIDEO_RATECONTROL_T_MMAL_VIDEO_RATECONTROL_DUMMY: MMAL_VIDEO_RATECONTROL_T =
-    2147483647;
+pub const MMAL_VIDEO_RATECONTROL_DEFAULT: MMAL_VIDEO_RATECONTROL_T = 0;
+pub const MMAL_VIDEO_RATECONTROL_VARIABLE: MMAL_VIDEO_RATECONTROL_T = 1;
+pub const MMAL_VIDEO_RATECONTROL_CONSTANT: MMAL_VIDEO_RATECONTROL_T = 2;
+pub const MMAL_VIDEO_RATECONTROL_VARIABLE_SKIP_FRAMES: MMAL_VIDEO_RATECONTROL_T = 3;
+pub const MMAL_VIDEO_RATECONTROL_CONSTANT_SKIP_FRAMES: MMAL_VIDEO_RATECONTROL_T = 4;
+pub const MMAL_VIDEO_RATECONTROL_DUMMY: MMAL_VIDEO_RATECONTROL_T = 2147483647;
 #[doc = " Manner of video rate control"]
 pub type MMAL_VIDEO_RATECONTROL_T = u32;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_CYCLIC: MMAL_VIDEO_INTRA_REFRESH_T =
-    0;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_ADAPTIVE: MMAL_VIDEO_INTRA_REFRESH_T =
-    1;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_BOTH: MMAL_VIDEO_INTRA_REFRESH_T = 2;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_KHRONOSEXTENSIONS:
-    MMAL_VIDEO_INTRA_REFRESH_T = 1862270976;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_VENDORSTARTUNUSED:
-    MMAL_VIDEO_INTRA_REFRESH_T = 2130706432;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_CYCLIC_MROWS:
-    MMAL_VIDEO_INTRA_REFRESH_T = 2130706433;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_PSEUDO_RAND:
-    MMAL_VIDEO_INTRA_REFRESH_T = 2130706434;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_MAX: MMAL_VIDEO_INTRA_REFRESH_T =
-    2130706435;
-pub const MMAL_VIDEO_INTRA_REFRESH_T_MMAL_VIDEO_INTRA_REFRESH_DUMMY: MMAL_VIDEO_INTRA_REFRESH_T =
-    2147483647;
+pub const MMAL_VIDEO_INTRA_REFRESH_CYCLIC: MMAL_VIDEO_INTRA_REFRESH_T = 0;
+pub const MMAL_VIDEO_INTRA_REFRESH_ADAPTIVE: MMAL_VIDEO_INTRA_REFRESH_T = 1;
+pub const MMAL_VIDEO_INTRA_REFRESH_BOTH: MMAL_VIDEO_INTRA_REFRESH_T = 2;
+pub const MMAL_VIDEO_INTRA_REFRESH_KHRONOSEXTENSIONS: MMAL_VIDEO_INTRA_REFRESH_T = 1862270976;
+pub const MMAL_VIDEO_INTRA_REFRESH_VENDORSTARTUNUSED: MMAL_VIDEO_INTRA_REFRESH_T = 2130706432;
+pub const MMAL_VIDEO_INTRA_REFRESH_CYCLIC_MROWS: MMAL_VIDEO_INTRA_REFRESH_T = 2130706433;
+pub const MMAL_VIDEO_INTRA_REFRESH_PSEUDO_RAND: MMAL_VIDEO_INTRA_REFRESH_T = 2130706434;
+pub const MMAL_VIDEO_INTRA_REFRESH_MAX: MMAL_VIDEO_INTRA_REFRESH_T = 2130706435;
+pub const MMAL_VIDEO_INTRA_REFRESH_DUMMY: MMAL_VIDEO_INTRA_REFRESH_T = 2147483647;
 #[doc = " Intra refresh modes"]
 pub type MMAL_VIDEO_INTRA_REFRESH_T = u32;
-pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_DEFAULT:
-    MMAL_VIDEO_ENCODE_RC_MODEL_T = 0;
-pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_JVT:
-    MMAL_VIDEO_ENCODE_RC_MODEL_T = 0;
-pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_VOWIFI:
-    MMAL_VIDEO_ENCODE_RC_MODEL_T = 1;
-pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_CBR:
-    MMAL_VIDEO_ENCODE_RC_MODEL_T = 2;
-pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_LAST:
-    MMAL_VIDEO_ENCODE_RC_MODEL_T = 3;
-pub const MMAL_VIDEO_ENCODE_RC_MODEL_T_MMAL_VIDEO_ENCODER_RC_MODEL_DUMMY:
-    MMAL_VIDEO_ENCODE_RC_MODEL_T = 2147483647;
+pub const MMAL_VIDEO_ENCODER_RC_MODEL_DEFAULT: MMAL_VIDEO_ENCODE_RC_MODEL_T = 0;
+pub const MMAL_VIDEO_ENCODER_RC_MODEL_JVT: MMAL_VIDEO_ENCODE_RC_MODEL_T = 0;
+pub const MMAL_VIDEO_ENCODER_RC_MODEL_VOWIFI: MMAL_VIDEO_ENCODE_RC_MODEL_T = 1;
+pub const MMAL_VIDEO_ENCODER_RC_MODEL_CBR: MMAL_VIDEO_ENCODE_RC_MODEL_T = 2;
+pub const MMAL_VIDEO_ENCODER_RC_MODEL_LAST: MMAL_VIDEO_ENCODE_RC_MODEL_T = 3;
+pub const MMAL_VIDEO_ENCODER_RC_MODEL_DUMMY: MMAL_VIDEO_ENCODE_RC_MODEL_T = 2147483647;
 pub type MMAL_VIDEO_ENCODE_RC_MODEL_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -9811,14 +9852,11 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_RATECONTROL_T() {
         )
     );
 }
-pub const MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T_MMAL_VIDEO_ENCODER_H264_MB_4x4_INTRA:
-    MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 1;
-pub const MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T_MMAL_VIDEO_ENCODER_H264_MB_8x8_INTRA:
-    MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 2;
-pub const MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T_MMAL_VIDEO_ENCODER_H264_MB_16x16_INTRA:
-    MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 4;
-pub const MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T_MMAL_VIDEO_ENCODER_H264_MB_INTRA_DUMMY:
-    MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 2147483647;
+pub const MMAL_VIDEO_ENCODER_H264_MB_4x4_INTRA: MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 1;
+pub const MMAL_VIDEO_ENCODER_H264_MB_8x8_INTRA: MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 2;
+pub const MMAL_VIDEO_ENCODER_H264_MB_16x16_INTRA: MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = 4;
+pub const MMAL_VIDEO_ENCODER_H264_MB_INTRA_DUMMY: MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T =
+    2147483647;
 pub type MMAL_VIDEO_ENCODE_H264_MB_INTRA_MODES_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -9871,18 +9909,12 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_ENCODER_H264_MB_INTRA_MODES_T() {
         )
     );
 }
-pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_STARTCODES:
-    MMAL_VIDEO_NALUNITFORMAT_T = 1;
-pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_NALUNITPERBUFFER:
-    MMAL_VIDEO_NALUNITFORMAT_T = 2;
-pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_ONEBYTEINTERLEAVELENGTH:
-    MMAL_VIDEO_NALUNITFORMAT_T = 4;
-pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_TWOBYTEINTERLEAVELENGTH:
-    MMAL_VIDEO_NALUNITFORMAT_T = 8;
-pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_FOURBYTEINTERLEAVELENGTH:
-    MMAL_VIDEO_NALUNITFORMAT_T = 16;
-pub const MMAL_VIDEO_NALUNITFORMAT_T_MMAL_VIDEO_NALUNITFORMAT_DUMMY: MMAL_VIDEO_NALUNITFORMAT_T =
-    2147483647;
+pub const MMAL_VIDEO_NALUNITFORMAT_STARTCODES: MMAL_VIDEO_NALUNITFORMAT_T = 1;
+pub const MMAL_VIDEO_NALUNITFORMAT_NALUNITPERBUFFER: MMAL_VIDEO_NALUNITFORMAT_T = 2;
+pub const MMAL_VIDEO_NALUNITFORMAT_ONEBYTEINTERLEAVELENGTH: MMAL_VIDEO_NALUNITFORMAT_T = 4;
+pub const MMAL_VIDEO_NALUNITFORMAT_TWOBYTEINTERLEAVELENGTH: MMAL_VIDEO_NALUNITFORMAT_T = 8;
+pub const MMAL_VIDEO_NALUNITFORMAT_FOURBYTEINTERLEAVELENGTH: MMAL_VIDEO_NALUNITFORMAT_T = 16;
+pub const MMAL_VIDEO_NALUNITFORMAT_DUMMY: MMAL_VIDEO_NALUNITFORMAT_T = 2147483647;
 #[doc = " NAL unit formats"]
 pub type MMAL_VIDEO_NALUNITFORMAT_T = u32;
 #[doc = " NAL unit format setting"]
@@ -10552,27 +10584,27 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_RENDER_STATS_T() {
     );
 }
 #[doc = "< The data is not interlaced, it is progressive scan"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceProgressive: MMAL_INTERLACETYPE_T = 0;
+pub const MMAL_InterlaceProgressive: MMAL_INTERLACETYPE_T = 0;
 #[doc = "< The data is interlaced, fields sent"]
 #[doc = "separately in temporal order, with upper field first"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleUpperFirst: MMAL_INTERLACETYPE_T = 1;
+pub const MMAL_InterlaceFieldSingleUpperFirst: MMAL_INTERLACETYPE_T = 1;
 #[doc = "< The data is interlaced, fields sent"]
 #[doc = "separately in temporal order, with lower field first"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldSingleLowerFirst: MMAL_INTERLACETYPE_T = 2;
+pub const MMAL_InterlaceFieldSingleLowerFirst: MMAL_INTERLACETYPE_T = 2;
 #[doc = "< The data is interlaced, two fields sent together line"]
 #[doc = "interleaved, with the upper field temporally earlier"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedUpperFirst: MMAL_INTERLACETYPE_T = 3;
+pub const MMAL_InterlaceFieldsInterleavedUpperFirst: MMAL_INTERLACETYPE_T = 3;
 #[doc = "< The data is interlaced, two fields sent together line"]
 #[doc = "interleaved, with the lower field temporally earlier"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceFieldsInterleavedLowerFirst: MMAL_INTERLACETYPE_T = 4;
+pub const MMAL_InterlaceFieldsInterleavedLowerFirst: MMAL_INTERLACETYPE_T = 4;
 #[doc = "< The stream may contain a mixture of progressive"]
 #[doc = "and interlaced frames"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceMixed: MMAL_INTERLACETYPE_T = 5;
+pub const MMAL_InterlaceMixed: MMAL_INTERLACETYPE_T = 5;
 #[doc = "< Reserved region for introducing Khronos Standard Extensions"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceKhronosExtensions: MMAL_INTERLACETYPE_T = 1862270976;
+pub const MMAL_InterlaceKhronosExtensions: MMAL_INTERLACETYPE_T = 1862270976;
 #[doc = "< Reserved region for introducing Vendor Extensions"]
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceVendorStartUnused: MMAL_INTERLACETYPE_T = 2130706432;
-pub const MMAL_INTERLACETYPE_T_MMAL_InterlaceMax: MMAL_INTERLACETYPE_T = 2147483647;
+pub const MMAL_InterlaceVendorStartUnused: MMAL_INTERLACETYPE_T = 2130706432;
+pub const MMAL_InterlaceMax: MMAL_INTERLACETYPE_T = 2147483647;
 pub type MMAL_INTERLACETYPE_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -10641,15 +10673,15 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T() {
         )
     );
 }
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_WHITE: MMAL_SOURCE_PATTERN_T = 0;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_BLACK: MMAL_SOURCE_PATTERN_T = 1;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_DIAGONAL: MMAL_SOURCE_PATTERN_T = 2;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_NOISE: MMAL_SOURCE_PATTERN_T = 3;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_RANDOM: MMAL_SOURCE_PATTERN_T = 4;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_COLOUR: MMAL_SOURCE_PATTERN_T = 5;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_BLOCKS: MMAL_SOURCE_PATTERN_T = 6;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_SWIRLY: MMAL_SOURCE_PATTERN_T = 7;
-pub const MMAL_SOURCE_PATTERN_T_MMAL_VIDEO_SOURCE_PATTERN_DUMMY: MMAL_SOURCE_PATTERN_T = 2147483647;
+pub const MMAL_VIDEO_SOURCE_PATTERN_WHITE: MMAL_SOURCE_PATTERN_T = 0;
+pub const MMAL_VIDEO_SOURCE_PATTERN_BLACK: MMAL_SOURCE_PATTERN_T = 1;
+pub const MMAL_VIDEO_SOURCE_PATTERN_DIAGONAL: MMAL_SOURCE_PATTERN_T = 2;
+pub const MMAL_VIDEO_SOURCE_PATTERN_NOISE: MMAL_SOURCE_PATTERN_T = 3;
+pub const MMAL_VIDEO_SOURCE_PATTERN_RANDOM: MMAL_SOURCE_PATTERN_T = 4;
+pub const MMAL_VIDEO_SOURCE_PATTERN_COLOUR: MMAL_SOURCE_PATTERN_T = 5;
+pub const MMAL_VIDEO_SOURCE_PATTERN_BLOCKS: MMAL_SOURCE_PATTERN_T = 6;
+pub const MMAL_VIDEO_SOURCE_PATTERN_SWIRLY: MMAL_SOURCE_PATTERN_T = 7;
+pub const MMAL_VIDEO_SOURCE_PATTERN_DUMMY: MMAL_SOURCE_PATTERN_T = 2147483647;
 pub type MMAL_SOURCE_PATTERN_T = u32;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -10748,15 +10780,15 @@ fn bindgen_test_layout_MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T() {
     );
 }
 #[doc = "< Takes a MMAL_PARAMETER_STRING_T"]
-pub const MMAL_PARAMETER_AUDIO_DESTINATION: _bindgen_ty_28 = 196608;
+pub const MMAL_PARAMETER_AUDIO_DESTINATION: _bindgen_ty_27 = 196608;
 #[doc = "< Takes a MMAL_PARAMETER_AUDIO_LATENCY_TARGET_T"]
-pub const MMAL_PARAMETER_AUDIO_LATENCY_TARGET: _bindgen_ty_28 = 196609;
-pub const MMAL_PARAMETER_AUDIO_SOURCE: _bindgen_ty_28 = 196610;
+pub const MMAL_PARAMETER_AUDIO_LATENCY_TARGET: _bindgen_ty_27 = 196609;
+pub const MMAL_PARAMETER_AUDIO_SOURCE: _bindgen_ty_27 = 196610;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_AUDIO_PASSTHROUGH: _bindgen_ty_28 = 196611;
+pub const MMAL_PARAMETER_AUDIO_PASSTHROUGH: _bindgen_ty_27 = 196611;
 #[doc = " Audio-specific MMAL parameter IDs."]
 #[doc = " @ingroup MMAL_PARAMETER_IDS"]
-pub type _bindgen_ty_28 = u32;
+pub type _bindgen_ty_27 = u32;
 #[doc = " Audio latency target to maintain."]
 #[doc = " These settings are used to adjust the clock speed in order"]
 #[doc = " to match the measured audio latency to a specified value."]
@@ -11389,28 +11421,28 @@ impl ::std::fmt::Debug for MMAL_CLOCK_EVENT_T {
     }
 }
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_CLOCK_REFERENCE: _bindgen_ty_29 = 262144;
+pub const MMAL_PARAMETER_CLOCK_REFERENCE: _bindgen_ty_28 = 262144;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_CLOCK_ACTIVE: _bindgen_ty_29 = 262145;
+pub const MMAL_PARAMETER_CLOCK_ACTIVE: _bindgen_ty_28 = 262145;
 #[doc = "< Takes a MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_CLOCK_SCALE: _bindgen_ty_29 = 262146;
+pub const MMAL_PARAMETER_CLOCK_SCALE: _bindgen_ty_28 = 262146;
 #[doc = "< Takes a MMAL_PARAMETER_INT64_T"]
-pub const MMAL_PARAMETER_CLOCK_TIME: _bindgen_ty_29 = 262147;
+pub const MMAL_PARAMETER_CLOCK_TIME: _bindgen_ty_28 = 262147;
 #[doc = "< Takes a MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T"]
-pub const MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD: _bindgen_ty_29 = 262148;
+pub const MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD: _bindgen_ty_28 = 262148;
 #[doc = "< Takes a MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T"]
-pub const MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD: _bindgen_ty_29 = 262149;
+pub const MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD: _bindgen_ty_28 = 262149;
 #[doc = "< Takes a MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T"]
-pub const MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD: _bindgen_ty_29 = 262150;
+pub const MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD: _bindgen_ty_28 = 262150;
 #[doc = "< Takes a MMAL_PARAMETER_BOOLEAN_T"]
-pub const MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO: _bindgen_ty_29 = 262151;
+pub const MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO: _bindgen_ty_28 = 262151;
 #[doc = "< Takes a MMAL_PARAMETER_RATIONAL_T"]
-pub const MMAL_PARAMETER_CLOCK_FRAME_RATE: _bindgen_ty_29 = 262152;
+pub const MMAL_PARAMETER_CLOCK_FRAME_RATE: _bindgen_ty_28 = 262152;
 #[doc = "< Takes a MMAL_PARAMETER_CLOCK_LATENCY_T"]
-pub const MMAL_PARAMETER_CLOCK_LATENCY: _bindgen_ty_29 = 262153;
+pub const MMAL_PARAMETER_CLOCK_LATENCY: _bindgen_ty_28 = 262153;
 #[doc = " Clock-specific MMAL parameter IDs."]
 #[doc = " @ingroup MMAL_PARAMETER_IDS"]
-pub type _bindgen_ty_29 = u32;
+pub type _bindgen_ty_28 = u32;
 #[doc = " Media-time update thresholds"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -11998,10 +12030,10 @@ fn bindgen_test_layout_MMAL_PARAMETER_SCALEFACTOR_T() {
         )
     );
 }
-pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_NONE: MMAL_PARAM_MIRROR_T = 0;
-pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_VERTICAL: MMAL_PARAM_MIRROR_T = 1;
-pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_HORIZONTAL: MMAL_PARAM_MIRROR_T = 2;
-pub const MMAL_PARAM_MIRROR_T_MMAL_PARAM_MIRROR_BOTH: MMAL_PARAM_MIRROR_T = 3;
+pub const MMAL_PARAM_MIRROR_NONE: MMAL_PARAM_MIRROR_T = 0;
+pub const MMAL_PARAM_MIRROR_VERTICAL: MMAL_PARAM_MIRROR_T = 1;
+pub const MMAL_PARAM_MIRROR_HORIZONTAL: MMAL_PARAM_MIRROR_T = 2;
+pub const MMAL_PARAM_MIRROR_BOTH: MMAL_PARAM_MIRROR_T = 3;
 #[doc = " Valid mirror modes"]
 pub type MMAL_PARAM_MIRROR_T = u32;
 #[doc = " Generic mirror parameter type"]
@@ -12307,17 +12339,17 @@ fn bindgen_test_layout_MMAL_PARAMETER_CONFIGFILE_CHUNK_T() {
     );
 }
 #[doc = "< Unknown port type"]
-pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_UNKNOWN: MMAL_PORT_TYPE_T = 0;
+pub const MMAL_PORT_TYPE_UNKNOWN: MMAL_PORT_TYPE_T = 0;
 #[doc = "< Control port"]
-pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CONTROL: MMAL_PORT_TYPE_T = 1;
+pub const MMAL_PORT_TYPE_CONTROL: MMAL_PORT_TYPE_T = 1;
 #[doc = "< Input port"]
-pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INPUT: MMAL_PORT_TYPE_T = 2;
+pub const MMAL_PORT_TYPE_INPUT: MMAL_PORT_TYPE_T = 2;
 #[doc = "< Output port"]
-pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_OUTPUT: MMAL_PORT_TYPE_T = 3;
+pub const MMAL_PORT_TYPE_OUTPUT: MMAL_PORT_TYPE_T = 3;
 #[doc = "< Clock port"]
-pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_CLOCK: MMAL_PORT_TYPE_T = 4;
+pub const MMAL_PORT_TYPE_CLOCK: MMAL_PORT_TYPE_T = 4;
 #[doc = "< Dummy value to force 32bit enum"]
-pub const MMAL_PORT_TYPE_T_MMAL_PORT_TYPE_INVALID: MMAL_PORT_TYPE_T = 4294967295;
+pub const MMAL_PORT_TYPE_INVALID: MMAL_PORT_TYPE_T = 4294967295;
 #[doc = " List of port types"]
 pub type MMAL_PORT_TYPE_T = u32;
 #[doc = " Definition of a port."]
@@ -13841,7 +13873,7 @@ extern "C" {
     #[doc = ""]
     pub fn mmal_4cc_to_string(
         buf: *mut ::std::os::raw::c_char,
-        len: usize,
+        len: size_t,
         fourcc: u32,
     ) -> *mut ::std::os::raw::c_char;
 }
@@ -14118,11 +14150,11 @@ extern "C" {
 extern "C" {
     pub fn bcm_host_get_processor_id() -> ::std::os::raw::c_int;
 }
-pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_IDLE: MMAL_STATS_COMP_STATE_T = 0;
-pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_CREATED: MMAL_STATS_COMP_STATE_T = 1;
-pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_DESTROYING: MMAL_STATS_COMP_STATE_T = 2;
-pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_DESTROYED: MMAL_STATS_COMP_STATE_T = 3;
-pub const MMAL_STATS_COMP_STATE_T_MMAL_STATS_COMP_UNUSED: MMAL_STATS_COMP_STATE_T = 4294967295;
+pub const MMAL_STATS_COMP_IDLE: MMAL_STATS_COMP_STATE_T = 0;
+pub const MMAL_STATS_COMP_CREATED: MMAL_STATS_COMP_STATE_T = 1;
+pub const MMAL_STATS_COMP_DESTROYING: MMAL_STATS_COMP_STATE_T = 2;
+pub const MMAL_STATS_COMP_DESTROYED: MMAL_STATS_COMP_STATE_T = 3;
+pub const MMAL_STATS_COMP_UNUSED: MMAL_STATS_COMP_STATE_T = 4294967295;
 #[doc = " State of components created by the VC adaptation layer, used for"]
 #[doc = " statistics reporting."]
 pub type MMAL_STATS_COMP_STATE_T = u32;
@@ -14894,10 +14926,10 @@ impl ::std::fmt::Debug for MMAL_VC_HOST_LOG_T {
         )
     }
 }
-pub const MMAL_STATS_RESULT_T_MMAL_STATS_FOUND: MMAL_STATS_RESULT_T = 0;
-pub const MMAL_STATS_RESULT_T_MMAL_STATS_COMPONENT_NOT_FOUND: MMAL_STATS_RESULT_T = 1;
-pub const MMAL_STATS_RESULT_T_MMAL_STATS_PORT_NOT_FOUND: MMAL_STATS_RESULT_T = 2;
-pub const MMAL_STATS_RESULT_T_MMAL_STATS_INVALID: MMAL_STATS_RESULT_T = 2147483647;
+pub const MMAL_STATS_FOUND: MMAL_STATS_RESULT_T = 0;
+pub const MMAL_STATS_COMPONENT_NOT_FOUND: MMAL_STATS_RESULT_T = 1;
+pub const MMAL_STATS_PORT_NOT_FOUND: MMAL_STATS_RESULT_T = 2;
+pub const MMAL_STATS_INVALID: MMAL_STATS_RESULT_T = 2147483647;
 #[doc = " Status from querying MMAL core statistics."]
 pub type MMAL_STATS_RESULT_T = u32;
 extern "C" {
@@ -14943,7 +14975,7 @@ extern "C" {
         stats: *mut MMAL_CORE_STATISTICS_T,
         result: *mut MMAL_STATS_RESULT_T,
         name: *mut ::std::os::raw::c_char,
-        namelen: usize,
+        namelen: size_t,
         type_: MMAL_PORT_TYPE_T,
         component: ::std::os::raw::c_uint,
         port: ::std::os::raw::c_uint,
@@ -14978,14 +15010,14 @@ extern "C" {
     #[doc = "                MMAL_ENOSPC if the allocation failed or MMAL_ENOSYS if the"]
     #[doc = "                API is not supported e.g in release mode VC images."]
     #[doc = " @internal"]
-    pub fn mmal_vc_consume_mem(size: usize, handle: *mut u32) -> MMAL_STATUS_T::Type;
+    pub fn mmal_vc_consume_mem(size: size_t, handle: *mut u32) -> MMAL_STATUS_T::Type;
 }
-pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_NONE: MMAL_VC_COMPACT_MODE_T = 0;
-pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_NORMAL: MMAL_VC_COMPACT_MODE_T = 1;
-pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_DISCARD: MMAL_VC_COMPACT_MODE_T = 2;
-pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_AGGRESSIVE: MMAL_VC_COMPACT_MODE_T = 4;
-pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_SHUFFLE: MMAL_VC_COMPACT_MODE_T = 128;
-pub const MMAL_VC_COMPACT_MODE_T_MMAL_VC_COMPACT_ALL: MMAL_VC_COMPACT_MODE_T = 7;
+pub const MMAL_VC_COMPACT_NONE: MMAL_VC_COMPACT_MODE_T = 0;
+pub const MMAL_VC_COMPACT_NORMAL: MMAL_VC_COMPACT_MODE_T = 1;
+pub const MMAL_VC_COMPACT_DISCARD: MMAL_VC_COMPACT_MODE_T = 2;
+pub const MMAL_VC_COMPACT_AGGRESSIVE: MMAL_VC_COMPACT_MODE_T = 4;
+pub const MMAL_VC_COMPACT_SHUFFLE: MMAL_VC_COMPACT_MODE_T = 128;
+pub const MMAL_VC_COMPACT_ALL: MMAL_VC_COMPACT_MODE_T = 7;
 pub type MMAL_VC_COMPACT_MODE_T = u32;
 extern "C" {
     #[doc = " Trigger relocatable heap compaction."]

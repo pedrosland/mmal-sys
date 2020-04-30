@@ -42,6 +42,7 @@ fn generate_bindings() {
         .rustfmt_bindings(true)
 
         .constified_enum_module(r"MMAL_STATUS_T|MMAL_PARAMETER_CAMERA_CONFIG_TIMESTAMP_MODE_T")
+        .prepend_enum_name(false)
 
         // Prevent generating bindings including libc!
         .whitelist_type(r"MMAL_.*")
@@ -80,7 +81,6 @@ fn generate_bindings() {
         .expect("Couldn't write bindings!");
 }
 
-
 #[cfg(feature = "generate_bindings")]
 fn locate_mmal_headers() -> String {
     let default_path = "/opt/vc/include";
@@ -91,13 +91,16 @@ fn locate_mmal_headers() -> String {
     };
 
     if !Path::new(&path).exists() {
-        panic!(format!("Could not locate mmal headers.
+        panic!(format!(
+            "Could not locate mmal headers.
 path: {}
 default: {}
 env MMAL_INCLUDE_DIR: {:?}
 ",
-            path, default_path, env::var("MMAL_INCLUDE_DIR")
-	));
+            path,
+            default_path,
+            env::var("MMAL_INCLUDE_DIR")
+        ));
     }
 
     path
@@ -112,12 +115,15 @@ fn locate_mmal_lib_dir() -> String {
     };
 
     if !Path::new(&path).exists() {
-        panic!(format!("Could not locate libary.
+        panic!(format!(
+            "Could not locate libary.
 path: {}
 default: {}
 env MMAL_LIB_DIR: {:?}
 ",
-            path, default_path, env::var("MMAL_LIB_DIR")
+            path,
+            default_path,
+            env::var("MMAL_LIB_DIR")
         ));
     }
 
