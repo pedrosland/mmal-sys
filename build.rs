@@ -112,13 +112,13 @@ fn locate_mmal_lib_dir() -> String {
     };
 
     if !Path::new(&path).exists() {
-        panic!(format!("Could not locate libary.
+        panic!("Could not locate libary.
 path: {}
 default: {}
 env MMAL_LIB_DIR: {:?}
 ",
             path, default_path, env::var("MMAL_LIB_DIR")
-        ));
+        );
     }
 
     path
