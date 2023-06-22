@@ -12,7 +12,7 @@ keywords = ["raspberry", "pi", "rpi"]
 links = "mmal"
 build = "build.rs"
 exclude = [ "ci/*" ]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 libc = "0.2"

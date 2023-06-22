@@ -91,13 +91,13 @@ fn locate_mmal_headers() -> String {
     };
 
     if !Path::new(&path).exists() {
-        panic!(format!("Could not locate mmal headers.
+        panic!("Could not locate mmal headers.
 path: {}
 default: {}
 env MMAL_INCLUDE_DIR: {:?}
 ",
             path, default_path, env::var("MMAL_INCLUDE_DIR")
-	));
+	    );
     }
 
     path
@@ -112,13 +112,13 @@ fn locate_mmal_lib_dir() -> String {
     };
 
     if !Path::new(&path).exists() {
-        panic!(format!("Could not locate libary.
+        panic!("Could not locate libary.
 path: {}
 default: {}
 env MMAL_LIB_DIR: {:?}
 ",
             path, default_path, env::var("MMAL_LIB_DIR")
-        ));
+        );
     }
 
     path

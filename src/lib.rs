@@ -287,7 +287,7 @@ impl fmt::Display for MMAL_PARAMETER_CAMERA_INFO_CAMERA_T {
         write!(
             f,
             "{} {}x{}",
-            ::std::str::from_utf8(&self.camera_name).unwrap(),
+            unsafe { std::ffi::CStr::from_ptr(self.camera_name.as_ptr()).to_string_lossy().into_owned() },
             self.max_width,
             self.max_height
         )
