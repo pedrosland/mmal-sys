@@ -91,13 +91,13 @@ fn locate_mmal_headers() -> String {
     };
 
     if !Path::new(&path).exists() {
-        panic!(format!("Could not locate mmal headers.
+        panic!("Could not locate mmal headers.
 path: {}
 default: {}
 env MMAL_INCLUDE_DIR: {:?}
 ",
             path, default_path, env::var("MMAL_INCLUDE_DIR")
-	));
+	    );
     }
 
     path
